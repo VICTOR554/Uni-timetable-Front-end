@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'list-view',
     loadChildren: () => import('./list-view/list-view.module').then( m => m.ListViewPageModule)
+  },
+  {
+    path: 'notes',
+    loadChildren: () => import('./notes/notes.module').then( m => m.NotesPageModule)
   }
 ];
 
