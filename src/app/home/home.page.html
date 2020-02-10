@@ -2,35 +2,61 @@
   <ion-toolbar>
     <ion-title>home</ion-title>
   </ion-toolbar>
+  <!--To view the days of the week-->
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-padding" class="ion-no-padding" class="ion-text-center">
+         <p>Mon</p>
+         <ion-button  shape="round">1</ion-button>
+        </ion-col>
+        <ion-col class="ion-no-padding" class="ion-text-center">
+          <p>Tue</p>
+        </ion-col>
+        <ion-col class="ion-no-padding" class="ion-text-center">
+          <p>Wed</p>
+        </ion-col>
+        <ion-col class="ion-no-padding" class="ion-text-center">
+          <p>Thur</p>
+        </ion-col>
+        <ion-col class="ion-no-padding" class="ion-text-center">
+          <p>Fri</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-tabs>
-    <ion-tabs>
-      <ion-tab-bar slot="bottom"  color="primary">
-
-        <ion-tab-button tab="list-view">
-          <ion-label>Timetable</ion-label>
-          <ion-icon name="calendar"></ion-icon>
-        </ion-tab-button>
-
-        <ion-tab-button tab="notes">
-          <ion-label>Notes</ion-label>
-          <ion-icon name="journal"></ion-icon>
-        </ion-tab-button>
-
-        <ion-tab-button tab="tasks" >
-          <ion-label>Tasks</ion-label>
-          <ion-icon name="checkbox-outline" ></ion-icon>
-        </ion-tab-button>
-
-        <ion-tab-button tab="more"> 
-          <ion-label>More</ion-label>
-          <ion-icon name="more"></ion-icon>
-        </ion-tab-button>
-
-
-      </ion-tab-bar>
-    </ion-tabs>
-  </ion-tabs>
+ 
 </ion-content>
+
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-no-padding" class="ion-text-center">
+          <ion-button>
+            <ion-icon name="calendar"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col class="ion-no-padding" class="ion-text-center">
+          <ion-button>
+            <ion-icon name="journal"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col class="ion-no-padding" class="ion-text-center">
+          <ion-button>
+            <ion-icon name="checkbox-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col class="ion-no-padding" class="ion-text-center">
+          <ion-button>
+            <ion-icon name="more"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
