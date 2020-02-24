@@ -64,6 +64,7 @@ export class HomeService {
     )
   ];
 
+  // create get home to duplicate array so changes are not made
   get home() {
     return [...this._home];
   }
