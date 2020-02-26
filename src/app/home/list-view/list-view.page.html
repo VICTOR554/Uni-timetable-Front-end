@@ -49,8 +49,33 @@
     <ion-col class="ion-no-padding">
       <ion-list class="ion-no-padding">
         <!-- for loop to draw the list from the array-->
-        <ion-card>
-          <p>HCI</p>
+        <ion-card *ngFor="let home of list" [routerLink]="['/', 'home', 'tabs', 'list-view', home.id]">
+          <ion-grid class="ion-no-padding">
+  
+            <ion-row class="ion-no-padding">
+  
+              <ion-col class="ion-no-padding" text-center size="3" >
+                <ion-row>
+  
+                  <ion-col size="12" class="ion-padding-top">
+                    <p>{{home.start}}</p>
+                  </ion-col>
+  
+                  <ion-col size="12" class="ion-no-padding">
+                    <p>{{home.end}}</p>
+                  </ion-col>
+  
+                </ion-row>
+              </ion-col>
+  
+              <ion-col >
+                <p>{{home.title}}</p>
+                <p>{{home.type}}</p>
+  
+              </ion-col>
+  
+            </ion-row>
+          </ion-grid>
         </ion-card>
   
       </ion-list>
