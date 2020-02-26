@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeService } from '../home.service';
 import { Homes } from '../home.model';
 
 @Component({
@@ -9,9 +10,10 @@ import { Homes } from '../home.model';
 export class ListViewPage implements OnInit {
   list: Homes[];
 
-  constructor() { }
+  constructor(private homeService: HomeService) { }
 
   ngOnInit() {
+    this.list = this.homeService.home;
   }
 
 }
