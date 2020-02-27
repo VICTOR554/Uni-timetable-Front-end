@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../home.service';
 import { Homes } from '../home.model';
+import { IonItemSliding } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-notes',
@@ -14,6 +16,11 @@ export class NotesPage implements OnInit {
 
   ngOnInit() {
     this.Notes = this.homeService.home;
+  }
+
+  onDelete(homeId: string, slidingItem: IonItemSliding) {
+    slidingItem.close();
+
   }
 
 }

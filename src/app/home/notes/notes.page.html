@@ -20,7 +20,7 @@
         <ion-list>
           <!-- for loop to draw the list from the array-->
       
-          <ion-item-sliding *ngFor="let home of Home" #slidingItem>
+          <ion-item-sliding *ngFor="let home of Notes" #slidingItem>
       
             <ion-item [routerLink]="['/', 'home', 'tabs', 'notes', 'edit', 'note']">
               <ion-grid class="ion-no-padding">
