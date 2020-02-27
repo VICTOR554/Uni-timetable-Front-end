@@ -16,7 +16,29 @@
       <ion-col>
         <ion-searchbar showCancelButton="focus"></ion-searchbar>
 
-      
+            <!--This is an item containing the lecture details-->
+            <ion-list>
+              <!-- for loop to draw the list from the array-->
+              <!-- [routerLink]="['/', 'home', 'tabs', 'list-view', home.id]" plan to add this-->
+          
+             
+          
+                <ion-item *ngFor="let home of Notes" >
+                  <ion-grid class="ion-no-padding">
+                    <ion-row>
+          
+                      <ion-col class="ion-padding">
+                        <p>{{home.title}}</p>
+                        <p>{{home.notetitle}}</p>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-item>
+          
+                
+    
+            
+            </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
