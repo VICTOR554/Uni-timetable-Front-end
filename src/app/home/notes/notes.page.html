@@ -17,28 +17,32 @@
         <ion-searchbar showCancelButton="focus"></ion-searchbar>
 
             <!--This is an item containing the lecture details-->
-            <ion-list>
-              <!-- for loop to draw the list from the array-->
-              <!-- [routerLink]="['/', 'home', 'tabs', 'list-view', home.id]" plan to add this-->
-          
-             
-          
-                <ion-item *ngFor="let home of Notes" >
-                  <ion-grid class="ion-no-padding">
-                    <ion-row>
-          
-                      <ion-col class="ion-padding">
-                        <p>{{home.title}}</p>
-                        <p>{{home.notetitle}}</p>
-                      </ion-col>
-                    </ion-row>
-                  </ion-grid>
-                </ion-item>
-          
-                
-    
-            
-            </ion-list>
+        <ion-list>
+          <!-- for loop to draw the list from the array-->
+      
+          <ion-item-sliding *ngFor="let home of Home" #slidingItem>
+      
+            <ion-item [routerLink]="['/', 'home', 'tabs', 'notes', 'edit', 'note']">
+              <ion-grid class="ion-no-padding">
+                <ion-row>
+      
+                  <ion-col class="ion-padding">
+                    <p>{{home.title}}</p>
+                    <p>{{home.notetitle}}</p>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+      
+            <ion-item-options>
+              <ion-item-option color="danger" (click)="onDelete(home.id, slidingItem)">
+                <ion-icon name="trash" slot="top" class="icon"></ion-icon>
+                Delete              
+              </ion-item-option>
+            </ion-item-options>
+
+          </ion-item-sliding>
+        </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
