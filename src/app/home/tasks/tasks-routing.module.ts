@@ -24,6 +24,10 @@ const routes: Routes = [
     path: 'new-tasks',
     loadChildren: () => import('./new-tasks/new-tasks.module').then( m => m.NewTasksPageModule)
   },
+  {
+    path: 'overdue',
+    loadChildren: () => import('./overdue/overdue.module').then( m => m.OverduePageModule)
+  },
 ];
 
 @NgModule({
