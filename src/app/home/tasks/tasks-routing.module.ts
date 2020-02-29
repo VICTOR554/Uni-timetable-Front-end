@@ -16,6 +16,10 @@ const routes: Routes = [
     path: 'flags',
     loadChildren: () => import('./flags/flags.module').then( m => m.FlagsPageModule)
   },
+  {
+    path: 'edit-tasks',
+    loadChildren: () => import('./edit-tasks/edit-tasks.module').then( m => m.EditTasksPageModule)
+  },
 ];
 
 @NgModule({
