@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'all-tasks',
     loadChildren: () => import('./all-tasks/all-tasks.module').then( m => m.AllTasksPageModule)
   },
+  {
+    path: 'flags',
+    loadChildren: () => import('./flags/flags.module').then( m => m.FlagsPageModule)
+  },
 ];
 
 @NgModule({
