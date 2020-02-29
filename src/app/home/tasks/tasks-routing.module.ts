@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: TasksPage
-  }
+  },
+  {
+    path: 'all-tasks',
+    loadChildren: () => import('./all-tasks/all-tasks.module').then( m => m.AllTasksPageModule)
+  },
 ];
 
 @NgModule({
