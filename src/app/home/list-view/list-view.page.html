@@ -6,7 +6,7 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title>February 2020</ion-title>
+    <ion-title color="primary" class="ion-text-center">February 2020</ion-title>
 
     <ion-buttons slot="end">
       <ion-button href="/home/tabs/list-view/details" slot="icon-only" color="primary">
@@ -78,8 +78,8 @@
 
                 <ion-row>
                   <ion-col class="ion-no-padding" class="ion-text-center">
-                    
-                    <ion-button size="small" shape="round" class="iround" href="/home/tabs/list-view/location">
+                    <!-- solved icon button routing problem using stop event -->
+                    <ion-button size="small" shape="round" class="iround" href="/home/tabs/list-view/location" (click)="stop($event)">
                       <ion-icon name="pin"></ion-icon>
                     </ion-button>
                     <label>-{{home.location}}</label>

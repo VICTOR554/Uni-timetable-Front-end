@@ -16,4 +16,7 @@ export class ListViewPage implements OnInit {
     this.list = this.homeService.home;
   }
 
+  stop(event: Event) {
+    event.stopPropagation();
+  }
 }
