@@ -79,7 +79,8 @@
                 <ion-row>
                   <ion-col class="ion-no-padding" class="ion-text-center">
                     <!-- solved icon button routing problem using stop event -->
-                    <ion-button size="small" shape="round" class="iround" href="/home/tabs/list-view/location" (click)="stop($event)">
+                    <ion-button size="small" shape="round" class="iround" href="/home/tabs/list-view/location"
+                    [routerLink]="['/', 'home', 'tabs', 'list-view', 'location',home.location]" (click)="stop($event)">
                       <ion-icon name="pin"></ion-icon>
                     </ion-button>
                     <label>-{{home.location}}</label>
