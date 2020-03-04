@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-auth',
@@ -29,6 +30,12 @@ export class AuthPage implements OnInit {
         this.router.navigateByUrl('/home/tabs/list-view');
       }, 1500);
     });
+  }
+
+  onSubmit(form: NgForm) {
+    const studentid = form.value.studentid;
+    const password = form.value.password;
+    console.log('Id=' + studentid, 'Password=' + password);
   }
 
 }
