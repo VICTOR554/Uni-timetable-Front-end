@@ -15,22 +15,22 @@
   <ion-tabs>
     <ion-tab-bar slot="top"  >
 
-      <ion-tab-button tab="all-tasks">
+      <ion-tab-button [routerLink]="['/', 'home', 'tabs', 'tasks', 'tabs2', 'all-tasks']">
         <ion-label>Tasks</ion-label>
         <ion-icon name="albums"></ion-icon>
       </ion-tab-button>
 
-      <ion-tab-button tab="flags">
+      <ion-tab-button [routerLink]="['/', 'home', 'tabs', 'tasks', 'tabs2', 'flags']">
         <ion-label>Flags</ion-label>
         <ion-icon name="flag"></ion-icon>
       </ion-tab-button>
 
-      <ion-tab-button tab="completed-tasks">
+      <ion-tab-button [routerLink]="['/', 'home', 'tabs', 'tasks', 'tabs2', 'completed-tasks']">
         <ion-label>Completed</ion-label>
         <ion-icon name="checkmark-circle-outline"></ion-icon>
       </ion-tab-button>
 
-      <ion-tab-button tab="overdue">
+      <ion-tab-button [routerLink]="['/', 'home', 'tabs', 'tasks', 'tabs2', 'overdue']">
         <ion-label>Overdue</ion-label>
         <ion-icon name="archive"></ion-icon>
       </ion-tab-button>
