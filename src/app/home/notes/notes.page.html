@@ -20,22 +20,22 @@
         <ion-list>
           <!-- for loop to draw the list from the array-->
       
-          <ion-item-sliding *ngFor="let home of Notes" #slidingItem>
+          <ion-item-sliding *ngFor="let note of loadednote" #slidingItem>
       
             <ion-item [routerLink]="['/', 'home', 'tabs', 'notes', 'edit', 'note']">
               <ion-grid class="ion-no-padding">
                 <ion-row>
       
                   <ion-col class="ion-padding">
-                    <p>{{home.title}}</p>
-                    <p>{{home.notetitle}}</p>
+                    <p>{{note.title}}</p>
+                    <p>{{note.modul}}</p>
                   </ion-col>
                 </ion-row>
               </ion-grid>
             </ion-item>
       
             <ion-item-options>
-              <ion-item-option color="danger" (click)="onDelete(home.id, slidingItem)">
+              <ion-item-option color="danger" (click)="onDelete(note.id, slidingItem)">
                 <ion-icon name="trash" slot="top" class="icon"></ion-icon>
                 Delete              
               </ion-item-option>

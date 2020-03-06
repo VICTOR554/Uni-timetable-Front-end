@@ -23,10 +23,6 @@ const routes: Routes =
                   loadChildren: () => import('./list-view/details/details.module').then(m => m.DetailsPageModule)
                 },
                 {
-                  path: ':homeid',
-                  loadChildren: () => import('./list-view/info/info.module').then(m => m.InfoPageModule)
-                },
-                {
                   path: 'location/:homelocation',
                   loadChildren: () => import('./list-view/location/location.module').then(m => m.LocationPageModule)
                 },

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../home.service';
-import { Homes } from '../home.model';
+import { Note } from '../home.model';
 import { IonItemSliding } from '@ionic/angular';
 import { Router } from '@angular/router';
 
@@ -11,18 +11,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./notes.page.scss'],
 })
 export class NotesPage implements OnInit {
-  Notes: Homes[];
+  loadednote: Note[];
 
   constructor(private homeService: HomeService, private router: Router) { }
 
   ngOnInit() {
-    this.Notes = this.homeService.home;
+    this.loadednote = this.homeService.notes;
   }
 
-  onDelete(homeId: string, slidingItem: IonItemSliding) {
+  onDelete(noteId: string, slidingItem: IonItemSliding) {
     slidingItem.close();
     this.router.navigate(['/', 'home', 'tabs', 'notes']);
-    console.log('Editing item', homeId);
+    console.log('Editing item', noteId);
   }
 
 }
