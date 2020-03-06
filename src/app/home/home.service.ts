@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Homes, Note, Alltask, Overdue, Flag, Completedtask } from './home.model';
+import { Note, Alltask, Overdue, Flag, Completedtask, Class } from './home.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +7,8 @@ import { Homes, Note, Alltask, Overdue, Flag, Completedtask } from './home.model
 
 export class HomeService {
   // tslint:disable-next-line: variable-name
-  private _home: Homes[] = [
-    new Homes(
+  private _classes: Class[] = [
+    new Class(
       'CL1',
       10,
       'HCI',
@@ -19,7 +19,7 @@ export class HomeService {
       'WLFB',
 
     ),
-    new Homes(
+    new Class(
       'CL2',
       11,
       'Software Engineering',
@@ -29,7 +29,7 @@ export class HomeService {
       'David Jackson',
       'HWLL',
     ),
-    new Homes(
+    new Class(
       'CL3',
       12,
       'Games and Design',
@@ -40,7 +40,7 @@ export class HomeService {
       'ESGW',
 
     ),
-    new Homes(
+    new Class(
       'CL4',
       13,
       'Advanced Topics',
@@ -50,7 +50,7 @@ export class HomeService {
       'Chris Brown',
       'Lect D',
     ),
-    new Homes(
+    new Class(
       'CL5',
       14,
       'Cyber Security',
@@ -309,22 +309,22 @@ export class HomeService {
 
 
 // create get home, notes, alltask, completedtask, overdue, flag to duplicate array so changes are not made
-  get home() {
-    return [...this._home];
+  get classes() {
+    return [...this._classes];
   }
   get notes() {
     return [...this._notes];
   }
-  get Alltasks() {
+  get alltasks() {
     return [...this._alltasks];
   }
-  get Completedtasks() {
+  get completedtasks() {
     return [...this._completedtasks];
   }
-  get Overdue() {
+  get overdues() {
     return [...this._overdues];
   }
-  get Flag() {
+  get flags() {
     return [...this._flags];
   }
 

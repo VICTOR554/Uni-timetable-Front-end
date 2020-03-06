@@ -1,4 +1,4 @@
-export class Homes {
+export class Class {
     constructor(
         public id: string,
         public date: number,
