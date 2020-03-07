@@ -22,7 +22,7 @@ export class NotesPage implements OnInit {
   onDelete(noteId: string, slidingItem: IonItemSliding) {
     slidingItem.close();
     this.router.navigate(['/', 'home', 'tabs', 'notes']);
-    console.log('Editing item', noteId);
+    console.log('Delete item', noteId);
   }
 
 }
