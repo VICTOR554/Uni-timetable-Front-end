@@ -49,7 +49,11 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      
+      <ion-row *ngIf="!form.get('module').valid && form.get('module').touched">
+        <ion-col size-sm="6" offset-sm="3">
+          <P>Pick a module or blank</P>
+        </ion-col>
+      </ion-row>
 
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
@@ -59,7 +63,11 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      
+      <ion-row *ngIf="!form.get('description').valid && form.get('description').touched">
+        <ion-col size-sm="6" offset-sm="3">
+          <P>Description must be between 1 and 180 chracters</P>
+        </ion-col>
+      </ion-row>
     </ion-grid>
   </form>
 </ion-content>
