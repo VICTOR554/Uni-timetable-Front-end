@@ -17,9 +17,9 @@ export class AllTasksPage implements OnInit {
     this.loadedalltask = this.homeService.alltasks;
   }
 
-  onDelete(homeId: string, slidingItem: IonItemSliding) {
+  onDelete(alltaskId: string, slidingItem: IonItemSliding) {
     slidingItem.close();
-    console.log('delete item', homeId);
+    console.log('delete item', alltaskId);
   }
 
   stop(event: Event) {

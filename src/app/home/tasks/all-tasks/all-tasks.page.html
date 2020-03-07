@@ -10,26 +10,26 @@
             <ion-list>
               <!-- for loop to draw the list from the array -->
     
-              <ion-item-sliding *ngFor="let task of loadedalltask" #slidingItem>
+              <ion-item-sliding *ngFor="let alltask of loadedalltask" #slidingItem>
     
-                <ion-item [routerLink]="['/', 'home', 'tabs', 'tasks', 'edit', 'task', task.id]">
+                <ion-item [routerLink]="['/', 'home', 'tabs', 'tasks', 'edit', 'task', alltask.id]">
     
                   <ion-item slot="start" lines="none" class="ion-no-padding" class="ion-no-margin" (click)="stop($event)">
                     <ion-checkbox class="ion-no-padding" color="primary" checked slot="start"></ion-checkbox>
                   </ion-item>
     
                   <ion-label>
-                    <p>{{ task.title }}</p>
-                    <p>{{ task.modul }}</p>
+                    <p>{{ alltask.title }}</p>
+                    <p>{{ alltask.modul }}</p>
                     <div class="offer-details">
                       <ion-icon color="primary" name="calendar"></ion-icon>
-                      <ion-text class="space-left"> {{ task.duedate }}</ion-text>
+                      <ion-text class="space-left"> {{ alltask.duedate }}</ion-text>
                     </div>
                   </ion-label>
                 </ion-item>
     
                 <ion-item-options>
-                  <ion-item-option color="danger" (click)="onDelete(task.id, slidingItem)">
+                  <ion-item-option color="danger" (click)="onDelete(alltask.id, slidingItem)">
                     <ion-icon name="trash" slot="top" class="icon"></ion-icon>
                     Delete
                   </ion-item-option>
