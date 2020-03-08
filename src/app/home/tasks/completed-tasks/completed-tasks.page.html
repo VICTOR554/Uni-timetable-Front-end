@@ -12,7 +12,7 @@
     
               <ion-item-sliding *ngFor="let completedtask of loadedcompletedtask" #slidingItem>
     
-                <ion-item [routerLink]="['/', 'home', 'tabs', 'tasks', 'edit', 'task', task.id]">
+                <ion-item [routerLink]="['/', 'home', 'tabs', 'tasks', 'edit', 'task', completedtask.id]">
     
                   <ion-item slot="start" lines="none" class="ion-no-padding" class="ion-no-margin" (click)="stop($event)">
                     <ion-checkbox class="ion-no-padding" color="primary" checked slot="start"></ion-checkbox>
