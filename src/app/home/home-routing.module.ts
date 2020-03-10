@@ -49,7 +49,21 @@ const routes: Routes =
           },
           {
             path: 'tasks',
-            loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksPageModule)
+            children:
+              [
+                {
+                  path: '',
+                  loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksPageModule)
+                },
+                {
+                  path: 'new-tasks',
+                  loadChildren: () => import('./tasks/new-tasks/new-tasks.module').then( m => m.NewTasksPageModule)
+                },
+                {
+                  path: 'edit/:homeId',
+                  loadChildren: () => import('./tasks/edit-tasks/edit-tasks.module').then(m => m.EditTasksPageModule)
+                },
+              ]
           },
           {
             path: 'more',

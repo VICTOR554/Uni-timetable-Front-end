@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Overdue } from '../../home.model';
-import { HomeService } from '../../home.service';
 import { IonItemSliding } from '@ionic/angular';
+import { Overdue } from '../tasks.model';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-overdue',
@@ -12,10 +12,10 @@ export class OverduePage implements OnInit {
 
   loadedoverdue: Overdue[];
 
-  constructor(private homeService: HomeService) { }
+  constructor(private tasksService: TasksService) { }
 
   ngOnInit() {
-    this.loadedoverdue = this.homeService.overdues;
+    this.loadedoverdue = this.tasksService.overdues;
   }
 
   onDelete(overdueId: string, slidingItem: IonItemSliding) {

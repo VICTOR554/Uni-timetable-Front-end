@@ -26,14 +26,6 @@ const routes: Routes = [
           loadChildren: () => import('./completed-tasks/completed-tasks.module').then(m => m.CompletedTasksPageModule)
         },
         {
-          path: 'edit-tasks',
-          loadChildren: () => import('./edit-tasks/edit-tasks.module').then(m => m.EditTasksPageModule)
-        },
-        {
-          path: 'new-tasks',
-          loadChildren: () => import('./new-tasks/new-tasks.module').then( m => m.NewTasksPageModule)
-        },
-        {
           path: '',
           redirectTo: '/home/tabs/tasks/tabs2/all-tasks',
           pathMatch: 'full'
