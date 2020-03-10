@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Flag } from '../../home.model';
-import { HomeService } from '../../home.service';
 import { IonItemSliding } from '@ionic/angular';
+import { Flag } from '../tasks.model';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-flags',
@@ -12,10 +12,10 @@ export class FlagsPage implements OnInit {
 
   loadedflag: Flag[];
 
-  constructor(private homeService: HomeService) { }
+  constructor(private tasksService: TasksService) { }
 
   ngOnInit() {
-    this.loadedflag = this.homeService.flags;
+    this.loadedflag = this.tasksService.flags;
   }
 
   onDelete(flagId: string, slidingItem: IonItemSliding) {

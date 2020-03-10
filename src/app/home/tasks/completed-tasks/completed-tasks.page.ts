@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Completedtask } from '../../home.model';
-import { HomeService } from '../../home.service';
+
 import { IonItemSliding } from '@ionic/angular';
+import { Completedtask } from '../tasks.model';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-completed-tasks',
@@ -11,10 +12,10 @@ import { IonItemSliding } from '@ionic/angular';
 export class CompletedTasksPage implements OnInit {
   loadedcompletedtask: Completedtask[];
 
-  constructor(private homeService: HomeService) { }
+  constructor(private tasksService: TasksService) { }
 
   ngOnInit() {
-    this.loadedcompletedtask = this.homeService.completedtasks;
+    this.loadedcompletedtask = this.tasksService.completedtasks;
   }
 
   onDelete(completedtaskId: string, slidingItem: IonItemSliding) {
