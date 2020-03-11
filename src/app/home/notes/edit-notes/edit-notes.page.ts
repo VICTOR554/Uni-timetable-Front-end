@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NotesService } from '../notes.service';
 import { Note } from '../notes.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-notes',
   templateUrl: './edit-notes.page.html',
   styleUrls: ['./edit-notes.page.scss'],
 })
-export class EditNotesPage implements OnInit {
+export class EditNotesPage implements OnInit, OnDestroy {
   loadednote: Note;
   form: FormGroup;
+  private noteSub: Subscription;
+
 
   constructor(private route: ActivatedRoute, private navCtrl: NavController, private notesService: NotesService) { }
 
@@ -24,7 +27,7 @@ export class EditNotesPage implements OnInit {
         this.navCtrl.navigateBack('/home/tabs/notes');
         return;
       }
-      this.notesService.getNote(paramMap.get('notesId')).subscribe(notes => {
+      this.noteSub = this.notesService.getNote(paramMap.get('notesId')).subscribe(notes => {
         this.loadednote = notes;
         // load detail of item in form by removing null and calling the title and description
         this.form = new FormGroup({
@@ -46,6 +49,13 @@ export class EditNotesPage implements OnInit {
       return;
     }
     console.log(this.form);
+  }
+
+   // used to clear subscription to avoid memory leaks
+   ngOnDestroy() {
+    if (this.noteSub) {
+      this.noteSub.unsubscribe();
+    }
   }
 
 }

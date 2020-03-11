@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -10,15 +10,16 @@ import { Class } from '../list.model';
   templateUrl: './details.page.html',
   styleUrls: ['./details.page.scss'],
 })
-export class DetailsPage implements OnInit {
+export class DetailsPage implements OnInit, OnDestroy {
 
   form: FormGroup;
   loadedclass: Class[];
+  private detailSub: Subscription;
 
   constructor(private listService: ListService, private router: Router) { }
 
   ngOnInit() {
-    this.listService.classes.subscribe(classes => {
+    this.detailSub = this.listService.classes.subscribe(classes => {
       this.loadedclass = classes;
     });
     this.form = new FormGroup({
@@ -36,5 +37,12 @@ export class DetailsPage implements OnInit {
   submit() {
     console.log(this.form);
     this.router.navigate(['home/tabs/list-view']);
+  }
+
+  // used to clear subscription to avoid memory leaks
+  ngOnDestroy() {
+    if (this.detailSub) {
+      this.detailSub.unsubscribe();
+    }
   }
 }

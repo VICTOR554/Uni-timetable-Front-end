@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TasksService } from '../tasks.service';
 import { Alltask } from '../tasks.model';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-tasks',
   templateUrl: './edit-tasks.page.html',
   styleUrls: ['./edit-tasks.page.scss'],
 })
-export class EditTasksPage implements OnInit {
+export class EditTasksPage implements OnInit, OnDestroy {
   loadedalltask: Alltask;
   form: FormGroup;
+  private taskSub: Subscription;
+
 
   constructor(private tasksService: TasksService, private route: ActivatedRoute, private navCtrl: NavController) {
 
@@ -26,7 +29,7 @@ export class EditTasksPage implements OnInit {
         this.navCtrl.navigateBack('/home/tabs/notes');
         return;
       }
-      this.tasksService.getAlltask(paramMap.get('taskId')).subscribe(notes => {
+      this.taskSub = this.tasksService.getAlltask(paramMap.get('taskId')).subscribe(notes => {
         this.loadedalltask = notes;
         // load detail of item in form by removing null and calling the title and description
         this.form = new FormGroup({
@@ -49,6 +52,13 @@ export class EditTasksPage implements OnInit {
       return;
     }
 
+  }
+
+  // used to clear subscription to avoid memory leaks
+  ngOnDestroy() {
+    if (this.taskSub) {
+      this.taskSub.unsubscribe();
+    }
   }
 
 

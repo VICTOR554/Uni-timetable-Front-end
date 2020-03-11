@@ -49,6 +49,12 @@ export class NewTasksPage implements OnInit {
 
       return;
     }
+    this.tasksService.addAlltask(
+      this.form.value.title,
+      this.form.value.duedate,
+      this.form.value.modul,
+      this.form.value.description,
+    );
     console.log(this.form);
 
     this.router.navigate(['home/tabs/tasks']);
