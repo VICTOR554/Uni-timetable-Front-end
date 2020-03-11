@@ -15,7 +15,9 @@ export class FlagsPage implements OnInit {
   constructor(private tasksService: TasksService) { }
 
   ngOnInit() {
-    this.loadedflag = this.tasksService.flags;
+    this.tasksService.flags.subscribe(flags => {
+      this.loadedflag = flags;
+    });
   }
 
   onDelete(flagId: string, slidingItem: IonItemSliding) {

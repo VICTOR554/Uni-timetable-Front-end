@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Note } from './notes.model';
 import { AuthService } from 'src/app/auth/auth.service';
+import { BehaviorSubject } from 'rxjs';
+import { take, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class NotesService {
 
   // tslint:disable-next-line: variable-name
-  private _notes: Note[] = [
+  private _notes = new BehaviorSubject<Note[]>([
     new Note(
       'N1',
       'Calender Problems',
@@ -49,15 +51,19 @@ export class NotesService {
       'abc'
     )
 
-  ];
+  ]);
   // Clone the notes array using spread operator  to stop data manipulation from outside notes service
   get notes() {
-    return [...this._notes];
+    return this._notes.asObservable();
   }
 
 
   getNote(id: string) {
-    return { ...this._notes.find(n => n.id === id) };
+    return this.notes.pipe(take(1),
+      map(notes => {
+        return { ...notes.find(n => n.id === id) };
+      })
+    );
   }
 
   constructor(private authService: AuthService) { }
@@ -70,7 +76,9 @@ export class NotesService {
       description,
       this.authService.userId
     );
-    this._notes.push(newNote);
+    this.notes.pipe(take(1)).subscribe(notes => {
+      this._notes.next(notes.concat(newNote));
+    });
   }
 
 

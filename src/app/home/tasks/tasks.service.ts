@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 import { Overdue, Flag, Completedtask, Alltask } from './tasks.model';
 import { AuthService } from 'src/app/auth/auth.service';
 
+import { take, map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
 
   // tslint:disable-next-line: variable-name
-  private _alltasks: Alltask[] = [
+  private _alltasks = new BehaviorSubject<Alltask[]>([
     new Alltask(
       'AT1',
       'Build sentien life',
@@ -55,10 +58,10 @@ export class TasksService {
       'abc'
 
     )
-  ];
+  ]);
 
   // tslint:disable-next-line: variable-name
-  private _completedtasks: Completedtask[] = [
+  private _completedtasks = new BehaviorSubject<Completedtask[]>([
     new Completedtask(
       'CT1',
       'Study Irobot movie analysis',
@@ -105,10 +108,10 @@ export class TasksService {
       'abc'
 
     )
-  ];
+  ]);
 
   // tslint:disable-next-line: variable-name
-  private _flags: Flag[] = [
+  private _flags = new BehaviorSubject<Flag[]>([
     new Flag(
       'FT1',
       'Stop Ultron',
@@ -155,10 +158,10 @@ export class TasksService {
       'abc'
 
     )
-  ];
+  ]);
 
   // tslint:disable-next-line: variable-name
-  private _overdues: Overdue[] = [
+  private _overdues = new BehaviorSubject<Overdue[]>([
     new Overdue(
       'OT1',
       'Build sentien life',
@@ -205,23 +208,27 @@ export class TasksService {
       'abc'
 
     )
-  ];
+  ]);
 
   get alltasks() {
-    return [...this._alltasks];
+    return this._alltasks.asObservable();
   }
   get completedtasks() {
-    return [...this._completedtasks];
+    return this._completedtasks.asObservable();
   }
   get overdues() {
-    return [...this._overdues];
+    return this._overdues.asObservable();
   }
   get flags() {
-    return [...this._flags];
+    return this._flags.asObservable();
   }
 
   getAlltask(id: string) {
-    return { ...this._alltasks.find(at => at.id === id) };
+    return this.alltasks.pipe(take(1),
+      map(alltasks => {
+        return { ...alltasks.find(at => at.id === id) };
+      })
+    );
   }
 
   addAlltask(title: string, duedate: Date, modul: string, description: string) {
@@ -233,11 +240,17 @@ export class TasksService {
       description,
       this.authService.userId
     );
-    this._alltasks.push(newAlltask);
+    this.alltasks.pipe(take(1)).subscribe(alltasks => {
+      this._alltasks.next(alltasks.concat(newAlltask));
+    });
   }
 
   getCompletedtask(id: string) {
-    return { ...this._completedtasks.find(ct => ct.id === id) };
+    return this.completedtasks.pipe(take(1),
+      map(completedtasks => {
+        return { ...completedtasks.find(ct => ct.id === id) };
+      })
+    );
   }
 
   addCompletedtask(title: string, duedate: Date, modul: string, description: string) {
@@ -249,11 +262,17 @@ export class TasksService {
       description,
       this.authService.userId
     );
-    this._completedtasks.push(newCompletedtask);
+    this.completedtasks.pipe(take(1)).subscribe(completedtasks => {
+      this._completedtasks.next(completedtasks.concat(newCompletedtask));
+    });
   }
 
   getOverdue(id: string) {
-    return { ...this._overdues.find(ov => ov.id === id) };
+    return this.overdues.pipe(take(1),
+      map(overdues => {
+        return { ...overdues.find(ov => ov.id === id) };
+      })
+    );
   }
 
   addOverdue(title: string, duedate: Date, modul: string, description: string) {
@@ -265,11 +284,17 @@ export class TasksService {
       description,
       this.authService.userId
     );
-    this._overdues.push(newOverdue);
+    this.overdues.pipe(take(1)).subscribe(overdues => {
+      this._overdues.next(overdues.concat(newOverdue));
+    });
   }
 
   getFlag(id: string) {
-    return { ...this._flags.find(fl => fl.id === id) };
+    return this.flags.pipe(take(1),
+      map(flags => {
+        return { ...flags.find(fl => fl.id === id) };
+      })
+    );
   }
 
   addFlag(title: string, duedate: Date, modul: string, description: string) {
@@ -281,8 +306,11 @@ export class TasksService {
       description,
       this.authService.userId
     );
-    this._flags.push(newFlag);
+    this.flags.pipe(take(1)).subscribe(flags => {
+      this._flags.next(flags.concat(newFlag));
+    });
   }
+
   constructor(private authService: AuthService) { }
 
 

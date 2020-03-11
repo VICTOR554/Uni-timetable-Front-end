@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Class } from '../../home.model';
 import { Subscription } from 'rxjs';
-import { HomeService } from '../../home.service';
 import { Router } from '@angular/router';
+import { ListService } from '../list.service';
+import { Class } from '../list.model';
 
 @Component({
   selector: 'app-details',
@@ -14,12 +14,13 @@ export class DetailsPage implements OnInit {
 
   form: FormGroup;
   loadedclass: Class[];
-  private detailSub: Subscription;
 
-  constructor(private homeService: HomeService, private router: Router) { }
+  constructor(private listService: ListService, private router: Router) { }
 
   ngOnInit() {
-    this.loadedclass = this.homeService.classes;
+    this.listService.classes.subscribe(classes => {
+      this.loadedclass = classes;
+    });
     this.form = new FormGroup({
       module: new FormControl(null, {
         updateOn: 'blur',

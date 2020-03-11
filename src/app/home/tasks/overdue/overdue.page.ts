@@ -15,7 +15,9 @@ export class OverduePage implements OnInit {
   constructor(private tasksService: TasksService) { }
 
   ngOnInit() {
-    this.loadedoverdue = this.tasksService.overdues;
+    this.tasksService.overdues.subscribe(overdues => {
+      this.loadedoverdue = overdues;
+    });
   }
 
   onDelete(overdueId: string, slidingItem: IonItemSliding) {

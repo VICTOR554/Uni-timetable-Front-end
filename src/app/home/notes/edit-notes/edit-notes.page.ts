@@ -24,20 +24,21 @@ export class EditNotesPage implements OnInit {
         this.navCtrl.navigateBack('/home/tabs/notes');
         return;
       }
-      this.loadednote = this.notesService.getNote(paramMap.get('notesId'));
-      // load detail of item in form by removing null and calling the title and description
-      this.form = new FormGroup({
-        title: new FormControl(this.loadednote.title, {
-          updateOn: 'blur',
-          validators: [Validators.required]
-        }),
-        description: new FormControl(this.loadednote.description, {
-          updateOn: 'blur',
-          validators: [Validators.required, Validators.maxLength(180)]
-        })
+      this.notesService.getNote(paramMap.get('notesId')).subscribe(notes => {
+        this.loadednote = notes;
+        // load detail of item in form by removing null and calling the title and description
+        this.form = new FormGroup({
+          title: new FormControl(this.loadednote.title, {
+            updateOn: 'blur',
+            validators: [Validators.required]
+          }),
+          description: new FormControl(this.loadednote.description, {
+            updateOn: 'blur',
+            validators: [Validators.required, Validators.maxLength(180)]
+          })
+        });
       });
     });
-
   }
 
   onUpdateNote() {

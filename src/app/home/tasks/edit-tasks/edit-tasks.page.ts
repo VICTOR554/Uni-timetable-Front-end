@@ -26,17 +26,19 @@ export class EditTasksPage implements OnInit {
         this.navCtrl.navigateBack('/home/tabs/notes');
         return;
       }
-      this.loadedalltask = this.tasksService.getAlltask(paramMap.get('taskId'));
-      // load detail of item in form by removing null and calling the title and description
-      this.form = new FormGroup({
-        title: new FormControl(this.loadedalltask.title, {
-          updateOn: 'blur',
-          validators: [Validators.required]
-        }),
-        description: new FormControl(this.loadedalltask.description, {
-          updateOn: 'blur',
-          validators: [Validators.required, Validators.maxLength(180)]
-        })
+      this.tasksService.getAlltask(paramMap.get('taskId')).subscribe(notes => {
+        this.loadedalltask = notes;
+        // load detail of item in form by removing null and calling the title and description
+        this.form = new FormGroup({
+          title: new FormControl(this.loadedalltask.title, {
+            updateOn: 'blur',
+            validators: [Validators.required]
+          }),
+          description: new FormControl(this.loadedalltask.description, {
+            updateOn: 'blur',
+            validators: [Validators.required, Validators.maxLength(180)]
+          })
+        });
       });
     });
   }

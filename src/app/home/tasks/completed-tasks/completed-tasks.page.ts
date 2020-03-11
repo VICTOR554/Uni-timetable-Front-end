@@ -15,7 +15,9 @@ export class CompletedTasksPage implements OnInit {
   constructor(private tasksService: TasksService) { }
 
   ngOnInit() {
-    this.loadedcompletedtask = this.tasksService.completedtasks;
+    this.tasksService.completedtasks.subscribe(completedtasks => {
+      this.loadedcompletedtask = completedtasks;
+    });
   }
 
   onDelete(completedtaskId: string, slidingItem: IonItemSliding) {

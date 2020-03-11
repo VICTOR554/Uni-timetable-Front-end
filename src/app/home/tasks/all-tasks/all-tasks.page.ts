@@ -14,7 +14,9 @@ export class AllTasksPage implements OnInit {
   constructor(private tasksService: TasksService) { }
 
   ngOnInit() {
-    this.loadedalltask = this.tasksService.alltasks;
+    this.tasksService.alltasks.subscribe(alltasks => {
+      this.loadedalltask = alltasks;
+    });
   }
 
   onDelete(alltaskId: string, slidingItem: IonItemSliding) {

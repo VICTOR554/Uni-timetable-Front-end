@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../home.service';
-import { Class } from '../home.model';
+import { ListService } from './list.service';
+import { Class } from './list.model';
 
 @Component({
   selector: 'app-list-view',
@@ -10,10 +10,12 @@ import { Class } from '../home.model';
 export class ListViewPage implements OnInit {
   loadedclass: Class[];
 
-  constructor(private homeService: HomeService) { }
+  constructor(private listService: ListService) { }
 
   ngOnInit() {
-    this.loadedclass = this.homeService.classes;
+    this.listService.classes.subscribe(classes => {
+      this.loadedclass = classes;
+    });
   }
 
   stop(event: Event) {

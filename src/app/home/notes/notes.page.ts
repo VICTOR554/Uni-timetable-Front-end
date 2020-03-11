@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../home.service';
 import { IonItemSliding } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Note } from './notes.model';
@@ -17,7 +16,9 @@ export class NotesPage implements OnInit {
   constructor(private notesService: NotesService, private router: Router) { }
 
   ngOnInit() {
-    this.loadednote = this.notesService.notes;
+    this.notesService.notes.subscribe(notes => {
+      this.loadednote = notes;
+    });
   }
 
   onDelete(noteId: string, slidingItem: IonItemSliding) {
