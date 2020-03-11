@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IonItemSliding } from '@ionic/angular';
+import { IonItemSliding, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Note } from './notes.model';
 import { NotesService } from './notes.service';
@@ -15,7 +15,7 @@ export class NotesPage implements OnInit, OnDestroy {
   loadednote: Note[];
   private noteSub: Subscription;
 
-  constructor(private notesService: NotesService, private router: Router) { }
+  constructor(private notesService: NotesService, private router: Router, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.noteSub = this.notesService.notes.subscribe(notes => {
@@ -25,8 +25,14 @@ export class NotesPage implements OnInit, OnDestroy {
 
   onDelete(noteId: string, slidingItem: IonItemSliding) {
     slidingItem.close();
-    this.router.navigate(['/', 'home', 'tabs', 'notes']);
-    console.log('Delete item', noteId);
+    this.loadingCtrl.create({ message: 'Deleting...' })
+      .then(loadingEl => {
+        loadingEl.present();
+        this.notesService.cancelNote(noteId).subscribe(() => {
+          loadingEl.dismiss();
+        });
+        console.log('delete item', noteId);
+      });
   }
 
   // used to clear subscription to avoid memory leaks

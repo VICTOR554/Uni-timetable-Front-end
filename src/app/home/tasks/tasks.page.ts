@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterEvent } from '@angular/router';
 
 @Component({
   selector: 'app-tasks',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TasksPage implements OnInit {
 
-  constructor() { }
+
+  constructor(private router: Router) {
+
+  }
 
   ngOnInit() {
   }

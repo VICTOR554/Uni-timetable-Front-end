@@ -102,6 +102,14 @@ export class NotesService {
     );
   }
 
-
+  cancelNote(noteId: string) {
+    return this.notes.pipe(
+      take(1),
+      delay(1000),
+      tap(notes => {
+        this._notes.next(notes.filter(n => n.id !== noteId));
+      })
+    );
+  }
 
 }

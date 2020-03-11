@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IonItemSliding } from '@ionic/angular';
+import { IonItemSliding, LoadingController } from '@ionic/angular';
 import { Flag } from '../tasks.model';
 import { TasksService } from '../tasks.service';
 import { Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ export class FlagsPage implements OnInit, OnDestroy {
   private taskSub: Subscription;
 
 
-  constructor(private tasksService: TasksService) { }
+  constructor(private tasksService: TasksService, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.taskSub = this.tasksService.flags.subscribe(flags => {
@@ -25,7 +25,14 @@ export class FlagsPage implements OnInit, OnDestroy {
 
   onDelete(flagId: string, slidingItem: IonItemSliding) {
     slidingItem.close();
-    console.log('delete item', flagId);
+    this.loadingCtrl.create({ message: 'Deleting...' })
+      .then(loadingEl => {
+        loadingEl.present();
+        this.tasksService.cancelAlltask(flagId).subscribe(() => {
+          loadingEl.dismiss();
+        });
+        console.log('delete item', flagId);
+      });
   }
 
   stop(event: Event) {

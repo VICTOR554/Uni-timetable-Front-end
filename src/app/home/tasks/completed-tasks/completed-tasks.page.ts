@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { IonItemSliding } from '@ionic/angular';
+import { IonItemSliding, LoadingController } from '@ionic/angular';
 import { Completedtask } from '../tasks.model';
 import { TasksService } from '../tasks.service';
 import { Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ export class CompletedTasksPage implements OnInit, OnDestroy {
   private taskSub: Subscription;
 
 
-  constructor(private tasksService: TasksService) { }
+  constructor(private tasksService: TasksService, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.taskSub = this.tasksService.completedtasks.subscribe(completedtasks => {
@@ -25,7 +25,14 @@ export class CompletedTasksPage implements OnInit, OnDestroy {
 
   onDelete(completedtaskId: string, slidingItem: IonItemSliding) {
     slidingItem.close();
-    console.log('delete item', completedtaskId);
+    this.loadingCtrl.create({ message: 'Deleting...' })
+      .then(loadingEl => {
+        loadingEl.present();
+        this.tasksService.cancelAlltask(completedtaskId).subscribe(() => {
+          loadingEl.dismiss();
+        });
+        console.log('delete item', completedtaskId);
+      });
   }
 
   stop(event: Event) {

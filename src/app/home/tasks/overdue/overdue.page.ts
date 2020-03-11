@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IonItemSliding } from '@ionic/angular';
+import { IonItemSliding, LoadingController } from '@ionic/angular';
 import { Overdue } from '../tasks.model';
 import { TasksService } from '../tasks.service';
 import { Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ export class OverduePage implements OnInit, OnDestroy {
   private taskSub: Subscription;
 
 
-  constructor(private tasksService: TasksService) { }
+  constructor(private tasksService: TasksService, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.taskSub = this.tasksService.overdues.subscribe(overdues => {
@@ -25,7 +25,14 @@ export class OverduePage implements OnInit, OnDestroy {
 
   onDelete(overdueId: string, slidingItem: IonItemSliding) {
     slidingItem.close();
-    console.log('delete item', overdueId);
+    this.loadingCtrl.create({ message: 'Deleting...' })
+      .then(loadingEl => {
+        loadingEl.present();
+        this.tasksService.cancelAlltask(overdueId).subscribe(() => {
+          loadingEl.dismiss();
+        });
+        console.log('delete item', overdueId);
+      });
   }
 
   stop(event: Event) {

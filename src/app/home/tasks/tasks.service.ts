@@ -223,6 +223,11 @@ export class TasksService {
     return this._flags.asObservable();
   }
 
+  constructor(private authService: AuthService) { }
+
+
+  // ALL TASK
+
   getAlltask(id: string) {
     return this.alltasks.pipe(take(1),
       map(alltasks => {
@@ -266,6 +271,18 @@ export class TasksService {
       })
     );
   }
+
+  cancelAlltask(alltaskId: string) {
+    return this.alltasks.pipe(
+      take(1),
+      delay(1000),
+      tap(alltasks => {
+        this._alltasks.next(alltasks.filter(at => at.id !== alltaskId));
+      })
+    );
+  }
+
+  // Completed Task
 
   getCompletedtask(id: string) {
     return this.completedtasks.pipe(take(1),
@@ -311,6 +328,18 @@ export class TasksService {
     );
   }
 
+  cancelCompletedtask(completedtaskId: string) {
+    return this.completedtasks.pipe(
+      take(1),
+      delay(1000),
+      tap(completedtasks => {
+        this._completedtasks.next(completedtasks.filter(ct => ct.id !== completedtaskId));
+      })
+    );
+  }
+
+  // Overdue Task
+
   getOverdue(id: string) {
     return this.overdues.pipe(take(1),
       map(overdues => {
@@ -354,6 +383,18 @@ export class TasksService {
       })
     );
   }
+
+  cancelOverdue(overdueId: string) {
+    return this.overdues.pipe(
+      take(1),
+      delay(1000),
+      tap(overdues => {
+        this._overdues.next(overdues.filter(ov => ov.id !== overdueId));
+      })
+    );
+  }
+
+  // Flag
 
   getFlag(id: string) {
     return this.flags.pipe(take(1),
@@ -399,7 +440,16 @@ export class TasksService {
     );
   }
 
-  constructor(private authService: AuthService) { }
+  cancelFlag(flagId: string) {
+    return this.flags.pipe(
+      take(1),
+      delay(1000),
+      tap(flags => {
+        this._flags.next(flags.filter(fl => fl.id !== flagId));
+      })
+    );
+  }
+
 
 
 }
