@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotesService } from '../notes.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class NewNotesPage implements OnInit {
   form: FormGroup;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private notesService: NotesService) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -19,7 +20,7 @@ export class NewNotesPage implements OnInit {
         updateOn: 'blur',
         validators: [Validators.required],
       }),
-      module: new FormControl(null, {
+      modul: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required],
       }),
@@ -35,7 +36,12 @@ export class NewNotesPage implements OnInit {
     if (!this.form.valid) {
       return;
     }
-    console.log(this.form);
+    this.notesService.addNote(
+      this.form.value.title,
+      this.form.value.modul,
+      this.form.value.description,
+    );
+    console.log(this.notesService.notes);
 
     this.router.navigate(['home/tabs/notes']);
   }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Overdue, Flag, Completedtask, Alltask } from './tasks.model';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -223,16 +224,66 @@ export class TasksService {
     return { ...this._alltasks.find(at => at.id === id) };
   }
 
+  addAlltask(title: string, duedate: Date, modul: string, description: string) {
+    const newAlltask = new Alltask(
+      Math.random().toString(),
+      title,
+      duedate,
+      modul,
+      description,
+      this.authService.userId
+    );
+    this._alltasks.push(newAlltask);
+  }
+
   getCompletedtask(id: string) {
     return { ...this._completedtasks.find(ct => ct.id === id) };
+  }
+
+  addCompletedtask(title: string, duedate: Date, modul: string, description: string) {
+    const newCompletedtask = new Completedtask(
+      Math.random().toString(),
+      title,
+      duedate,
+      modul,
+      description,
+      this.authService.userId
+    );
+    this._completedtasks.push(newCompletedtask);
   }
 
   getOverdue(id: string) {
     return { ...this._overdues.find(ov => ov.id === id) };
   }
 
+  addOverdue(title: string, duedate: Date, modul: string, description: string) {
+    const newOverdue = new Overdue(
+      Math.random().toString(),
+      title,
+      duedate,
+      modul,
+      description,
+      this.authService.userId
+    );
+    this._overdues.push(newOverdue);
+  }
+
   getFlag(id: string) {
     return { ...this._flags.find(fl => fl.id === id) };
   }
-  constructor() { }
+
+  addFlag(title: string, duedate: Date, modul: string, description: string) {
+    const newFlag = new Flag(
+      Math.random().toString(),
+      title,
+      duedate,
+      modul,
+      description,
+      this.authService.userId
+    );
+    this._flags.push(newFlag);
+  }
+  constructor(private authService: AuthService) { }
+
+
 }

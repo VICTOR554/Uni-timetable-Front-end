@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Note } from './notes.model';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +60,19 @@ export class NotesService {
     return { ...this._notes.find(n => n.id === id) };
   }
 
+  constructor(private authService: AuthService) { }
 
-  constructor() { }
+  addNote(title: string, modul: string, description: string) {
+    const newNote = new Note(
+      Math.random().toString(),
+      title,
+      modul,
+      description,
+      this.authService.userId
+    );
+    this._notes.push(newNote);
+  }
+
+
+
 }
