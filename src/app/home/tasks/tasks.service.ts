@@ -218,5 +218,21 @@ export class TasksService {
   get flags() {
     return [...this._flags];
   }
+
+  getAlltask(id: string) {
+    return { ...this._alltasks.find(at => at.id === id) };
+  }
+
+  getCompletedtask(id: string) {
+    return { ...this._completedtasks.find(ct => ct.id === id) };
+  }
+
+  getOverdue(id: string) {
+    return { ...this._overdues.find(ov => ov.id === id) };
+  }
+
+  getFlag(id: string) {
+    return { ...this._flags.find(fl => fl.id === id) };
+  }
   constructor() { }
 }

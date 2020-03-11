@@ -25,7 +25,7 @@ export class EditNotesPage implements OnInit {
         return;
       }
       this.loadednote = this.notesService.getNote(paramMap.get('notesId'));
-      // load detail of item in array using id to find it
+      // load detail of item in form by removing null and calling the title and description
       this.form = new FormGroup({
         title: new FormControl(this.loadednote.title, {
           updateOn: 'blur',

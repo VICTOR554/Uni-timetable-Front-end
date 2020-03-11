@@ -60,7 +60,7 @@ const routes: Routes =
                   loadChildren: () => import('./tasks/new-tasks/new-tasks.module').then( m => m.NewTasksPageModule)
                 },
                 {
-                  path: 'edit/:homeId',
+                  path: 'edit/:taskId',
                   loadChildren: () => import('./tasks/edit-tasks/edit-tasks.module').then(m => m.EditTasksPageModule)
                 },
               ]
