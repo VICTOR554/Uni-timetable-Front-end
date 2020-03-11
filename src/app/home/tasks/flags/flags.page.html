@@ -14,7 +14,7 @@
     
                 <ion-item [routerLink]="['/', 'home', 'tabs', 'tasks', 'edit', flag.id]">
     
-                  <ion-item slot="start" lines="none" class="ion-no-padding" class="ion-no-margin" (click)="stop($event)">
+                  <ion-item slot="start" lines="none" class="ion-no-padding" class="ion-no-margin" (click)="stop($event)" [routerLink]="['/', 'home', 'tabs', 'tasks', 'tabs2', 'all-tasks']">
                     <ion-checkbox class="ion-no-padding" color="primary" checked slot="start"></ion-checkbox>
                   </ion-item>
     

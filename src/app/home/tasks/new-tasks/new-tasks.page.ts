@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TasksService } from '../tasks.service';
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-new-tasks',
@@ -15,7 +16,7 @@ export class NewTasksPage implements OnInit {
   defaultEndTime;
   previousUrl: string;
 
-  constructor(private tasksService: TasksService, private router: Router) {
+  constructor(private tasksService: TasksService, private router: Router, private loadingCtrl: LoadingController) {
 
   }
 
@@ -49,17 +50,28 @@ export class NewTasksPage implements OnInit {
 
       return;
     }
-    this.tasksService.addAlltask(
-      this.form.value.title,
-      this.form.value.duedate,
-      this.form.value.modul,
-      this.form.value.description,
-    );
-    console.log(this.form);
+    this.loadingCtrl.create({
+      message: 'Creating Task'
+    }).then(loadingEl => {
+      loadingEl.present();
+      this.tasksService.addAlltask(
+        this.form.value.title,
+        this.form.value.duedate,
+        this.form.value.modul,
+        this.form.value.description,
+      ).subscribe(() => {
+        loadingEl.dismiss();
+        console.log(this.tasksService.alltasks);
+        this.form.reset();
+        this.router.navigate(['home/tabs/tasks']);
 
-    this.router.navigate(['home/tabs/tasks']);
+      });
+    });
   }
 
 
-
 }
+
+
+
+

@@ -1,22 +1,20 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home/tabs/notes"></ion-back-button>
+      <ion-back-button 
+      defaultHref="/home/tabs/notes"></ion-back-button>
     </ion-buttons>
-
-    <ion-title>{{loadednote.title}}</ion-title>
+    <ion-title>Edit Note-{{loadednote.title}}</ion-title>
 
     <ion-buttons slot="primary">
-      <ion-button (click)="onUpdateNote()" type="submit">
+      <ion-button (click)="onUpdateNote()" [disabled]="!form.valid" type="submit" >
         <ion-icon name="checkmark" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
-
   </ion-toolbar>
 </ion-header>
-
-
-<ion-content>
+ 
+<ion-content padding>
   <form [formGroup]="form">
     <ion-grid>
       <ion-row>
@@ -28,8 +26,29 @@
         </ion-col>
       </ion-row>
 
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Module</ion-label>
+            <ion-select placeholder="Select a Module" autocomplete autocorrect formControlName="modul"> 
+              <ion-select-option value="blank">-</ion-select-option>
+              <ion-select-option value="Software Engineering">Software Engineering</ion-select-option>
+              <ion-select-option value="HCI">HCI</ion-select-option>
+              <ion-select-option value="Games and Design">Games and Design</ion-select-option>
+              <ion-select-option value="Artificial Intelligence">Artificial Intelligence</ion-select-option>
+              <ion-select-option value="Cyber Security">Cyber Security</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="!form.get('modul').valid && form.get('modul').touched">
+        <ion-col size-sm="6" offset-sm="3">
+          <P>Pick a module or blank</P>
+        </ion-col>
+      </ion-row>
 
 
+      
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
@@ -43,7 +62,7 @@
           <P>Description must not between 1 and 180 chracters</P>
         </ion-col>
       </ion-row>
-
     </ion-grid>
   </form>
 </ion-content>
+ 

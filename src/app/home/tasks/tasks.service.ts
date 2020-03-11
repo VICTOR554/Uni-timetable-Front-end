@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Overdue, Flag, Completedtask, Alltask } from './tasks.model';
 import { AuthService } from 'src/app/auth/auth.service';
 
-import { take, map } from 'rxjs/operators';
+import { take, map, delay, tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -15,8 +15,8 @@ export class TasksService {
     new Alltask(
       'AT1',
       'Build sentien life',
-      new Date('2019-02-12'),
       'HCI',
+      new Date('2019-02-12'),
       'Study the new article of advanced AI',
       'abc'
 
@@ -25,8 +25,8 @@ export class TasksService {
     new Alltask(
       'AT2',
       'Check if code smell',
-      new Date('2020-02-18'),
       'Software Engineering',
+      new Date('2020-02-18'),
       'Study the the lecture on code smells',
       'abc'
 
@@ -34,8 +34,8 @@ export class TasksService {
     new Alltask(
       'AT3',
       'Research Call of duty',
-      new Date('2020-02-20'),
       'Games and Design',
+      new Date('2020-02-20'),
       'Design Call of duty main frame',
       'abc'
 
@@ -43,8 +43,8 @@ export class TasksService {
     new Alltask(
       'AT4',
       'Study cloud service',
-      new Date('2020-02-24'),
       'Advanced Topics',
+      new Date('2020-02-24'),
       'Study how is cloud service advancing to the new age',
       'abc'
 
@@ -52,8 +52,8 @@ export class TasksService {
     new Alltask(
       'AT5',
       'Build firewall',
-      new Date('2020-02-26'),
       'Cyber Security',
+      new Date('2020-02-26'),
       'Build a firewall to stop the self replecating virus',
       'abc'
 
@@ -65,8 +65,8 @@ export class TasksService {
     new Completedtask(
       'CT1',
       'Study Irobot movie analysis',
-      new Date('2019-02-12'),
       'HCI',
+      new Date('2019-02-12'),
       'Study the new article of advanced AI',
       'abc'
 
@@ -75,8 +75,8 @@ export class TasksService {
     new Completedtask(
       'CT2',
       'Does code rot',
-      new Date('2020-02-18'),
       'Software Engineering',
+      new Date('2020-02-18'),
       'Study the the lecture on code smells',
       'abc'
 
@@ -84,8 +84,8 @@ export class TasksService {
     new Completedtask(
       'CT3',
       'Create simulation',
-      new Date('2020-02-20'),
       'Games and Design',
+      new Date('2020-02-20'),
       'Design Call of duty main frame',
       'abc'
 
@@ -93,8 +93,8 @@ export class TasksService {
     new Completedtask(
       'CT4',
       'Build better cloud service',
-      new Date('2020-02-24'),
       'Advanced Topics',
+      new Date('2020-02-24'),
       'Study how is cloud service advancing to the new age',
       'abc'
 
@@ -102,8 +102,8 @@ export class TasksService {
     new Completedtask(
       'CT5',
       'Stop virus from going',
-      new Date('2020-02-26'),
       'Cyber Security',
+      new Date('2020-02-26'),
       'Build a firewall to stop the self replecating virus',
       'abc'
 
@@ -115,8 +115,8 @@ export class TasksService {
     new Flag(
       'FT1',
       'Stop Ultron',
-      new Date('2019-02-12'),
       'HCI',
+      new Date('2019-02-12'),
       'Study the new article of advanced AI',
       'abc'
 
@@ -125,8 +125,8 @@ export class TasksService {
     new Flag(
       'FT2',
       'Learn how to create the matrix',
-      new Date('2020-02-18'),
       'Software Engineering',
+      new Date('2020-02-18'),
       'Study the the lecture on code smells',
       'abc'
 
@@ -134,8 +134,8 @@ export class TasksService {
     new Flag(
       'FT3',
       'Build Virtual Reality device',
-      new Date('2020-02-20'),
       'Games and Design',
+      new Date('2020-02-20'),
       'Design Call of duty main frame',
       'abc'
 
@@ -143,8 +143,8 @@ export class TasksService {
     new Flag(
       'FT4',
       'Study dissertation write up',
-      new Date('2020-02-24'),
       'Advanced Topics',
+      new Date('2020-02-24'),
       'Study how is cloud service advancing to the new age',
       'abc'
 
@@ -152,8 +152,8 @@ export class TasksService {
     new Flag(
       'FT5',
       'Solve np vs npm',
-      new Date('2020-02-26'),
       'Cyber Security',
+      new Date('2020-02-26'),
       'Build a firewall to stop the self replecating virus',
       'abc'
 
@@ -165,8 +165,8 @@ export class TasksService {
     new Overdue(
       'OT1',
       'Build sentien life',
-      new Date('2019-02-12'),
       'HCI',
+      new Date('2019-02-12'),
       'Study the new article of advanced AI',
       'abc'
 
@@ -175,8 +175,8 @@ export class TasksService {
     new Overdue(
       'OT2',
       'Check if code smell',
-      new Date('2020-02-18'),
       'Software Engineering',
+      new Date('2020-02-18'),
       'Study the the lecture on code smells',
       'abc'
 
@@ -184,8 +184,8 @@ export class TasksService {
     new Overdue(
       'OT3',
       'Research Call of duty',
-      new Date('2020-02-20'),
       'Games and Design',
+      new Date('2020-02-20'),
       'Design Call of duty main frame',
       'abc'
 
@@ -193,8 +193,8 @@ export class TasksService {
     new Overdue(
       'OT4',
       'Study cloud service',
-      new Date('2020-02-24'),
       'Advanced Topics',
+      new Date('2020-02-24'),
       'Study how is cloud service advancing to the new age',
       'abc'
 
@@ -202,8 +202,8 @@ export class TasksService {
     new Overdue(
       'OT5',
       'Build firewall',
-      new Date('2020-02-26'),
       'Cyber Security',
+      new Date('2020-02-26'),
       'Build a firewall to stop the self replecating virus',
       'abc'
 
@@ -231,18 +231,40 @@ export class TasksService {
     );
   }
 
-  addAlltask(title: string, duedate: Date, modul: string, description: string) {
+  addAlltask(title: string, modul: string, duedate: Date, description: string) {
     const newAlltask = new Alltask(
       Math.random().toString(),
       title,
-      duedate,
       modul,
+      duedate,
       description,
       this.authService.userId
     );
-    this.alltasks.pipe(take(1)).subscribe(alltasks => {
+    return this.alltasks.pipe(take(1), delay(1000), tap(alltasks => {
       this._alltasks.next(alltasks.concat(newAlltask));
-    });
+    })
+    );
+  }
+
+  updateAlltask(alltaskId: string, title: string, modul: string, duedate: Date, description: string) {
+    return this.alltasks.pipe(
+      take(1),
+      delay(1000),
+      tap(alltasks => {
+        const updatedAlltaskIndex = alltasks.findIndex(at => at.id === alltaskId);
+        const updatedAlltasks = [...alltasks];
+        const oldAlltask = updatedAlltasks[updatedAlltaskIndex];
+        updatedAlltasks[updatedAlltaskIndex] = new Alltask(
+          oldAlltask.id,
+          title,
+          modul,
+          duedate,
+          description,
+          oldAlltask.userId
+        );
+        this._alltasks.next(updatedAlltasks);
+      })
+    );
   }
 
   getCompletedtask(id: string) {
@@ -253,18 +275,40 @@ export class TasksService {
     );
   }
 
-  addCompletedtask(title: string, duedate: Date, modul: string, description: string) {
+  addCompletedtask(title: string, modul: string, duedate: Date, description: string) {
     const newCompletedtask = new Completedtask(
       Math.random().toString(),
       title,
-      duedate,
       modul,
+      duedate,
       description,
       this.authService.userId
     );
-    this.completedtasks.pipe(take(1)).subscribe(completedtasks => {
+    return this.completedtasks.pipe(take(1), delay(1000), tap(completedtasks => {
       this._completedtasks.next(completedtasks.concat(newCompletedtask));
-    });
+    })
+    );
+  }
+
+  updateCompletedtask(completedtaskId: string, title: string, modul: string, duedate: Date, description: string) {
+    return this.completedtasks.pipe(
+      take(1),
+      delay(1000),
+      tap(completedtasks => {
+        const updatedCompletedtaskIndex = completedtasks.findIndex(ct => ct.id === completedtaskId);
+        const updatedCompletedtasks = [...completedtasks];
+        const oldCompletedtask = updatedCompletedtasks[updatedCompletedtaskIndex];
+        updatedCompletedtasks[updatedCompletedtaskIndex] = new Completedtask(
+          oldCompletedtask.id,
+          title,
+          modul,
+          duedate,
+          description,
+          oldCompletedtask.userId
+        );
+        this._completedtasks.next(updatedCompletedtasks);
+      })
+    );
   }
 
   getOverdue(id: string) {
@@ -275,18 +319,40 @@ export class TasksService {
     );
   }
 
-  addOverdue(title: string, duedate: Date, modul: string, description: string) {
+  addOverdue(title: string, modul: string, duedate: Date, description: string) {
     const newOverdue = new Overdue(
       Math.random().toString(),
       title,
-      duedate,
       modul,
+      duedate,
       description,
       this.authService.userId
     );
-    this.overdues.pipe(take(1)).subscribe(overdues => {
+    return this.overdues.pipe(take(1), delay(1000), tap(overdues => {
       this._overdues.next(overdues.concat(newOverdue));
-    });
+    })
+    );
+  }
+
+  updateOverdue(overdueId: string, title: string, modul: string, duedate: Date, description: string) {
+    return this.overdues.pipe(
+      take(1),
+      delay(1000),
+      tap(overdues => {
+        const updatedOverdueIndex = overdues.findIndex(ov => ov.id === overdueId);
+        const updatedOverdues = [...overdues];
+        const oldOverdue = updatedOverdues[updatedOverdueIndex];
+        updatedOverdues[updatedOverdueIndex] = new Overdue(
+          oldOverdue.id,
+          title,
+          modul,
+          duedate,
+          description,
+          oldOverdue.userId
+        );
+        this._overdues.next(updatedOverdues);
+      })
+    );
   }
 
   getFlag(id: string) {
@@ -297,18 +363,40 @@ export class TasksService {
     );
   }
 
-  addFlag(title: string, duedate: Date, modul: string, description: string) {
+  addFlag(title: string, modul: string, duedate: Date, description: string) {
     const newFlag = new Flag(
       Math.random().toString(),
       title,
-      duedate,
       modul,
+      duedate,
       description,
       this.authService.userId
     );
-    this.flags.pipe(take(1)).subscribe(flags => {
+    return this.flags.pipe(take(1), delay(1000), tap(flags => {
       this._flags.next(flags.concat(newFlag));
-    });
+    })
+    );
+  }
+
+  updateFlag(flagId: string, title: string, modul: string, duedate: Date, description: string) {
+    return this.flags.pipe(
+      take(1),
+      delay(1000),
+      tap(flags => {
+        const updatedFlagIndex = flags.findIndex(fl => fl.id === flagId);
+        const updatedFlags = [...flags];
+        const oldOverdue = updatedFlags[updatedFlagIndex];
+        updatedFlags[updatedFlagIndex] = new Flag(
+          oldOverdue.id,
+          title,
+          modul,
+          duedate,
+          description,
+          oldOverdue.userId
+        );
+        this._flags.next(updatedFlags);
+      })
+    );
   }
 
   constructor(private authService: AuthService) { }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Note } from './notes.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BehaviorSubject } from 'rxjs';
-import { take, map } from 'rxjs/operators';
+import { take, map, delay, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -76,9 +76,30 @@ export class NotesService {
       description,
       this.authService.userId
     );
-    this.notes.pipe(take(1)).subscribe(notes => {
+    return this.notes.pipe(take(1), delay(1000), tap(notes => {
       this._notes.next(notes.concat(newNote));
-    });
+    })
+    );
+  }
+
+  updateNote(noteId: string, title: string, modul: string, description: string) {
+    return this.notes.pipe(
+      take(1),
+      delay(1000),
+      tap(notes => {
+        const updatedNoteIndex = notes.findIndex(no => no.id === noteId);
+        const updatedNotes = [...notes];
+        const oldNote = updatedNotes[updatedNoteIndex];
+        updatedNotes[updatedNoteIndex] = new Note(
+          oldNote.id,
+          title,
+          modul,
+          description,
+          oldNote.userId
+        );
+        this._notes.next(updatedNotes);
+      })
+    );
   }
 
 
