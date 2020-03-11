@@ -49,11 +49,15 @@ export class NotesService {
     )
 
   ];
-
+  // Clone the notes array using spread operator  to stop data manipulation from outside notes service
   get notes() {
     return [...this._notes];
   }
 
+
+  getNote(id: string) {
+    return { ...this._notes.find(n => n.id === id) };
+  }
 
 
   constructor() { }

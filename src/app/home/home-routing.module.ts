@@ -42,7 +42,7 @@ const routes: Routes =
                 },
                 {
                   // add note id so dat when you click the notes the will have the id as a url
-                  path: 'edit/note',
+                  path: 'edit/:noteId',
                   loadChildren: () => import('./notes/edit-notes/edit-notes.module').then(m => m.EditNotesPageModule)
                 },
               ]

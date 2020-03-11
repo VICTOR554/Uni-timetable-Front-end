@@ -22,7 +22,7 @@
       
           <ion-item-sliding *ngFor="let note of loadednote" #slidingItem>
       
-            <ion-item [routerLink]="['/', 'home', 'tabs', 'notes', 'edit', 'note']">
+            <ion-item [routerLink]="['/', 'home', 'tabs', 'notes', 'edit', note.id]">
               <ion-grid class="ion-no-padding">
                 <ion-row>
       
