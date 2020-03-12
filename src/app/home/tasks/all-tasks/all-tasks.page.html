@@ -23,7 +23,7 @@
                     <p>{{ alltask.modul }}</p>
                     <div class="offer-details">
                       <ion-icon color="primary" name="calendar"></ion-icon>
-                      <ion-text class="space-left"> {{ alltask.duedate }}</ion-text>
+                      <ion-text class="space-left"> {{ alltask.duedate | date:'dd MMM yyyy hh:mm a' }}</ion-text>
                     </div>
                   </ion-label>
                 </ion-item>

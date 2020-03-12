@@ -34,8 +34,8 @@ export class EditTasksPage implements OnInit, OnDestroy {
         this.navCtrl.navigateBack('/home/tabs/notes');
         return;
       }
-      this.taskSub = this.tasksService.getAlltask(paramMap.get('taskId')).subscribe(notes => {
-        this.loadedalltask = notes;
+      this.taskSub = this.tasksService.getAlltask(paramMap.get('taskId')).subscribe(alltasks => {
+        this.loadedalltask = alltasks;
         // load detail of item in form by removing null and calling the title and description
         this.form = new FormGroup({
           title: new FormControl(this.loadedalltask.title, {
@@ -72,14 +72,14 @@ export class EditTasksPage implements OnInit, OnDestroy {
         (
           this.loadedalltask.id,
           this.form.value.title,
-          this.form.value.duedate,
           this.form.value.modul,
+          this.form.value.duedate,
           this.form.value.description,
         )
         .subscribe(() => {
           loadingEl.dismiss();
           this.form.reset();
-          this.router.navigate(['/home/tabs/notes']);
+          this.router.navigate(['/home/tabs/tasks']);
 
         });
     });

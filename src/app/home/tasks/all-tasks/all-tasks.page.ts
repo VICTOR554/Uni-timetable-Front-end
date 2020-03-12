@@ -34,6 +34,8 @@ export class AllTasksPage implements OnInit, OnDestroy {
       });
   }
 
+
+
   stop(event: Event) {
     console.log('stop');
     event.stopPropagation();
