@@ -7,10 +7,14 @@ import { Router, RouterEvent } from '@angular/router';
   styleUrls: ['./tasks.page.scss'],
 })
 export class TasksPage implements OnInit {
-
+  selectedPath = '';
 
   constructor(private router: Router) {
-
+    this.router.events.subscribe((event: RouterEvent) => {
+      if (event && event.url) {
+        this.selectedPath = event.url;
+      }
+    });
   }
 
   ngOnInit() {
