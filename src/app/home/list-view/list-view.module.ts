@@ -13,7 +13,7 @@ import { ListViewPage } from './list-view.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ListViewPageRoutingModule
+    ListViewPageRoutingModule,
   ],
   declarations: [ListViewPage]
 })

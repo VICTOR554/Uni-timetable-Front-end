@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Note } from './notes.model';
 import { NotesService } from './notes.service';
 import { Subscription } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -15,12 +16,21 @@ export class NotesPage implements OnInit, OnDestroy {
   loadednote: Note[];
   private noteSub: Subscription;
 
-  constructor(private notesService: NotesService, private router: Router, private loadingCtrl: LoadingController) { }
+  // tslint:disable-next-line: max-line-length
+  constructor(
+    private notesService: NotesService,
+    private router: Router,
+    private loadingCtrl: LoadingController,
+    private http: HttpClient) { }
 
   ngOnInit() {
     this.noteSub = this.notesService.notes.subscribe(notes => {
       this.loadednote = notes;
     });
+
+
+
+
   }
 
   onDelete(noteId: string, slidingItem: IonItemSliding) {

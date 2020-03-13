@@ -28,7 +28,7 @@ export class FlagsPage implements OnInit, OnDestroy {
     this.loadingCtrl.create({ message: 'Deleting...' })
       .then(loadingEl => {
         loadingEl.present();
-        this.tasksService.cancelAlltask(flagId).subscribe(() => {
+        this.tasksService.cancelFlag(flagId).subscribe(() => {
           loadingEl.dismiss();
         });
         console.log('delete item', flagId);

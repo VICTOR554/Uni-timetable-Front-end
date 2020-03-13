@@ -25,7 +25,7 @@ date;
       .pipe(filter((e: any) => e instanceof RoutesRecognized),
         pairwise()
       ).subscribe((e: any) => {
-        console.log(e[0].urlAfterRedirects); // previous url
+        console.log('tndnjjtdtkjkdkdj' + e[0].urlAfterRedirects); // previous url
       });
 
     this.dates = new Date().toISOString();

@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ListService } from './list.service';
 import { Class } from './list.model';
 import { Subscription } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-list-view',
@@ -18,6 +20,8 @@ export class ListViewPage implements OnInit, OnDestroy {
     this.listSub = this.listService.classes.subscribe(classes => {
       this.loadedclass = classes;
     });
+
+
   }
 
   stop(event: Event) {

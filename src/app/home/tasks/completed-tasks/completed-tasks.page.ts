@@ -28,7 +28,7 @@ export class CompletedTasksPage implements OnInit, OnDestroy {
     this.loadingCtrl.create({ message: 'Deleting...' })
       .then(loadingEl => {
         loadingEl.present();
-        this.tasksService.cancelAlltask(completedtaskId).subscribe(() => {
+        this.tasksService.cancelCompletedtask(completedtaskId).subscribe(() => {
           loadingEl.dismiss();
         });
         console.log('delete item', completedtaskId);

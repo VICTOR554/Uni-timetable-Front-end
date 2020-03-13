@@ -3,6 +3,8 @@ import { Note } from './notes.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BehaviorSubject } from 'rxjs';
 import { take, map, delay, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -66,7 +68,7 @@ export class NotesService {
     );
   }
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private http: HttpClient) { }
 
   addNote(title: string, modul: string, description: string) {
     const newNote = new Note(
@@ -76,6 +78,7 @@ export class NotesService {
       description,
       this.authService.userId
     );
+    // return this.http.post('')
     return this.notes.pipe(take(1), delay(1000), tap(notes => {
       this._notes.next(notes.concat(newNote));
     })

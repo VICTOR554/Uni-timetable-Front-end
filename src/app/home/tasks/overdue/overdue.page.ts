@@ -28,7 +28,7 @@ export class OverduePage implements OnInit, OnDestroy {
     this.loadingCtrl.create({ message: 'Deleting...' })
       .then(loadingEl => {
         loadingEl.present();
-        this.tasksService.cancelAlltask(overdueId).subscribe(() => {
+        this.tasksService.cancelOverdue(overdueId).subscribe(() => {
           loadingEl.dismiss();
         });
         console.log('delete item', overdueId);
