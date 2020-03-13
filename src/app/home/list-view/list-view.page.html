@@ -1,46 +1,72 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button slot="icon-only" color="primary">
+      <ion-button slot="icon-only">
         <ion-icon name="calendar"></ion-icon>
       </ion-button>
     </ion-buttons>
 
-    <ion-title color="primary" class="ion-text-center">February 2020</ion-title>
+    <ion-title class="ion-text-center">{{ loadedweek[0].mon | date:'MMM yyyy' }} (Week- {{ loadedweek[0].week }})
+    </ion-title>
 
     <ion-buttons slot="end">
-      <ion-button href="/home/tabs/list-view/details" slot="icon-only" color="primary">
+      <ion-button href="/home/tabs/list-view/details" slot="icon-only">
         <ion-icon name="book"></ion-icon>
       </ion-button>
     </ion-buttons>
 
   </ion-toolbar>
   <!--To view the days of the week-->
-  <ion-toolbar>
+  <ion-toolbar class="ion-toolbar2">
 
     <ion-grid>
-      <ion-row>
-        <ion-col class="ion-padding" class="ion-no-padding" class="ion-text-center">
+      <ion-row no-padding>
+
+        <ion-col no-padding class="ion-no-padding" class="ion-text-center">
           <p>Mon</p>
-          <ion-button shape="round" class="bround">1</ion-button>
         </ion-col>
-        <ion-col class="ion-no-padding" class="ion-text-center">
+        <ion-col no-padding class="ion-text-center">
           <p>Tue</p>
-          <ion-button shape="round" class="bround">2</ion-button>
         </ion-col>
-        <ion-col class="ion-no-padding" class="ion-text-center">
+        <ion-col no-padding class="ion-text-center">
           <p>Wed</p>
-          <ion-button shape="round" class="bround">3</ion-button>
         </ion-col>
-        <ion-col class="ion-no-padding" class="ion-text-center">
+        <ion-col no-padding class="ion-text-center">
           <p>Thur</p>
-          <ion-button shape="round" class="bround">4</ion-button>
         </ion-col>
-        <ion-col class="ion-no-padding" class="ion-text-center">
+        <ion-col no-padding class="ion-text-center">
           <p>Fri</p>
-          <ion-button shape="round" class="bround">5</ion-button>
         </ion-col>
+
       </ion-row>
+
+      <ion-row padding-bottom>
+        <ion-icon name="arrow-back" padding-top (click)="Previousweek()"></ion-icon>
+
+        <ion-col no-padding class="ion-no-padding" class="ion-text-center">
+
+          <ion-button shape="round" class="bround">{{ loadedweek[0].mon | date:'dd ' }}</ion-button>
+        </ion-col>
+        <ion-col no-padding class="ion-text-center">
+
+          <ion-button shape="round" class="bround">{{ loadedweek[0].tue | date:'dd ' }}</ion-button>
+        </ion-col>
+        <ion-col no-padding class="ion-text-center">
+
+          <ion-button shape="round" class="bround">{{ loadedweek[0].wed | date:'dd ' }}</ion-button>
+        </ion-col>
+        <ion-col no-padding class="ion-text-center">
+
+          <ion-button shape="round" class="bround">{{ loadedweek[0].thu | date:'dd ' }}</ion-button>
+        </ion-col>
+        <ion-col no-padding class="ion-text-center">
+
+          <ion-button shape="round" class="bround">{{ loadedweek[0].fri | date:'dd ' }}</ion-button>
+        </ion-col>
+
+        <ion-icon padding-top name="arrow-forward" (click)="Nextweek()"></ion-icon>
+      </ion-row>
+
     </ion-grid>
 
   </ion-toolbar>

@@ -12,8 +12,7 @@ import * as moment from 'moment';
 })
 export class NewTasksPage implements OnInit {
   form: FormGroup;
-  dates;
-date;
+  date;
   previousUrl: string;
 
   constructor(private tasksService: TasksService, private router: Router, private loadingCtrl: LoadingController) {
@@ -28,7 +27,7 @@ date;
         console.log('tndnjjtdtkjkdkdj' + e[0].urlAfterRedirects); // previous url
       });
 
-    this.dates = new Date().toISOString();
+    this.date = new Date().toISOString();
     // this.date = moment(this.dates).format('MM/DD/YYYY hh:mm A');
     this.form = new FormGroup({
       title: new FormControl(null, {

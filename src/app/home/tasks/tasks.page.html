@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    
-    <ion-title>tasks</ion-title>
 
-    <ion-buttons slot="primary">
+    
+    <ion-title class="ion-text-center">Tasks</ion-title>
+
+    <ion-buttons slot="end">
       <ion-button [routerLink]="['/', 'home', 'tabs', 'tasks', 'new-tasks']">
         <ion-icon name="add" slot="icon-only"></ion-icon>
       </ion-button>
@@ -12,7 +13,7 @@
 </ion-header>
 
 <ion-content >
-  <ion-tabs >
+  <ion-tabs class="pt">
     <ion-tab-bar slot="top"  >
 
       <ion-tab-button [routerLink]="['/', 'home', 'tabs', 'tasks', 'tabs2', 'all-tasks']" [class.active-item]="selectedPath.includes('all-tasks')">

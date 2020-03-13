@@ -11,3 +11,17 @@ export class Class {
 
     ) {}
 }
+
+
+export class Week {
+    constructor(
+        public id: string,
+        public week: number,
+        public mon: Date,
+        public tue: Date,
+        public wed: Date,
+        public thu: Date,
+        public fri: Date,
+
+    ) {}
+}
