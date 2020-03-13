@@ -4,7 +4,7 @@
       <ion-back-button 
       defaultHref="/home/tabs/notes"></ion-back-button>
     </ion-buttons>
-    <ion-title>Edit Note-{{loadednote.title}}</ion-title>
+    <ion-title>Edit Note- {{loadednote.title}}</ion-title>
 
     <ion-buttons slot="primary">
       <ion-button (click)="onUpdateNote()" [disabled]="!form.valid" type="submit" >

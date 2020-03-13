@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterEvent } from '@angular/router';
+import { Router, RouterEvent, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tasks',
@@ -10,6 +11,8 @@ export class TasksPage implements OnInit {
   selectedPath = '';
 
   constructor(private router: Router) {
+
+
     this.router.events.subscribe((event: RouterEvent) => {
       if (event && event.url) {
         this.selectedPath = event.url;

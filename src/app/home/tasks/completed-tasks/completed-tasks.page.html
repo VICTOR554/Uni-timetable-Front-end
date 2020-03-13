@@ -14,16 +14,16 @@
     
                 <ion-item [routerLink]="['/', 'home', 'tabs', 'tasks', 'edit', completedtask.id]">
     
-                  <ion-item slot="start" lines="none" class="ion-no-padding" class="ion-no-margin" (click)="stop($event)" [routerLink]="['/', 'home', 'tabs', 'tasks', 'tabs2', 'all-tasks']">
+                  <ion-item slot="start" detail='false'lines="none" class="ion-no-padding" class="ion-no-margin" (click)="stop($event)" [routerLink]="['/', 'home', 'tabs', 'tasks', 'tabs2', 'all-tasks']">
                     <ion-checkbox class="ion-no-padding" color="primary" checked slot="start"></ion-checkbox>
                   </ion-item>
     
                   <ion-label>
-                    <p>{{ completedtask.title }}</p>
-                    <p>{{ completedtask.modul }}</p>
-                    <div class="offer-details">
+                    <h2 class="pb">{{ completedtask.title }}</h2>
+                    <h3 class="pb">{{ completedtask.modul }}</h3>
+                    <div class="task-details" class="pbs">
                       <ion-icon color="primary" name="calendar"></ion-icon>
-                      <ion-text class="space-left"> {{ completedtask.duedate }}</ion-text>
+                      <ion-text class="space-left"> {{ completedtask.duedate | date:'dd MMM yyyy hh:mm a' }}</ion-text>
                     </div>
                   </ion-label>
                 </ion-item>
