@@ -19,7 +19,7 @@ export interface AuthResponseData {
 export class AuthService {
 
   // tslint:disable-next-line: variable-name
-  private _userIsAuthenticated = true;
+  private _userIsAuthenticated = false;
 
   // tslint:disable-next-line: variable-name
   private _userId = 'abc';
@@ -46,11 +46,12 @@ export class AuthService {
   };
 
 
+
   token(studentid: number, password: string) {
     return this.http.post('http://localhost:3000/login', {
       number: studentid,
       password
-    }).subscribe(res => {
+    }).subscribe((res: any) => {
       console.log(res.token);
       this._token = res.token;
       this.httpOptions.headers = this.httpOptions.headers.set('Authorization', res.token);
