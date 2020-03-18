@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NotesService } from '../notes.service';
 import { LoadingController } from '@ionic/angular';
+import { NotesPage } from '../notes.page';
+import { NotesService } from '../notes.service';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { LoadingController } from '@ionic/angular';
 export class NewNotesPage implements OnInit {
   form: FormGroup;
 
+  // tslint:disable-next-line: max-line-length
   constructor(private router: Router, private notesService: NotesService, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
@@ -21,11 +23,10 @@ export class NewNotesPage implements OnInit {
         updateOn: 'blur',
         validators: [Validators.required],
       }),
-      modul: new FormControl(null, {
+      module_code: new FormControl(null, {
         updateOn: 'blur',
-        validators: [Validators.required],
       }),
-      description: new FormControl(null, {
+      body: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required, Validators.maxLength(1800)],
       }),
@@ -33,7 +34,7 @@ export class NewNotesPage implements OnInit {
   }
 
   onCreateNote() {
-
+    console.log(this.form);
     if (!this.form.valid) {
       return;
     }
@@ -43,13 +44,14 @@ export class NewNotesPage implements OnInit {
       loadingEl.present();
       this.notesService.addNote(
         this.form.value.title,
-        this.form.value.modul,
-        this.form.value.description,
-      ).subscribe(() => {
+        this.form.value.module_code,
+        this.form.value.body,
+      ).subscribe((res) => {
         loadingEl.dismiss();
-        console.log(this.notesService.notes);
-        this.form.reset();
+        console.log(res);
         this.router.navigate(['home/tabs/notes']);
+        // this.notespage.update();
+        this.form.reset();
 
       });
     });
