@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Note } from './notes.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BehaviorSubject } from 'rxjs';
-import { take, map, delay, tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import * as moment from 'moment';
 
 
 @Injectable({
@@ -11,108 +11,62 @@ import { HttpClient } from '@angular/common/http';
 })
 export class NotesService {
 
+
+
   // tslint:disable-next-line: variable-name
   private _notes = new BehaviorSubject<Note[]>([
-    new Note(
-      'N1',
-      'Calender Problems',
-      'HCI',
-      'HCI talks about interaction between the system',
-      'abc'
-
-    ),
-    new Note(
-      'N2',
-      'Tabs',
-      'Software Engineering',
-      'Software Engineering ia about how effective the system is',
-      'abc'
-
-    ),
-    new Note(
-      'N3',
-      'Ionic',
-      'Games and Design',
-      'Teaches you how to manipulate pixels to create games of your own design',
-      'abc'
-
-    ),
-    new Note(
-      'N4',
-      'Block Chain in the supply chain',
-      'Advanced Topics',
-      'Teaches you about cloud service and different data types',
-      'abc'
-
-    ),
-    new Note(
-      'N5',
-      'Dissertation',
-      'Cyber Security',
-      'Teaches you how to create firewalls to stop hackers',
-      'abc'
-    )
 
   ]);
+
   // Clone the notes array using spread operator  to stop data manipulation from outside notes service
   get notes() {
     return this._notes.asObservable();
   }
 
+  getAllNotes() {
+    return this.http.get('http://localhost:3000/student/note/',   this.authService.httpOptions);
+  }
 
-  getNote(id: string) {
-    return this.notes.pipe(take(1),
-      map(notes => {
-        return { ...notes.find(n => n.id === id) };
-      })
-    );
+  getNote(noteId: string) {
+    console.log(noteId);
+    return this.http.get('http://localhost:3000/student/note/one/' + noteId, this.authService.httpOptions);
+
   }
 
   constructor(private authService: AuthService, private http: HttpClient) { }
 
-  addNote(title: string, modul: string, description: string) {
+
+  // tslint:disable-next-line: variable-name
+  addNote(title: string, module_code: string, body: string) {
+    // tslint:disable-next-line: variable-name
+    const date_time = +moment.unix(Date.now()).format('X');
+    console.log(this.authService.httpOptions.headers);
     const newNote = new Note(
-      Math.random().toString(),
       title,
-      modul,
-      description,
-      this.authService.userId
+      module_code,
+      body,
+      date_time,
     );
-    // return this.http.post('')
-    return this.notes.pipe(take(1), delay(1000), tap(notes => {
-      this._notes.next(notes.concat(newNote));
-    })
-    );
+    return this.http.post('http://localhost:3000/student/note/new', newNote, this.authService.httpOptions);
   }
 
-  updateNote(noteId: string, title: string, modul: string, description: string) {
-    return this.notes.pipe(
-      take(1),
-      delay(1000),
-      tap(notes => {
-        const updatedNoteIndex = notes.findIndex(no => no.id === noteId);
-        const updatedNotes = [...notes];
-        const oldNote = updatedNotes[updatedNoteIndex];
-        updatedNotes[updatedNoteIndex] = new Note(
-          oldNote.id,
-          title,
-          modul,
-          description,
-          oldNote.userId
-        );
-        this._notes.next(updatedNotes);
-      })
+
+  // tslint:disable-next-line: variable-name
+  updateNote( title: string, module_code: string, body: string, noteId: string) {
+    // tslint:disable-next-line: variable-name
+    const date_time = +moment.unix(Date.now()).format('X');
+    console.log(this.authService.httpOptions.headers);
+    const updatedNote = new Note(
+      title,
+      module_code,
+      body,
+      date_time,
     );
+    return this.http.put('http://localhost:3000/student/note/edit/' + noteId, updatedNote, this.authService.httpOptions);
   }
 
-  cancelNote(noteId: string) {
-    return this.notes.pipe(
-      take(1),
-      delay(1000),
-      tap(notes => {
-        this._notes.next(notes.filter(n => n.id !== noteId));
-      })
-    );
+  deleteNote(noteId: string) {
+    return this.http.delete('http://localhost:3000/student/note/delete/' + noteId, this.authService.httpOptions);
   }
 
 }

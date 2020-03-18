@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IonItemSliding, LoadingController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, RouterEvent, NavigationEnd } from '@angular/router';
 import { Note } from './notes.model';
 import { NotesService } from './notes.service';
 import { Subscription } from 'rxjs';
@@ -13,24 +13,42 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./notes.page.scss'],
 })
 export class NotesPage implements OnInit, OnDestroy {
-  loadednote: Note[];
+  loadednotes: Note[];
   private noteSub: Subscription;
-
+  selectedPath = '/home/tabs/notes';
+  counter = 0;
   // tslint:disable-next-line: max-line-length
   constructor(
     private notesService: NotesService,
     private router: Router,
-    private loadingCtrl: LoadingController,
-    private http: HttpClient) { }
+    private loadingCtrl: LoadingController) {
+      this.router.events.subscribe((event: RouterEvent) => {
+        if (event.url !== undefined && event instanceof NavigationEnd) {
+          if (event.url === this.selectedPath && this.counter !== 0) {
+            this.update();
+            console.log('refreshed page');
+            console.log('counter = ', this.counter);
+          }
+          this.counter = this.counter + 1;
+        }
+
+      });
+  }
 
   ngOnInit() {
-    this.noteSub = this.notesService.notes.subscribe(notes => {
-      this.loadednote = notes;
+    console.log('hi');
+    this.getNotes();
+  }
+
+  update() {
+    this.getNotes();
+  }
+
+  getNotes() {
+    this.noteSub = this.notesService.getAllNotes().subscribe((notes: any) => {
+      this.loadednotes = notes;
+      console.log(notes);
     });
-
-
-
-
   }
 
   onDelete(noteId: string, slidingItem: IonItemSliding) {
@@ -38,7 +56,8 @@ export class NotesPage implements OnInit, OnDestroy {
     this.loadingCtrl.create({ message: 'Deleting...' })
       .then(loadingEl => {
         loadingEl.present();
-        this.notesService.cancelNote(noteId).subscribe(() => {
+        this.notesService.deleteNote(noteId).subscribe(() => {
+          this.update();
           loadingEl.dismiss();
         });
         console.log('delete item', noteId);

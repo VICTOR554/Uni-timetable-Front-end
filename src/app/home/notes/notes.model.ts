@@ -1,9 +1,16 @@
+
+
 export class Note {
     constructor(
-        public id: string,
+
         public title: string,
-        public modul: string,
-        public description: string,
-        public userId: string,
+        // tslint:disable-next-line: variable-name
+        public module_code: string,
+        public body: string,
+        // tslint:disable-next-line: variable-name
+        public date_time: number,
+        // tslint:disable-next-line: variable-name
+        public _id?: string,
     ) { }
 }
+
