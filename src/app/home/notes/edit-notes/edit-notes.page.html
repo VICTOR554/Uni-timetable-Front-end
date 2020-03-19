@@ -4,18 +4,19 @@
       <ion-back-button 
       defaultHref="/home/tabs/notes"></ion-back-button>
     </ion-buttons>
-    <ion-title>Edit Note- {{loadednote.title}}</ion-title>
+
+    <ion-title *ngIf="form" class="ion-text-center">Edit Note- {{loadednote.title}}</ion-title>
 
     <ion-buttons slot="primary">
-      <ion-button (click)="onUpdateNote()" [disabled]="!form.valid" type="submit" >
+      <ion-button  *ngIf="form" (click)="onUpdateNote()" [disabled]="!form.valid" type="submit" >
         <ion-icon name="checkmark" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> 
  
 <ion-content padding>
-  <form [formGroup]="form">
+  <form [formGroup]="form" *ngIf="form">
     <ion-grid>
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
@@ -30,18 +31,17 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Module</ion-label>
-            <ion-select placeholder="Select a Module" autocomplete autocorrect formControlName="modul"> 
-              <ion-select-option value="blank">-</ion-select-option>
-              <ion-select-option value="Software Engineering">Software Engineering</ion-select-option>
-              <ion-select-option value="HCI">HCI</ion-select-option>
-              <ion-select-option value="Games and Design">Games and Design</ion-select-option>
-              <ion-select-option value="Artificial Intelligence">Artificial Intelligence</ion-select-option>
-              <ion-select-option value="Cyber Security">Cyber Security</ion-select-option>
+            <ion-select placeholder="Select a Module" autocomplete autocorrect formControlName="module_code"> 
+              <ion-select-option value="CS3003">Software Engineering</ion-select-option>
+              <ion-select-option value="CS3009">Human-Computer Interaction</ion-select-option>
+              <ion-select-option value="CS3001-CS3606">Advanced Topics </ion-select-option>
+              <ion-select-option value="CS3072-CS3605">Final Year Project</ion-select-option>
+              <ion-select-option value="CS3100">Software Project Management</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="!form.get('modul').valid && form.get('modul').touched">
+      <ion-row *ngIf="!form.get('module_code').valid && form.get('module_code').touched">
         <ion-col size-sm="6" offset-sm="3">
           <P>Pick a module or blank</P>
         </ion-col>
@@ -53,11 +53,11 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Short Descripton</ion-label>
-            <ion-textarea rows="6" formControlName="description"></ion-textarea>
+            <ion-textarea rows="6" formControlName="body"></ion-textarea>
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="!form.get('description').valid && form.get('description').touched">
+      <ion-row *ngIf="!form.get('body').valid && form.get('body').touched">
         <ion-col size-sm="6" offset-sm="3">
           <P>Description must not between 1 and 180 chracters</P>
         </ion-col>

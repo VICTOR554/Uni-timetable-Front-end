@@ -33,19 +33,22 @@ export class EditNotesPage implements OnInit, OnDestroy {
         this.navCtrl.navigateBack('/home/tabs/notes');
         return;
       }
-      this.noteSub = this.notesService.getNote(paramMap.get('noteId')).subscribe(notes => {
-        this.loadednote = notes;
+      console.log(paramMap);
+      console.log(paramMap.get('noteId'));
+      this.noteSub = this.notesService.getNote(paramMap.get('noteId')).subscribe((note: any) => {
+        console.log(note);
+        this.loadednote = note;
+        console.log(this.loadednote);
         // load detail of item in form by removing null and calling the title and description
         this.form = new FormGroup({
           title: new FormControl(this.loadednote.title, {
             updateOn: 'blur',
-            validators: [Validators.required]
-          }),
-          modul: new FormControl(this.loadednote.modul, {
-            updateOn: 'blur',
             validators: [Validators.required],
           }),
-          description: new FormControl(this.loadednote.description, {
+          module_code: new FormControl(this.loadednote.module_code, {
+            updateOn: 'blur',
+          }),
+          body: new FormControl(this.loadednote.body, {
             updateOn: 'blur',
             validators: [Validators.required, Validators.maxLength(180)]
           })
@@ -63,12 +66,11 @@ export class EditNotesPage implements OnInit, OnDestroy {
       message: 'Updating Note'
     }).then(loadingEl => {
       loadingEl.present();
-      this.notesService.updateNote
-        (
-          this.loadednote.id,
+      this.notesService.updateNote(
           this.form.value.title,
-          this.form.value.modul,
-          this.form.value.description,
+          this.form.value.module_code,
+          this.form.value.body,
+          this.loadednote._id
         )
         .subscribe(() => {
           loadingEl.dismiss();
