@@ -5,7 +5,7 @@ import { TasksPage } from './tasks.page';
 
 const routes: Routes = [
   {
-    path: 'tabs2',
+    path: '',
     component: TasksPage,
     children:
       [
@@ -27,15 +27,19 @@ const routes: Routes = [
         },
         {
           path: '',
-          redirectTo: '/home/tabs/tasks/tabs2/all-tasks',
+          redirectTo: '/home/tabs/tasks/all-tasks',
           pathMatch: 'full'
         }
       ]
   },
   {
     path: '',
-    redirectTo: '/home/tabs/tasks/tabs2/all-tasks',
+    redirectTo: '/home/tabs/tasks/all-tasks',
     pathMatch: 'full'
+  },
+  {
+    path: 'all-tasks',
+    loadChildren: () => import('./all-tasks/all-tasks.module').then( m => m.AllTasksPageModule)
   },
 ];
 
