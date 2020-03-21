@@ -1,45 +1,53 @@
-
-
 <ion-content>
-    <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-searchbar showCancelButton="focus"></ion-searchbar>
-    
-            <!-- This is an item containing the lecture details -->
-            <ion-list>
-              <!-- for loop to draw the list from the array -->
-    
-              <ion-item-sliding *ngFor="let overdue of loadedoverdue" #slidingItem>
-    
-                <ion-item [routerLink]="['/', 'home', 'tabs', 'tasks', 'edit', overdue.id]">
-    
-                  <ion-item slot="start" detail='false' lines="none" class="ion-no-padding" class="ion-no-margin" (click)="stop($event)" [routerLink]="['/', 'home', 'tabs', 'tasks', 'tabs2', 'all-tasks']">
-                    <ion-checkbox class="ion-no-padding" color="primary" checked slot="start"></ion-checkbox>
-                  </ion-item>
-    
-                  <ion-label>
-                    <h2 class="pb">{{ overdue.title }}</h2>
-                    <h3 class="pb">{{ overdue.modul }}</h3>
-                    <div class="task-details" class="pbs">
-                      <ion-icon color="primary" name="calendar"></ion-icon>
-                      <ion-text class="space-left"> {{ overdue.duedate | date:'dd MMM yyyy hh:mm a' }}</ion-text>
-                    </div>
-                  </ion-label>
-                </ion-item>
-    
-                <ion-item-options>
-                  <ion-item-option color="danger" (click)="onDelete(overdue.id, slidingItem)">
-                    <ion-icon name="trash" slot="top" class="icon"></ion-icon>
-                    Delete
-                  </ion-item-option>
-                </ion-item-options>
-     
-              </ion-item-sliding>
-            </ion-list>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-searchbar showCancelButton="focus"></ion-searchbar>
 
+        <!-- This is an item containing the lecture details -->
+        <ion-list>
+          <!-- for loop to draw the list from the array -->
+
+          <ion-item-sliding *ngFor="let overdue of loadedoverdue" #slidingItem>
+
+            <ion-item [routerLink]="['/', 'home', 'tabs', 'tasks', 'edit', overdue._id]">
+
+
+
+              <ion-label>
+                <h2 class="pb">{{ overdue.title }}</h2>
+                <h3 class="pb">{{ overdue.module_code }}</h3>
+                <div class="task-details" class="pbs">
+                  <ion-icon color="primary" name="calendar"></ion-icon>
+                  <ion-text class="space-left"> {{ overdue.due_date_time | momentPipe:'ddd MMM YYYY hh:mm a' }}
+                  </ion-text>
+                </div>
+              </ion-label>
+            </ion-item>
+
+            <ion-item-options>
+
+
+              <ion-item-option color="success" (click)="Complete(overdue._id, slidingItem)">
+                <ion-icon name="checkmark-circle-outline" slot="top" class="icon"></ion-icon>
+
+                Complete
+              </ion-item-option>
+              <ion-item-option color="warning" (click)="Flag(overdue._id, slidingItem)">
+                <ion-icon name="flag" slot="top" class="icon"></ion-icon>
+                Flag
+              </ion-item-option>
+              <ion-item-option color="danger" (click)="onDelete(overdue._id, slidingItem)">
+                <ion-icon name="trash" slot="top" class="icon"></ion-icon>
+                Delete
+              </ion-item-option>
+
+            </ion-item-options>
+
+          </ion-item-sliding>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

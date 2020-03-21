@@ -7,13 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { OverduePageRoutingModule } from './overdue-routing.module';
 
 import { OverduePage } from './overdue.page';
+import { SharedModule } from '../../shared/shared.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OverduePageRoutingModule
+    OverduePageRoutingModule,
+    SharedModule
   ],
   declarations: [OverduePage]
 })
