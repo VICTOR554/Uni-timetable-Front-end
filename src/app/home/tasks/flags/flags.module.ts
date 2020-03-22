@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { FlagsPageRoutingModule } from './flags-routing.module';
 
 import { FlagsPage } from './flags.page';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FlagsPageRoutingModule
+    FlagsPageRoutingModule,
+    SharedModule
   ],
   declarations: [FlagsPage]
 })
