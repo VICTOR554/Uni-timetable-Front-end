@@ -103,7 +103,7 @@ export class OverduePage implements OnInit, OnDestroy {
         this.tasksService.deleteTask(overdueId).subscribe(() => {
           loadingEl.dismiss();
         });
-        console.log('delete item', overdueId);
+        console.log('delete task', overdueId);
       });
   }
 

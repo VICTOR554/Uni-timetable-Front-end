@@ -19,7 +19,7 @@
                 <h3 class="pb">{{ overdue.module_code }}</h3>
                 <div class="task-details" class="pbs">
                   <ion-icon color="primary" name="calendar"></ion-icon>
-                  <ion-text class="space-left"> {{ overdue.due_date_time | momentPipe:'ddd MMM YYYY hh:mm a' }}
+                  <ion-text class="space-left"> {{ overdue.due_date_time | momentPipe:"ddd DD MMM YYYY hh:mm a" }}
                   </ion-text>
                 </div>
               </ion-label>
