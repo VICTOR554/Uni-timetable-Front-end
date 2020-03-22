@@ -1,27 +1,36 @@
-export class Class {
+export class Activity {
     constructor(
-        public id: string,
-        public date: number,
-        public title: string,
+        // tslint:disable-next-line: variable-name
+        public module_code: string,
         public type: string,
-        public start: string,
-        public end: string,
-        public lecturer: string,
+        // tslint:disable-next-line: variable-name
+        public start_date_time: string,
+        // tslint:disable-next-line: variable-name
+        public end_date_time: string,
+        // tslint:disable-next-line: variable-name
+        public lecturer_name: string,
         public location: string,
-
-    ) {}
+        public id?: string,
+    ) { }
 }
 
 
 export class Week {
     constructor(
-        public id: string,
-        public week: number,
-        public mon: Date,
-        public tue: Date,
-        public wed: Date,
-        public thu: Date,
-        public fri: Date,
+        // tslint:disable-next-line: variable-name
+        public number: number,
+        public dates: [],
 
-    ) {}
+    ) { }
+}
+
+
+export class Module {
+    constructor(
+        // tslint:disable-next-line: variable-name
+        public name: number,
+        public code: string,
+        // tslint:disable-next-line: variable-name
+        public course_id: number,
+    ) { }
 }

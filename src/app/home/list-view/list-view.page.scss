@@ -18,4 +18,12 @@
     --ion-toolbar-background: var(--ion-color-primary-contrast);
     --ion-toolbar-color: var(--ion-color-primary);
   }
-  
+
+  .marginrow {
+    margin-left: 14px;
+    margin-right: 14px;
+  }
+ 
+  .a:focus {
+    background-color:orange;
+  }
