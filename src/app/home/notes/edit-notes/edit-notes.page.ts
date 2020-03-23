@@ -23,7 +23,7 @@ export class EditNotesPage implements OnInit, OnDestroy {
     private notesService: NotesService,
     private router: Router,
     private loadingCtrl: LoadingController,
-    ) { }
+  ) { }
 
   ngOnInit() {
     // Subscribe to changes in route params
@@ -67,16 +67,17 @@ export class EditNotesPage implements OnInit, OnDestroy {
     }).then(loadingEl => {
       loadingEl.present();
       this.notesService.updateNote(
-          this.form.value.title,
-          this.form.value.module_code,
-          this.form.value.body,
-          this.loadednote._id
-        )
+        this.form.value.title,
+        this.form.value.module_code,
+        this.form.value.body,
+        this.loadednote._id
+      )
         .subscribe(() => {
-          loadingEl.dismiss();
-          this.form.reset();
-          this.router.navigate(['/home/tabs/notes']);
-
+          setTimeout(() => {
+            loadingEl.dismiss();
+            this.form.reset();
+            this.router.navigate(['/home/tabs/notes']);
+          }, 1000);
         });
     });
 

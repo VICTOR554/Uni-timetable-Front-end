@@ -45,22 +45,31 @@ export class NotesPage implements OnInit, OnDestroy {
   }
 
   getNotes() {
-    this.noteSub = this.notesService.getAllNotes().subscribe((notes: any) => {
-      this.loadednotes = notes;
-      console.log(notes);
-    });
+    this.loadingCtrl.create({ message: 'Loading Note...' })
+      .then(loadingEl => {
+        loadingEl.present();
+        this.noteSub = this.notesService.getAllNotes().subscribe((notes: any) => {
+          this.loadednotes = notes;
+          console.log(notes);
+        });
+        setTimeout(() => {
+          loadingEl.dismiss();
+        }, 1000);
+      });
   }
 
   onDelete(noteId: string, slidingItem: IonItemSliding) {
     slidingItem.close();
-    this.loadingCtrl.create({ message: 'Deleting...' })
+    this.loadingCtrl.create({ message: 'Deleting Note...' })
       .then(loadingEl => {
         loadingEl.present();
         this.notesService.deleteNote(noteId).subscribe(() => {
           this.update();
-          loadingEl.dismiss();
         });
-        console.log('delete item', noteId);
+        setTimeout(() => {
+          loadingEl.dismiss();
+          console.log('delete item', noteId);
+        }, 1000);
       });
   }
 

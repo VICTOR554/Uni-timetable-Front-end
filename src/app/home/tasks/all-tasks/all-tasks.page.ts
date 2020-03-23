@@ -18,7 +18,7 @@ export class AllTasksPage implements OnInit, OnDestroy {
   counter = 0;
 
 
-  constructor(private tasksService: TasksService, private router: Router, private loadingCtrl: LoadingController, ) {
+  constructor(private tasksService: TasksService, private router: Router, private loadingCtrl: LoadingController ) {
     this.router.events.subscribe((event: RouterEvent) => {
       // console.log(event)
       if (event.url !== undefined && event instanceof NavigationEnd) {
@@ -44,29 +44,38 @@ export class AllTasksPage implements OnInit, OnDestroy {
   }
 
   getTasks() {
-    this.taskSub = this.tasksService.getOnScheduleTasks().subscribe((alltasks: any) => {
-      this.loadedalltask = alltasks;
-      console.log(alltasks);
-    });
+    this.loadingCtrl.create({ message: 'Loading In Progress Tasks...' })
+      .then(loadingEl => {
+        loadingEl.present();
+        this.taskSub = this.tasksService.getOnScheduleTasks().subscribe((alltasks: any) => {
+          this.loadedalltask = alltasks;
+          console.log(alltasks);
+        });
+        setTimeout(() => {
+          loadingEl.dismiss();
+        }, 1000);
+      });
   }
 
   onDelete(alltaskId: string, slidingItem: IonItemSliding) {
     slidingItem.close();
-    this.loadingCtrl.create({ message: 'Deleting...' })
+    this.loadingCtrl.create({ message: 'Deleting Task...' })
       .then(loadingEl => {
         loadingEl.present();
         this.tasksService.deleteTask(alltaskId).subscribe(() => {
           this.update();
-          loadingEl.dismiss();
         });
-        console.log('delete item', alltaskId);
+        setTimeout(() => {
+          loadingEl.dismiss();
+          console.log('delete task', alltaskId);
+        }, 1000);
       });
   }
 
   Flag(task: any, slidingItem: IonItemSliding) {
     console.log(task);
     slidingItem.close();
-    this.loadingCtrl.create({ message: 'Deleting...' })
+    this.loadingCtrl.create({ message: 'Task is Flagged...' })
       .then(loadingEl => {
         loadingEl.present();
 
@@ -81,15 +90,18 @@ export class AllTasksPage implements OnInit, OnDestroy {
           task.is_completed,
           task.is_flagged).subscribe(() => {
             this.update();
-            loadingEl.dismiss();
+
           });
-        console.log('updated to flag', task);
+        setTimeout(() => {
+          loadingEl.dismiss();
+          console.log('updated to flag', task);
+        }, 1000);
       });
   }
 
   Complete(task: any, slidingItem: IonItemSliding) {
     slidingItem.close();
-    this.loadingCtrl.create({ message: 'Deleting...' })
+    this.loadingCtrl.create({ message: 'Task is Completed...' })
       .then(loadingEl => {
         loadingEl.present();
         task.is_completed = true;
@@ -102,9 +114,11 @@ export class AllTasksPage implements OnInit, OnDestroy {
           task.is_completed,
           task.is_flagged).subscribe(() => {
             this.update();
-            loadingEl.dismiss();
           });
-        console.log('updated to complete', task);
+        setTimeout(() => {
+          loadingEl.dismiss();
+          console.log('updated to complete', task);
+        }, 1000);
       });
   }
 

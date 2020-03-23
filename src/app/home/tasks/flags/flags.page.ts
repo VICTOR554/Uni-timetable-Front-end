@@ -22,7 +22,7 @@ export class FlagsPage implements OnInit, OnDestroy {
     this.router.events.subscribe((event: RouterEvent) => {
       // console.log(event)
       if (event.url !== undefined && event instanceof NavigationEnd) {
-        if ((event.url === this.selectedPath ) && this.counter !== 0) {
+        if ((event.url === this.selectedPath) && this.counter !== 0) {
           this.update();
           console.log('refreshed page');
           console.log('counter = ', this.counter);
@@ -31,7 +31,7 @@ export class FlagsPage implements OnInit, OnDestroy {
       }
 
     });
-   }
+  }
 
   ngOnInit() {
     console.log('hi');
@@ -43,15 +43,22 @@ export class FlagsPage implements OnInit, OnDestroy {
   }
 
   getTasks() {
-    this.taskSub = this.tasksService.getFlaggedTasks().subscribe((flags: any) => {
-      this.loadedflag = flags;
-      console.log(flags);
-    });
+    this.loadingCtrl.create({ message: 'Loading Overdue Tasks...' })
+      .then(loadingEl => {
+        loadingEl.present();
+        this.taskSub = this.tasksService.getFlaggedTasks().subscribe((flags: any) => {
+          this.loadedflag = flags;
+          console.log(flags);
+        });
+        setTimeout(() => {
+          loadingEl.dismiss();
+        }, 1000);
+      });
   }
 
   Complete(task: any, slidingItem: IonItemSliding) {
     slidingItem.close();
-    this.loadingCtrl.create({ message: 'Deleting...' })
+    this.loadingCtrl.create({ message: 'Task is Completed...' })
       .then(loadingEl => {
         loadingEl.present();
         task.is_completed = true;
@@ -64,16 +71,18 @@ export class FlagsPage implements OnInit, OnDestroy {
           task.is_completed,
           task.is_flagged).subscribe(() => {
             this.update();
-            loadingEl.dismiss();
           });
-        console.log('updated to complete', task);
+        setTimeout(() => {
+          loadingEl.dismiss();
+          console.log('updated to complete', task);
+        }, 1000);
       });
   }
 
   NotFlag(task: any, slidingItem: IonItemSliding) {
     console.log(task);
     slidingItem.close();
-    this.loadingCtrl.create({ message: 'Deleting...' })
+    this.loadingCtrl.create({ message: 'Task is Unflagged...' })
       .then(loadingEl => {
         loadingEl.present();
 
@@ -88,9 +97,11 @@ export class FlagsPage implements OnInit, OnDestroy {
           task.is_completed,
           task.is_flagged).subscribe(() => {
             this.update();
-            loadingEl.dismiss();
           });
-        console.log('updated to flag', task);
+        setTimeout(() => {
+          loadingEl.dismiss();
+          console.log('updated to flag', task);
+        }, 1000);
       });
   }
 
@@ -100,9 +111,12 @@ export class FlagsPage implements OnInit, OnDestroy {
       .then(loadingEl => {
         loadingEl.present();
         this.tasksService.deleteTask(flagId).subscribe(() => {
-          loadingEl.dismiss();
+          this.update();
         });
-        console.log('delete item', flagId);
+        setTimeout(() => {
+          loadingEl.dismiss();
+          console.log('delete item', flagId);
+        }, 1000);
       });
   }
 

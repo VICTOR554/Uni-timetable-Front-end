@@ -22,7 +22,7 @@ export class CompletedTasksPage implements OnInit, OnDestroy {
     this.router.events.subscribe((event: RouterEvent) => {
       // console.log(event)
       if (event.url !== undefined && event instanceof NavigationEnd) {
-        if ((event.url === this.selectedPath ) && this.counter !== 0) {
+        if ((event.url === this.selectedPath) && this.counter !== 0) {
           this.update();
           console.log('refreshed page');
           console.log('counter = ', this.counter);
@@ -31,7 +31,7 @@ export class CompletedTasksPage implements OnInit, OnDestroy {
       }
 
     });
-   }
+  }
 
   ngOnInit() {
     console.log('hi');
@@ -43,16 +43,23 @@ export class CompletedTasksPage implements OnInit, OnDestroy {
   }
 
   getTasks() {
-    this.taskSub = this.tasksService.getCompleteTasks().subscribe((completedtasks: any) => {
-      this.loadedcompletedtask = completedtasks;
-      console.log(completedtasks);
-    });
+    this.loadingCtrl.create({ message: 'Loading Overdue Tasks...' })
+      .then(loadingEl => {
+        loadingEl.present();
+        this.taskSub = this.tasksService.getCompleteTasks().subscribe((completedtasks: any) => {
+          this.loadedcompletedtask = completedtasks;
+          console.log(completedtasks);
+        });
+        setTimeout(() => {
+          loadingEl.dismiss();
+        }, 1000);
+      });
   }
 
   Flag(task: any, slidingItem: IonItemSliding) {
     console.log(task);
     slidingItem.close();
-    this.loadingCtrl.create({ message: 'Deleting...' })
+    this.loadingCtrl.create({ message: 'Task is Flagged...' })
       .then(loadingEl => {
         loadingEl.present();
 
@@ -67,15 +74,17 @@ export class CompletedTasksPage implements OnInit, OnDestroy {
           task.is_completed,
           task.is_flagged).subscribe(() => {
             this.update();
-            loadingEl.dismiss();
           });
-        console.log('updated to flag', task);
+        setTimeout(() => {
+          loadingEl.dismiss();
+          console.log('updated to flag', task);
+        }, 1000);
       });
   }
 
   NotComplete(task: any, slidingItem: IonItemSliding) {
     slidingItem.close();
-    this.loadingCtrl.create({ message: 'Deleting...' })
+    this.loadingCtrl.create({ message: 'Task is not Completed...' })
       .then(loadingEl => {
         loadingEl.present();
         task.is_completed = false;
@@ -88,9 +97,11 @@ export class CompletedTasksPage implements OnInit, OnDestroy {
           task.is_completed,
           task.is_flagged).subscribe(() => {
             this.update();
-            loadingEl.dismiss();
           });
-        console.log('updated to complete', task);
+        setTimeout(() => {
+          loadingEl.dismiss();
+          console.log('updated to complete', task);
+        }, 1000);
       });
   }
 
@@ -101,9 +112,11 @@ export class CompletedTasksPage implements OnInit, OnDestroy {
         loadingEl.present();
         this.tasksService.deleteTask(completedtaskId).subscribe(() => {
           this.update();
-          loadingEl.dismiss();
         });
-        console.log('delete item', completedtaskId);
+        setTimeout(() => {
+          loadingEl.dismiss();
+          console.log('delete item', completedtaskId);
+        }, 1000);
       });
   }
 

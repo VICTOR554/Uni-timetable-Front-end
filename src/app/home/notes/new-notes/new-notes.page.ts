@@ -47,12 +47,12 @@ export class NewNotesPage implements OnInit {
         this.form.value.module_code,
         this.form.value.body,
       ).subscribe((res) => {
-        loadingEl.dismiss();
-        console.log(res);
-        this.router.navigate(['home/tabs/notes']);
-        // this.notespage.update();
-        this.form.reset();
-
+        setTimeout(() => {
+          loadingEl.dismiss();
+          console.log(res);
+          this.form.reset();
+          this.router.navigate(['home/tabs/notes']);
+        }, 1000);
       });
     });
   }

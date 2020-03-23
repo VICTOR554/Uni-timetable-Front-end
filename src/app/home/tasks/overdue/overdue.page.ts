@@ -22,7 +22,7 @@ export class OverduePage implements OnInit, OnDestroy {
     this.router.events.subscribe((event: RouterEvent) => {
       // console.log(event)
       if (event.url !== undefined && event instanceof NavigationEnd) {
-        if ((event.url === this.selectedPath ) && this.counter !== 0) {
+        if ((event.url === this.selectedPath) && this.counter !== 0) {
           this.update();
           console.log('refreshed page');
           console.log('counter = ', this.counter);
@@ -31,7 +31,7 @@ export class OverduePage implements OnInit, OnDestroy {
       }
 
     });
-   }
+  }
 
 
   ngOnInit() {
@@ -44,15 +44,22 @@ export class OverduePage implements OnInit, OnDestroy {
   }
 
   getTasks() {
-    this.taskSub = this.tasksService.getOverdueTasks().subscribe((overdues: any) => {
-      this.loadedoverdue = overdues;
-      console.log(overdues);
-    });
+    this.loadingCtrl.create({ message: 'Loading Overdue Tasks...' })
+      .then(loadingEl => {
+        loadingEl.present();
+        this.taskSub = this.tasksService.getOverdueTasks().subscribe((overdues: any) => {
+          this.loadedoverdue = overdues;
+          console.log(overdues);
+        });
+        setTimeout(() => {
+          loadingEl.dismiss();
+        }, 1000);
+      });
   }
 
   Complete(task: any, slidingItem: IonItemSliding) {
     slidingItem.close();
-    this.loadingCtrl.create({ message: 'Deleting...' })
+    this.loadingCtrl.create({ message: 'Task is Completed...' })
       .then(loadingEl => {
         loadingEl.present();
         task.is_completed = true;
@@ -65,16 +72,18 @@ export class OverduePage implements OnInit, OnDestroy {
           task.is_completed,
           task.is_flagged).subscribe(() => {
             this.update();
-            loadingEl.dismiss();
           });
-        console.log('updated to complete', task);
+        setTimeout(() => {
+          loadingEl.dismiss();
+          console.log('updated to complete', task);
+        }, 1000);
       });
   }
 
   Flag(task: any, slidingItem: IonItemSliding) {
     console.log(task);
     slidingItem.close();
-    this.loadingCtrl.create({ message: 'Deleting...' })
+    this.loadingCtrl.create({ message: 'Task is Flagged...' })
       .then(loadingEl => {
         loadingEl.present();
 
@@ -89,9 +98,11 @@ export class OverduePage implements OnInit, OnDestroy {
           task.is_completed,
           task.is_flagged).subscribe(() => {
             this.update();
-            loadingEl.dismiss();
           });
-        console.log('updated to flag', task);
+        setTimeout(() => {
+          loadingEl.dismiss();
+          console.log('updated to flag', task);
+        }, 1000);
       });
   }
 
@@ -101,9 +112,12 @@ export class OverduePage implements OnInit, OnDestroy {
       .then(loadingEl => {
         loadingEl.present();
         this.tasksService.deleteTask(overdueId).subscribe(() => {
-          loadingEl.dismiss();
+          this.update();
         });
-        console.log('delete task', overdueId);
+        setTimeout(() => {
+          loadingEl.dismiss();
+          console.log('delete task', overdueId);
+        }, 1000);
       });
   }
 

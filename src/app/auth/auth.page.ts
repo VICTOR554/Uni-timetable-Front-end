@@ -47,14 +47,18 @@ export class AuthPage implements OnInit {
               this.isLoading = false;
               this.authService.token(studentid, password);
               this.authService.loggedin();
-              loadingEl.dismiss();
-              this.router.navigateByUrl('/home/tabs/list-view');
-              form.reset();
+              setTimeout(() => {
+                loadingEl.dismiss();
+                this.router.navigateByUrl('/home/tabs/list-view');
+                form.reset();
+              }, 1000);
             } else {
               this.isLoading = false;
-              loadingEl.dismiss();
-              this.showAlert('wrong username or password');
-              console.log('wrong username or password');
+              setTimeout(() => {
+                loadingEl.dismiss();
+                this.showAlert('wrong username or password');
+                console.log('wrong username or password');
+              }, 1000);
             }
           },
 

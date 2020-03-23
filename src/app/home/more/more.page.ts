@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-more',
@@ -9,14 +10,21 @@ import { Router } from '@angular/router';
 })
 export class MorePage implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
   }
 
   onLogout() {
-    this.authService.logout();
-    this.router.navigateByUrl('/auth');
+    this.loadingCtrl.create({ message: 'Logging Out...' })
+      .then(loadingEl => {
+        loadingEl.present();
+        this.authService.logout();
+        this.router.navigateByUrl('/auth');
+        setTimeout(() => {
+          loadingEl.dismiss();
+        }, 1000);
+      });
   }
 
 }
