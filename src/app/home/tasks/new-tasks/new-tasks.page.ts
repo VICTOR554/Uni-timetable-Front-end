@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TasksService } from '../tasks.service';
-import { Router, RoutesRecognized, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { filter, pairwise } from 'rxjs/operators';
 import * as moment from 'moment';
@@ -15,34 +15,26 @@ import * as moment from 'moment';
 export class NewTasksPage implements OnInit {
   form: FormGroup;
   date;
-  previousUrl: string;
 
   constructor(private tasksService: TasksService, private router: Router, private loadingCtrl: LoadingController) {
-    router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      console.log(event.url);
-    });
 
   }
 
   ngOnInit() {
     this.date = new Date().toISOString();
-    // this.date = moment(this.dates).format('MM/DD/YYYY hh:mm A');
     this.form = new FormGroup({
       title: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required],
       }),
-      modul: new FormControl(null, {
+      module_code: new FormControl(null, {
+        updateOn: 'blur',
+      }),
+      due_date_time: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required],
       }),
-      duedate: new FormControl(null, {
-        updateOn: 'blur',
-        validators: [Validators.required],
-      }),
-      description: new FormControl(null, {
+      body: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required, Validators.maxLength(1800)],
       }),
@@ -50,7 +42,8 @@ export class NewTasksPage implements OnInit {
   }
 
   onCreateAlltask() {
-    // console.log(this.router.url);
+    console.log(this.form);
+
     if (!this.form.valid) {
 
       return;
@@ -59,22 +52,21 @@ export class NewTasksPage implements OnInit {
       message: 'Creating Task'
     }).then(loadingEl => {
       loadingEl.present();
-      this.tasksService.addAlltask(
+      this.tasksService.addTask(
         this.form.value.title,
-        this.form.value.modul,
-        new Date(this.form.value.duedate),
-        this.form.value.description,
-      ).subscribe(() => {
-        loadingEl.dismiss();
-        console.log(this.tasksService.alltasks);
-        this.form.reset();
-        this.router.navigate(['home/tabs/tasks']);
-
+        this.form.value.module_code,
+        this.form.value.due_date_time,
+        this.form.value.body,
+      ).subscribe((res) => {
+        setTimeout(() => {
+          loadingEl.dismiss();
+          console.log(res);
+          this.form.reset();
+          this.router.navigate(['home/tabs/tasks']);
+        }, 1000);
       });
     });
   }
-
-
 }
 
 
