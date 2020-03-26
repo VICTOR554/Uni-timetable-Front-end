@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { OverduePageRoutingModule } from './overdue-routing.module';
 
 import { OverduePage } from './overdue.page';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({

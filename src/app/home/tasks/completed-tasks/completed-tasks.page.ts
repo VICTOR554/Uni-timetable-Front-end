@@ -43,7 +43,7 @@ export class CompletedTasksPage implements OnInit, OnDestroy {
   }
 
   getTasks() {
-    this.loadingCtrl.create({ message: 'Loading Overdue Tasks...' })
+    this.loadingCtrl.create({ message: 'Loading Completed Tasks...' })
       .then(loadingEl => {
         loadingEl.present();
         this.taskSub = this.tasksService.getCompleteTasks().subscribe((completedtasks: any) => {

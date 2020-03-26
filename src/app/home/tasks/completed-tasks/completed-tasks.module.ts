@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CompletedTasksPageRoutingModule } from './completed-tasks-routing.module';
 
 import { CompletedTasksPage } from './completed-tasks.page';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
