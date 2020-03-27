@@ -9,12 +9,13 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { SharedModule } from './home/shared/shared.module';
+import { WeekComponent } from './home/list-view/week/week.component';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, WeekComponent],
+  entryComponents: [WeekComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, SharedModule],
   providers: [
     StatusBar,

@@ -1,5 +1,7 @@
 {
   "name": "uni-timetable",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
