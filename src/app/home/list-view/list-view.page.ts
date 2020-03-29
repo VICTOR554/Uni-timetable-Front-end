@@ -2,8 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ListService } from './list.service';
 import { Week, Activity, Module } from './list.model';
 import { Subscription } from 'rxjs';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, PopoverController } from '@ionic/angular';
 import { Router, RouterEvent, NavigationEnd } from '@angular/router';
+import { WeekComponent } from './week/week.component';
 
 
 @Component({
@@ -21,7 +22,12 @@ export class ListViewPage implements OnInit, OnDestroy {
   day = 0;
   noclass;
 
-  constructor(private listService: ListService, private loadingCtrl: LoadingController, private router: Router) {
+  constructor(
+    private listService: ListService,
+    private loadingCtrl: LoadingController,
+    private router: Router,
+    private popoverController: PopoverController
+  ) {
     this.router.events.subscribe((event: RouterEvent) => {
       // console.log(event)
       if (event.url !== undefined && event instanceof NavigationEnd) {
@@ -33,6 +39,18 @@ export class ListViewPage implements OnInit, OnDestroy {
         this.counter = this.counter + 1;
       }
     });
+  }
+
+  async presentPopover(eve) {
+    const popover = await this.popoverController.create({
+      component: WeekComponent,
+      componentProps: {},
+      event: eve,
+      mode: 'ios',
+      translucent: true,
+      cssClass: 'popOver'
+    });
+    return await popover.present();
   }
 
 
@@ -109,7 +127,7 @@ export class ListViewPage implements OnInit, OnDestroy {
       this.loadedmodules.push(module);
       console.log('Module Code', ModuleCode);
       console.log('Module', module);
-
+      console.log('modules for the week', this.loadedmodules);
     });
   }
 

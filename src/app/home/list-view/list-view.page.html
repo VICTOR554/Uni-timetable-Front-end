@@ -6,13 +6,13 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title *ngIf="loadedweek" class="ion-text-center"> {{ day | momentPipe:'ddd DD MMM YYYY'}} (Week -
-      {{ loadedweek.number }})
+    <ion-title *ngIf="loadedweek" class="ion-text-center"> {{ day | momentPipe:'ddd DD MMM YYYY'}} (Week - {{ loadedweek.number }})
     </ion-title>
 
+
     <ion-buttons slot="end">
-      <ion-button slot="icon-only" [routerLink]="['/', 'home', 'tabs', 'list-view', 'details']">
-        <ion-icon name="book"></ion-icon>
+      <ion-button slot="icon-only"  (click)="presentPopover($event)">
+        <ion-icon name="chevron-down-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
 
@@ -41,8 +41,9 @@
 
       </ion-row>
 
-      <ion-row class="ion-padding-bottom"*ngIf="loadedweek">
-        <ion-icon *ngIf="loadedweek.number > 1" name="arrow-back" class="ion-padding-top" (click)="previousWeek(loadedweek.number)">
+      <ion-row class="ion-padding-bottom" *ngIf="loadedweek">
+        <ion-icon *ngIf="loadedweek.number > 1" name="arrow-back" class="ion-padding-top"
+          (click)="previousWeek(loadedweek.number)">
         </ion-icon>
 
         <ion-col class="ion-no-padding" class="ion-text-center">
@@ -71,7 +72,8 @@
             {{ loadedweek.dates[4] | momentPipe:'DD' }}</ion-button>
         </ion-col>
 
-        <ion-icon *ngIf="52 > loadedweek.number" class="ion-padding-top" name="arrow-forward" (click)="nextWeek(loadedweek.number)">
+        <ion-icon *ngIf="52 > loadedweek.number" class="ion-padding-top" name="arrow-forward"
+          (click)="nextWeek(loadedweek.number)">
         </ion-icon>
       </ion-row>
 
@@ -107,7 +109,8 @@
                 </ion-col>
 
                 <ion-col>
-                  <p>{{activity.module_code}}</p>
+                  <p *ngFor="let module of loadedmodules">{{module.name}}</p>
+
                   <p>{{activity.type}}</p>
 
                   <ion-row>
