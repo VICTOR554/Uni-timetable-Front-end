@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Week, Activity } from './list.model';
 import { BehaviorSubject } from 'rxjs';
-import { take, delay, tap } from 'rxjs/operators';
 import { AuthService } from '../../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 
@@ -11,24 +10,12 @@ import * as moment from 'moment';
   providedIn: 'root'
 })
 export class ListService {
-  // tslint:disable-next-line: variable-name
-  private _activities = new BehaviorSubject<Activity[]>([]);
-
-  // tslint:disable-next-line: variable-name
-  private _weeks = new BehaviorSubject<Week[]>([]);
-
 
   constructor(private authService: AuthService, private http: HttpClient) { }
 
 
-  // create get home, notes, alltask, completedtask, overdue, flag to duplicate array so changes are not made
-  get activities() {
-    return this._activities.asObservable();
-  }
 
-  get weeks() {
-    return this._weeks.asObservable();
-  }
+
 
   GetAllActivity(Currentday: number) {
     return this.http.get('https://timetable-plus.herokuapp.com/student/activity/day/' + Currentday, this.authService.httpOptions);

@@ -23,20 +23,6 @@ export class TasksService {
   // tslint:disable-next-line: variable-name
   private _overdues = new BehaviorSubject<Overdue[]>([]);
 
-  // tslint:disable-next-line: variable-name
-
-  get tasks() {
-    return this._tasks.asObservable();
-  }
-  get completedtasks() {
-    return this._completedtasks.asObservable();
-  }
-  get overdues() {
-    return this._overdues.asObservable();
-  }
-  get flags() {
-    return this._flags.asObservable();
-  }
 
   constructor(private authService: AuthService, private http: HttpClient) { }
 
