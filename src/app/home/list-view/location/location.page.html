@@ -1,9 +1,18 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home/tabs/list-view"></ion-back-button>
+    </ion-buttons>
     <ion-title>location</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <app-staticmap></app-staticmap>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 </ion-content>
