@@ -16,6 +16,7 @@ export class CompletedTasksPage implements OnInit, OnDestroy {
   private taskSub: Subscription;
   selectedPath = '/home/tabs/tasks/completed-tasks';
   counter = 0;
+  nocompletedtasks;
 
 
   constructor(private tasksService: TasksService, private loadingCtrl: LoadingController, private router: Router) {
@@ -49,6 +50,11 @@ export class CompletedTasksPage implements OnInit, OnDestroy {
         this.taskSub = this.tasksService.getCompleteTasks().subscribe((completedtasks: any) => {
           this.loadedcompletedtask = completedtasks;
           console.log(completedtasks);
+          if (completedtasks.length === 0) {
+            this.nocompletedtasks = true;
+          } else {
+            this.nocompletedtasks = false;
+          }
         });
         setTimeout(() => {
           loadingEl.dismiss();

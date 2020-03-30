@@ -16,6 +16,7 @@ export class FlagsPage implements OnInit, OnDestroy {
   private taskSub: Subscription;
   selectedPath = '/home/tabs/tasks/flags';
   counter = 0;
+  noflags;
 
 
   constructor(private tasksService: TasksService, private loadingCtrl: LoadingController, private router: Router) {
@@ -43,12 +44,17 @@ export class FlagsPage implements OnInit, OnDestroy {
   }
 
   getTasks() {
-    this.loadingCtrl.create({ message: 'Loading Overdue Tasks...' })
+    this.loadingCtrl.create({ message: 'Loading Flagged Tasks...' })
       .then(loadingEl => {
         loadingEl.present();
         this.taskSub = this.tasksService.getFlaggedTasks().subscribe((flags: any) => {
           this.loadedflag = flags;
           console.log(flags);
+          if (flags.length === 0) {
+            this.noflags = true;
+          } else {
+            this.noflags = false;
+          }
         });
         setTimeout(() => {
           loadingEl.dismiss();

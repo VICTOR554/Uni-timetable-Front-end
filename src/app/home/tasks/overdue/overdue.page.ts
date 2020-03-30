@@ -16,7 +16,7 @@ export class OverduePage implements OnInit, OnDestroy {
   private taskSub: Subscription;
   selectedPath = '/home/tabs/tasks/overdue';
   counter = 0;
-
+  nooverdue;
 
   constructor(private tasksService: TasksService, private loadingCtrl: LoadingController, private router: Router) {
     this.router.events.subscribe((event: RouterEvent) => {
@@ -50,6 +50,11 @@ export class OverduePage implements OnInit, OnDestroy {
         this.taskSub = this.tasksService.getOverdueTasks().subscribe((overdues: any) => {
           this.loadedoverdue = overdues;
           console.log(overdues);
+          if (overdues.length === 0) {
+            this.nooverdue = true;
+          } else {
+            this.nooverdue = false;
+          }
         });
         setTimeout(() => {
           loadingEl.dismiss();

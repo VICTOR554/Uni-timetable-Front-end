@@ -46,6 +46,24 @@
           </ion-list>
         </ion-col>
       </ion-row>
+      <ion-row *ngIf="noflags === true">
+        <ion-col size-sm="12" offset-sm="3" class="nomargin">
+          <h1 class="textcenter">There are no Flagged Tasks</h1>
+          <p class="textcenter">Would you like to go to In Progress Tasks to Flag Tasks?</p>
+          <ion-row>
+  
+  
+            <ion-col class="nopadding textcenter " [routerLink]="['/', 'home', 'tabs', 'tasks', 'all-tasks']">
+              <ion-label>In Progress</ion-label>
+              <br>
+              <ion-button>
+                <ion-icon name="albums"></ion-icon>
+              </ion-button>
+            </ion-col>
+  
+          </ion-row>
+        </ion-col>
+      </ion-row>
     </ion-grid>
 
 </ion-content>

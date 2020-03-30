@@ -4,7 +4,6 @@ import { Router, ActivatedRoute, RouterEvent, NavigationEnd } from '@angular/rou
 import { Note } from './notes.model';
 import { NotesService } from './notes.service';
 import { Subscription } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -17,7 +16,8 @@ export class NotesPage implements OnInit, OnDestroy {
   private noteSub: Subscription;
   selectedPath = '/home/tabs/notes';
   counter = 0;
-  // tslint:disable-next-line: max-line-length
+  nonotes;
+
   constructor(
     private notesService: NotesService,
     private router: Router,
@@ -51,6 +51,12 @@ export class NotesPage implements OnInit, OnDestroy {
         this.noteSub = this.notesService.getAllNotes().subscribe((notes: any) => {
           this.loadednotes = notes;
           console.log(notes);
+
+          if (notes.length === 0) {
+            this.nonotes = true;
+          } else {
+            this.nonotes = false;
+          }
         });
         setTimeout(() => {
           loadingEl.dismiss();

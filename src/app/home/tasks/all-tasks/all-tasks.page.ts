@@ -16,9 +16,10 @@ export class AllTasksPage implements OnInit, OnDestroy {
   selectedPath1 = '/home/tabs/tasks';
   selectedPath2 = '/home/tabs/tasks/all-tasks';
   counter = 0;
+  notasks;
 
 
-  constructor(private tasksService: TasksService, private router: Router, private loadingCtrl: LoadingController ) {
+  constructor(private tasksService: TasksService, private router: Router, private loadingCtrl: LoadingController) {
     this.router.events.subscribe((event: RouterEvent) => {
       // console.log(event)
       if (event.url !== undefined && event instanceof NavigationEnd) {
@@ -50,6 +51,11 @@ export class AllTasksPage implements OnInit, OnDestroy {
         this.taskSub = this.tasksService.getOnScheduleTasks().subscribe((alltasks: any) => {
           this.loadedalltask = alltasks;
           console.log(alltasks);
+          if (alltasks.length === 0) {
+            this.notasks = true;
+          } else {
+            this.notasks = false;
+          }
         });
         setTimeout(() => {
           loadingEl.dismiss();

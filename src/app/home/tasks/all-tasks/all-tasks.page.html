@@ -44,6 +44,24 @@
           </ion-list>
         </ion-col>
       </ion-row>
+      <ion-row *ngIf="notasks === true">
+        <ion-col size-sm="12" offset-sm="3" class="nomargin">
+          <h1 class="textcenter">There are no Tasks</h1>
+          <p class="textcenter">Would you like to create a Task?</p>
+          <ion-row>
+
+  
+            <ion-col class="nopadding textcenter" [routerLink]="['/', 'home', 'tabs', 'tasks', 'new-tasks']">
+              <ion-label>Create Tasks</ion-label>
+              <br>
+              <ion-button>
+                <ion-icon name="add" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-col>
+  
+          </ion-row>
+        </ion-col>
+      </ion-row>
     </ion-grid>
 
 </ion-content>
