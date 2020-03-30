@@ -19,10 +19,6 @@ const routes: Routes =
                   loadChildren: () => import('./list-view/list-view.module').then(m => m.ListViewPageModule)
                 },
                 {
-                  path: 'details',
-                  loadChildren: () => import('./list-view/details/details.module').then(m => m.DetailsPageModule)
-                },
-                {
                   path: 'location/:homelocation',
                   loadChildren: () => import('./list-view/location/location.module').then(m => m.LocationPageModule)
                 },

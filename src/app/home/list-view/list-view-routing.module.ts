@@ -9,10 +9,6 @@ const routes: Routes = [
     component: ListViewPage
   },
   {
-    path: 'details',
-    loadChildren: () => import('./details/details.module').then( m => m.DetailsPageModule)
-  },
-  {
     path: 'location',
     loadChildren: () => import('./location/location.module').then( m => m.LocationPageModule)
   }

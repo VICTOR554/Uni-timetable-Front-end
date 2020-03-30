@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { take, map, tap } from 'rxjs/operators';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 
 export interface AuthResponseData {
@@ -48,7 +47,7 @@ export class AuthService {
 
 
   token(studentid: number, password: string) {
-    return this.http.post('http://localhost:3000/login', {
+    return this.http.post('https://timetable-plus.herokuapp.com/login', {
       number: studentid,
       password
     }).subscribe((res: any) => {
@@ -66,7 +65,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(studentid: number, password: string) {
-    return this.http.post('http://localhost:3000/login', {
+    return this.http.post('https://timetable-plus.herokuapp.com/login', {
       number: studentid,
       password
     });

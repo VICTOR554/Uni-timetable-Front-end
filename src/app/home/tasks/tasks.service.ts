@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
 
 import { Overdue, Flag, Completedtask, Task } from './tasks.model';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -44,21 +44,21 @@ export class TasksService {
   // ALL TASK
 
   getOnScheduleTasks() {
-    return this.http.get('http://localhost:3000/student/task/onschedule', this.authService.httpOptions);
+    return this.http.get('https://timetable-plus.herokuapp.com/student/task/onschedule', this.authService.httpOptions);
   }
   getCompleteTasks() {
-    return this.http.get('http://localhost:3000/student/task/completed', this.authService.httpOptions);
+    return this.http.get('https://timetable-plus.herokuapp.com/student/task/completed', this.authService.httpOptions);
   }
   getFlaggedTasks() {
-    return this.http.get('http://localhost:3000/student/task/flagged', this.authService.httpOptions);
+    return this.http.get('https://timetable-plus.herokuapp.com/student/task/flagged', this.authService.httpOptions);
   }
   getOverdueTasks() {
-    return this.http.get('http://localhost:3000/student/task/overdue', this.authService.httpOptions);
+    return this.http.get('https://timetable-plus.herokuapp.com/student/task/overdue', this.authService.httpOptions);
   }
 
   getOneTask(taskId: string) {
     // console.log(taskId);
-    return this.http.get('http://localhost:3000/student/task/one/' + taskId, this.authService.httpOptions);
+    return this.http.get('https://timetable-plus.herokuapp.com/student/task/one/' + taskId, this.authService.httpOptions);
 
   }
 
@@ -81,7 +81,7 @@ export class TasksService {
       is_completed,
       is_flagged
     );
-    return this.http.post('http://localhost:3000/student/task/new', newTask, this.authService.httpOptions);
+    return this.http.post('https://timetable-plus.herokuapp.com/student/task/new', newTask, this.authService.httpOptions);
   }
 
 
@@ -120,13 +120,13 @@ export class TasksService {
       is_completed,
       is_flagged
     );
-    return this.http.put('http://localhost:3000/student/task/edit/' + taskId, updatedTask, this.authService.httpOptions);
+    return this.http.put('https://timetable-plus.herokuapp.com/student/task/edit/' + taskId, updatedTask, this.authService.httpOptions);
   }
 
 
 
   deleteTask(taskId: string) {
-    return this.http.delete('http://localhost:3000/student/task/delete/' + taskId, this.authService.httpOptions);
+    return this.http.delete('https://timetable-plus.herokuapp.com/student/task/delete/' + taskId, this.authService.httpOptions);
   }
 
 
