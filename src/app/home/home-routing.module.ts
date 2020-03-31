@@ -19,7 +19,7 @@ const routes: Routes =
                   loadChildren: () => import('./list-view/list-view.module').then(m => m.ListViewPageModule)
                 },
                 {
-                  path: 'location/:homelocation',
+                  path: 'location/:activitylocation',
                   loadChildren: () => import('./list-view/location/location.module').then(m => m.LocationPageModule)
                 },
               ]

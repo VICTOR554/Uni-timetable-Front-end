@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Week, Activity } from './list.model';
-import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 
@@ -34,6 +32,10 @@ export class ListService {
 
   getallWeeks() {
     return this.http.get('https://timetable-plus.herokuapp.com/student/week/', this.authService.httpOptions);
+  }
+
+  getLocation(key) {
+    return this.http.get('https://timetable-plus.herokuapp.com/student/location/' + key, this.authService.httpOptions);
   }
 
   GetWeekByNumber(weekNumber: number) {

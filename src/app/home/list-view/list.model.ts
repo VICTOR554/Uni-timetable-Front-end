@@ -34,3 +34,12 @@ export class Module {
         public course_id: number,
     ) { }
 }
+
+export class Locations {
+    constructor(
+        public name: string,
+        public lat: number,
+        public lng: number,
+        public key: string,
+    ) { }
+}

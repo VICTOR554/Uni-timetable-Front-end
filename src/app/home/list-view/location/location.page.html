@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home/tabs/list-view"></ion-back-button>
     </ion-buttons>
-    <ion-title>location</ion-title>
+    <ion-title *ngIf="loadedlocation">location- {{loadedlocation.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +11,12 @@
 <ion-grid>
   <ion-row>
     <ion-col>
-      <app-staticmap></app-staticmap>
+      <div class="picker">
+        <ion-img
+          class="location-image"
+          [src]="selectedLocationImage"
+        ></ion-img>
+      </div>
     </ion-col>
   </ion-row>
 </ion-grid>
