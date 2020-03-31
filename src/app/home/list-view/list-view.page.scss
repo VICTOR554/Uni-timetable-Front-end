@@ -1,29 +1,55 @@
 // button round
 .bround {
-    --border-radius: 45%;
-    --padding-start: 18px;
-    --padding-bottom: 19px;
-    --padding-end: 18px;
-    --padding-top: 19px;
-  }
-  // icon round
-  .iround {
-    --border-radius: 45%;
-    --padding-start: 11px;
-    --padding-bottom: 10px;
-    --padding-end: 10px;
-    --padding-top: 11px;
-  }
-  .ion-toolbar2 {
-    --ion-toolbar-background: var(--ion-color-primary-contrast);
-    --ion-toolbar-color: var(--ion-color-primary);
-  }
+  --border-radius: 45%;
+  --padding-start: 18px;
+  --padding-bottom: 19px;
+  --padding-end: 18px;
+  --padding-top: 19px;
+}
+// icon round
+.iround {
+  --border-radius: 45%;
+  --padding-start: 11px;
+  --padding-bottom: 10px;
+  --padding-end: 10px;
+  --padding-top: 11px;
+}
+.ion-toolbar2 {
+  --ion-toolbar-background: var(--ion-color-primary-contrast);
+  --ion-toolbar-color: var(--ion-color-primary);
+}
 
-  .marginrow {
-    margin-left: 14px;
-    margin-right: 14px;
-  }
- 
-  .a:focus {
-    background-color:orange;
-  }
+.marginrow {
+  margin-left: 14px;
+  margin-right: 14px;
+}
+
+.a:focus {
+  background-color: orange;
+}
+
+.nopadding {
+  padding: 0px !important;
+}
+
+.textcenter {
+  text-align: center !important;
+}
+.marginbottom {
+  margin-bottom: 2px !important;
+}
+
+.nomargin {
+  margin: 0px !important;
+}
+
+.nopadding.textcenter {
+  padding: 0px !important;
+  text-align: center !important;
+}
+
+.nopadding.textcenter.nomargin {
+  padding: 0px !important;
+  text-align: center !important;
+  margin: 0px !important;
+}

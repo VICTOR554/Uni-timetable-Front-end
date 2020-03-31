@@ -47,18 +47,18 @@ export class AuthPage implements OnInit {
               this.isLoading = false;
               this.authService.token(studentid, password);
               this.authService.loggedin();
-              setTimeout(() => {
-                loadingEl.dismiss();
-                this.router.navigateByUrl('/home/tabs/list-view');
-                form.reset();
-              }, 1000);
+
+              loadingEl.dismiss();
+              this.router.navigateByUrl('/home/tabs/list-view');
+              form.reset();
+
             } else {
               this.isLoading = false;
-              setTimeout(() => {
-                loadingEl.dismiss();
-                this.showAlert('wrong username or password');
-                console.log('wrong username or password');
-              }, 1000);
+
+              loadingEl.dismiss();
+              this.showAlert('wrong username or password');
+              console.log('wrong username or password');
+
             }
           },
 
@@ -77,15 +77,7 @@ export class AuthPage implements OnInit {
   }
 
 
-  // onSubmit() {
-  //   if (!form.valid) {
-  //     return;
-  //   }
-  //   const studentid = form.value.studentid;
-  //   const password = form.value.password;
 
-  //   this.Login(studentid, password);
-  // }
 
 
 

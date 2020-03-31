@@ -1,42 +1,60 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button slot="icon-only">
-        <ion-icon name="calendar"></ion-icon>
-      </ion-button>
-    </ion-buttons>
 
-    <ion-title *ngIf="loadedweek" class="ion-text-center"> {{ day | momentPipe:'ddd DD MMM YYYY'}} (Week - {{ loadedweek.number }})
-    </ion-title>
+    <ion-grid>
+      <ion-row>
 
+        <ion-buttons>
+          <ion-button slot="icon-only">
+            <ion-icon name="calendar"></ion-icon>
+          </ion-button>
+        </ion-buttons>
 
-    <ion-buttons slot="end">
-      <ion-button slot="icon-only"  (click)="presentPopover($event)">
-        <ion-icon name="chevron-down-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+        <ion-col>
+
+          <ion-title class="nopadding textcenter"> {{ day | momentPipe:'ddd DD MMM YYYY'}}
+          </ion-title>
+
+        </ion-col>
+
+        <ion-buttons>
+          <ion-button slot="icon-only" (click)="weekPopover($event)">
+            <ion-icon name="calendar"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+
+      </ion-row>
+      <ion-row >
+
+        <ion-col class="nopadding">
+          <p *ngIf="loadedweek" class="nopadding textcenter">(Week - {{ loadedweek.number }})</p>
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
 
   </ion-toolbar>
   <!--To view the days of the week-->
   <ion-toolbar class="ion-toolbar2">
 
     <ion-grid>
-      <ion-row class="ion-no-padding" class="marginrow">
+      <ion-row class="nopadding" class="marginrow">
 
-        <ion-col class="ion-no-padding" class="ion-text-center">
-          <p>Mon</p>
+        <ion-col class="nopadding">
+          <p class="marginbottom textcenter">Mon</p>
         </ion-col>
-        <ion-col class="ion-no-padding" class="ion-text-center">
-          <p>Tue</p>
+        <ion-col class="nopadding">
+          <p class="marginbottom textcenter">Tue</p>
         </ion-col>
-        <ion-col class="ion-no-padding" class="ion-text-center">
-          <p>Wed</p>
+        <ion-col class="nopadding">
+          <p class="marginbottom textcenter">Wed</p>
         </ion-col>
-        <ion-col class="ion-no-padding" class="ion-text-center">
-          <p>Thur</p>
+        <ion-col class="nopadding">
+          <p class="marginbottom textcenter">Thur</p>
         </ion-col>
-        <ion-col class="ion-no-padding" class="ion-text-center">
-          <p>Fri</p>
+        <ion-col class="nopadding">
+          <p class="marginbottom textcenter">Fri</p>
         </ion-col>
 
       </ion-row>
@@ -46,28 +64,28 @@
           (click)="previousWeek(loadedweek.number)">
         </ion-icon>
 
-        <ion-col class="ion-no-padding" class="ion-text-center">
+        <ion-col class="nopadding textcenter">
           <ion-button shape="round" class="a" class="bround" (click)="CurrentDay(loadedweek.dates[0])">
             {{ loadedweek.dates[0] | momentPipe:'DD'  }}
           </ion-button>
         </ion-col>
 
-        <ion-col class="ion-no-padding" class="ion-text-center">
+        <ion-col class="nopadding textcenter">
           <ion-button shape="round" class="bround" (click)="CurrentDay(loadedweek.dates[1])">
             {{ loadedweek.dates[1] | momentPipe:'DD' }}</ion-button>
         </ion-col>
 
-        <ion-col class="ion-no-padding" class="ion-text-center">
+        <ion-col class="nopadding textcenter">
           <ion-button shape="round" class="bround" (click)="CurrentDay(loadedweek.dates[2])">
             {{ loadedweek.dates[2] | momentPipe:' DD'  }}</ion-button>
         </ion-col>
 
-        <ion-col class="ion-no-padding" class="ion-text-center" (click)="CurrentDay(loadedweek.dates[3])">
+        <ion-col class="nopadding textcenter" (click)="CurrentDay(loadedweek.dates[3])">
           <ion-button shape="round" class="bround">
             {{ loadedweek.dates[3] | momentPipe:'DD' }}</ion-button>
         </ion-col>
 
-        <ion-col class="ion-no-padding" class="ion-text-center" (click)="CurrentDay(loadedweek.dates[4])">
+        <ion-col class="nopadding textcenter" (click)="CurrentDay(loadedweek.dates[4])">
           <ion-button shape="round" class="bround">
             {{ loadedweek.dates[4] | momentPipe:'DD' }}</ion-button>
         </ion-col>
@@ -84,24 +102,24 @@
 
 <ion-content>
   <!--This is a card containing the lecture details-->
-  <ion-grid class="ion-no-padding">
-    <ion-row class="ion-no-padding">
-      <ion-col class="ion-no-padding">
-        <ion-list class="ion-no-padding">
+  <ion-grid class="nopadding">
+    <ion-row class="nopadding">
+      <ion-col class="nopadding">
+        <ion-list class="nopadding">
           <!-- for loop to draw the list from the array-->
           <ion-card *ngFor="let activity of loadedactivity">
-            <ion-grid class="ion-no-padding">
+            <ion-grid class="nopadding">
 
-              <ion-row class="ion-no-padding">
+              <ion-row class="nopadding">
 
-                <ion-col class="ion-no-padding" class="ion-text-center" size="3">
+                <ion-col class="nopadding textcenter" size="3">
                   <ion-row>
 
                     <ion-col size="12" class="ion-padding-top">
                       <p>{{activity.start_date_time | momentPipe:'hh:mm a' }}</p>
                     </ion-col>
 
-                    <ion-col size="12" class="ion-no-padding">
+                    <ion-col size="12" class="nopadding ">
                       <p>{{activity.end_date_time | momentPipe:'hh:mm a' }}</p>
                     </ion-col>
 
@@ -114,7 +132,7 @@
                   <p>{{activity.type}}</p>
 
                   <ion-row>
-                    <ion-col class="ion-no-padding" class="ion-text-center">
+                    <ion-col class="nopadding ">
                       <!-- solved icon button routing problem using stop event -->
                       <ion-button size="small" shape="round" class="iround"
                         [routerLink]="['/', 'home', 'tabs', 'list-view', 'location',activity.location]">
@@ -124,9 +142,9 @@
 
                     </ion-col>
 
-                    <ion-col class="ion-no-padding" class="ion-text-center">
+                    <ion-col class="nopadding ">
 
-                      <ion-button size="small" shape="round" class="iround">
+                      <ion-button size="small" shape="round" class="iround" (click)="lecturerPopover($event, activity.lecturer_name)">
                         <ion-icon name="person"></ion-icon>
                       </ion-button>
                       <label>-{{activity.lecturer_name}}</label>
@@ -144,12 +162,12 @@
       </ion-col>
     </ion-row>
     <ion-row *ngIf="noclass === true">
-      <ion-col size-sm="12" offset-sm="3">
-        <h1 class="ion-text-center"> No Lecture Today</h1>
-        <p class="ion-text-center">Would you like to do some Tasks</p>
+      <ion-col size-sm="12" offset-sm="3" class="nomargin">
+        <h1 class="textcenter"> No Lectures Today</h1>
+        <p class="textcenter">Would you like to do some Tasks?</p>
         <ion-row>
 
-          <ion-col class="ion-no-padding" class="ion-text-center">
+          <ion-col class="nopadding textcenter">
             <ion-label>In Progress</ion-label>
             <br>
             <ion-button [routerLink]="['/', 'home', 'tabs', 'tasks', 'all-tasks']">
@@ -157,8 +175,7 @@
             </ion-button>
           </ion-col>
 
-          <ion-col class="ion-no-padding" class="ion-text-center"
-            [routerLink]="['/', 'home', 'tabs', 'tasks', 'flags']">
+          <ion-col class="nopadding textcenter " [routerLink]="['/', 'home', 'tabs', 'tasks', 'flags']">
             <ion-label>Flags</ion-label>
             <br>
             <ion-button>

@@ -11,11 +11,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { WeekComponent } from './home/list-view/week/week.component';
 import { SharedModule } from './shared/shared.module';
+import { LecturerComponent } from './home/list-view/lecturer/lecturer.component';
 
 
 @NgModule({
-  declarations: [AppComponent, WeekComponent],
-  entryComponents: [WeekComponent],
+  declarations: [AppComponent, WeekComponent, LecturerComponent],
+  entryComponents: [WeekComponent, LecturerComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, SharedModule],
   providers: [
     StatusBar,

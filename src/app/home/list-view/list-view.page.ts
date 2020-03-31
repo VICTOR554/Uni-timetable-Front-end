@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { LoadingController, PopoverController } from '@ionic/angular';
 import { Router, RouterEvent, NavigationEnd } from '@angular/router';
 import { WeekComponent } from './week/week.component';
+import { LecturerComponent } from './lecturer/lecturer.component';
 
 
 @Component({
@@ -41,17 +42,7 @@ export class ListViewPage implements OnInit, OnDestroy {
     });
   }
 
-  async presentPopover(eve) {
-    const popover = await this.popoverController.create({
-      component: WeekComponent,
-      componentProps: {},
-      event: eve,
-      mode: 'ios',
-      translucent: true,
-      cssClass: 'popOver'
-    });
-    return await popover.present();
-  }
+
 
 
   ngOnInit() {
@@ -116,7 +107,7 @@ export class ListViewPage implements OnInit, OnDestroy {
         });
         setTimeout(() => {
           loadingEl.dismiss();
-        }, 1000);
+        }, 500);
       });
 
   }
@@ -144,6 +135,30 @@ export class ListViewPage implements OnInit, OnDestroy {
   CurrentDay(currentday) {
     this.getActivity(currentday);
     this.day = currentday;
+  }
+
+  async weekPopover(eve) {
+    const popover = await this.popoverController.create({
+      component: WeekComponent,
+      componentProps: {},
+      event: eve,
+      mode: 'ios',
+      translucent: true,
+      cssClass: 'popOver'
+    });
+    return await popover.present();
+  }
+
+  async lecturerPopover(eve , lecturer) {
+    const popover = await this.popoverController.create({
+      component: LecturerComponent,
+      componentProps: { key1: lecturer },
+      event: eve,
+      mode: 'ios',
+      translucent: true,
+      cssClass: 'popOver'
+    });
+    return await popover.present();
   }
 
   // used to clear subscription to avoid memory leaks
