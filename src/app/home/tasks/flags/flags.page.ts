@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IonItemSliding, LoadingController } from '@ionic/angular';
-import { Flag } from '../tasks.model';
+import { Flag, Module } from '../tasks.model';
 import { TasksService } from '../tasks.service';
 import { Subscription } from 'rxjs';
 import { RouterEvent, Router, NavigationEnd } from '@angular/router';
@@ -13,6 +13,7 @@ import { RouterEvent, Router, NavigationEnd } from '@angular/router';
 export class FlagsPage implements OnInit, OnDestroy {
 
   loadedflag: Flag[];
+  loadedmodules: Module[];
   private taskSub: Subscription;
   selectedPath = '/home/tabs/tasks/flags';
   counter = 0;
@@ -50,6 +51,18 @@ export class FlagsPage implements OnInit, OnDestroy {
         this.taskSub = this.tasksService.getFlaggedTasks().subscribe((flags: any) => {
           this.loadedflag = flags;
           console.log(flags);
+
+          this.loadedmodules = [];
+          // checks the module code and calls getmodule to get module name
+          flags.forEach(element => {
+            if (element.module_code) {
+              this.getModule(element.module_code);
+            } else {
+
+              this.getModule('no module');
+            }
+          });
+
           if (flags.length === 0) {
             this.noflags = true;
           } else {
@@ -60,6 +73,25 @@ export class FlagsPage implements OnInit, OnDestroy {
           loadingEl.dismiss();
         }, 1000);
       });
+  }
+
+  // gets module name
+  getModule(ModuleCode) {
+    if (ModuleCode === 'no module') {
+      this.loadedmodules.push({
+        name: 'no module',
+        code: 'no module',
+        course_id: 0
+      });
+
+    } else {
+      this.taskSub = this.tasksService.GetModule(ModuleCode).subscribe((module: any) => {
+        this.loadedmodules.push(module);
+        console.log('Module Code', ModuleCode);
+        console.log('Module', module);
+        console.log('modules for the week', this.loadedmodules);
+      });
+    }
   }
 
   Complete(task: any, slidingItem: IonItemSliding) {

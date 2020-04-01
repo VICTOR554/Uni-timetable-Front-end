@@ -15,13 +15,16 @@
 
 
               <ion-label>
-                <h2 class="pb">{{ completetask.title }}</h2>
-                <h3 class="pb">{{ completetask.module_code }}</h3>
-                <div class="task-details" class="pbs">
-                  <ion-icon color="primary" name="calendar"></ion-icon>
-                  <ion-text class="space-left"> {{ completetask.due_date_time | momentPipe:"ddd DD MMM YYYY hh:mm a" }}
-                  </ion-text>
-                </div>
+                <p class="pb title">{{ completetask.title }}</p>
+                  
+                  <div class="task-details" class="pb">
+                    <ion-icon name="link" color="primary" class="pt"></ion-icon>
+                    <p  *ngFor="let module of loadedmodules" class="space-left">{{ module.name }}</p>
+                  </div>
+                  <div class="task-details" class="pbs">
+                    <ion-icon color="primary" name="calendar" class="pt"></ion-icon>
+                    <p class="space-left"> {{ completetask.due_date_time | momentPipe: "ddd DD MMM YYYY hh:mm a" }}</p>
+                  </div>
               </ion-label>
             </ion-item>
 
@@ -30,7 +33,7 @@
 
               <ion-item-option color="success" (click)="NotComplete(completetask, slidingItem)">
                 <ion-icon name="checkmark-circle-outline" slot="top" class="icon"></ion-icon>
-                Unfinished
+                Incompleted
               </ion-item-option>
               <ion-item-option color="warning" (click)="Flag(completetask, slidingItem)">
                 <ion-icon name="flag" slot="top" class="icon"></ion-icon>

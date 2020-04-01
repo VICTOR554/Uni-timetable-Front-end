@@ -9,15 +9,16 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { WeekComponent } from './home/list-view/week/week.component';
 import { SharedModule } from './shared/shared.module';
 import { LecturerComponent } from './home/list-view/lecturer/lecturer.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
-  declarations: [AppComponent, WeekComponent, LecturerComponent],
-  entryComponents: [WeekComponent, LecturerComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, SharedModule],
+  declarations: [AppComponent, LecturerComponent],
+  entryComponents: [LecturerComponent],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, SharedModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
     StatusBar,
     SplashScreen,

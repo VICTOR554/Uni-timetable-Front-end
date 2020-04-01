@@ -15,12 +15,15 @@
 
 
               <ion-label>
-                <h2 class="pb">{{ overdue.title }}</h2>
-                <h3 class="pb">{{ overdue.module_code }}</h3>
+                <p class="pb title">{{ overdue.title }}</p>
+                  
+                <div class="task-details" class="pb">
+                  <ion-icon name="link" color="primary" class="pt"></ion-icon>
+                  <p  *ngFor="let module of loadedmodules" class="space-left">{{ module.name }}</p>
+                </div>
                 <div class="task-details" class="pbs">
-                  <ion-icon color="primary" name="calendar"></ion-icon>
-                  <ion-text class="space-left"> {{ overdue.due_date_time | momentPipe:"ddd DD MMM YYYY hh:mm a" }}
-                  </ion-text>
+                  <ion-icon color="primary" name="calendar" class="pt"></ion-icon>
+                  <p class="space-left"> {{ overdue.due_date_time | momentPipe: "ddd DD MMM YYYY hh:mm a" }}</p>
                 </div>
               </ion-label>
             </ion-item>

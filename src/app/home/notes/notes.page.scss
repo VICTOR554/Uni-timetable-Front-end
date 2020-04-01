@@ -1,26 +1,54 @@
-.nopadding {
-    padding: 0px !important;
-  }
-  
-  .textcenter {
-    text-align: center !important;
-  }
-  .marginbottom {
-    margin-bottom: 2px !important;
-  }
-  
-  .nomargin{
-    margin: 0px !important;
-  }
-  
-  .nopadding.textcenter {
-    padding: 0px !important;
-    text-align: center !important;
-  
-  }
+.note-details {
+  display: flex;
+  align-items: center;
+}
+.space-left {
+  display: inline-block;
+  padding-left: 6px;
+  font-size: 16px;
+}
 
-  .nopadding.textcenter.nomargin {
-    padding: 0px !important;
-    text-align: center !important;
-    margin: 0px !important;
-  }
+.pbs {
+  padding-bottom: 3px;
+}
+.pb {
+  padding-bottom: 8px;
+}
+.pt {
+  padding-top: 2px;
+}
+.title {
+  font-size: 20px;
+  color: black;
+}
+.pb.title {
+  font-size: 20px;
+  color: black;
+  padding-bottom: 8px;
+}
+
+.nopadding {
+  padding: 0px !important;
+}
+
+.textcenter {
+  text-align: center !important;
+}
+.marginbottom {
+  margin-bottom: 2px !important;
+}
+
+.nomargin {
+  margin: 0px !important;
+}
+
+.nopadding.textcenter {
+  padding: 0px !important;
+  text-align: center !important;
+}
+
+.nopadding.textcenter.nomargin {
+  padding: 0px !important;
+  text-align: center !important;
+  margin: 0px !important;
+}

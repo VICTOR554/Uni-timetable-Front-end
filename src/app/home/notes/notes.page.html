@@ -21,19 +21,22 @@
         <!--This is an item containing the lecture details-->
         <ion-list>
           <!-- for loop to draw the list from the array-->
-          <ion-item-sliding *ngFor="let notes of loadednotes" #slidingItem detail>
+          <ion-item-sliding *ngFor="let notes of loadednotes; let i = index" #slidingItem detail>
 
             <ion-item [routerLink]="['/', 'home', 'tabs', 'notes', 'edit', notes._id]" detail>
-              <ion-grid class="ion-no-padding">
-                <ion-row>
-
-                  <ion-col class="ion-padding">
-                    <p>{{notes.title}}</p>
-                    <p>{{notes.module_code}}</p>
-                    <p>{{notes.date_time | momentPipe:'ddd DD MMM YYYY hh:mm a'}}</p>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
+              <ion-label>
+                <p class="pb title">{{ notes.title }}</p>
+                  
+                <div class="note-details" class="pb" >
+                  <ion-icon name="link" color="primary" class="pt"></ion-icon>
+                  <p  class="space-left" >{{ loadedmodules[i].name }}</p>
+                </div>
+                
+                <div class="note-details" class="pbs">
+                  <ion-icon color="primary" name="calendar" class="pt"></ion-icon>
+                  <p class="space-left"> {{ notes.date_time | momentPipe: "ddd DD MMM YYYY hh:mm a" }}</p>
+                </div>
+              </ion-label>
             </ion-item>
 
             <ion-item-options side="end">

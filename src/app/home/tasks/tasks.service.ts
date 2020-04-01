@@ -45,7 +45,9 @@ export class TasksService {
   getOneTask(taskId: string) {
     // console.log(taskId);
     return this.http.get('https://timetable-plus.herokuapp.com/student/task/one/' + taskId, this.authService.httpOptions);
-
+  }
+  GetModule(ModuleCode: string) {
+    return this.http.get('https://timetable-plus.herokuapp.com/student/module/' + ModuleCode, this.authService.httpOptions);
   }
 
   // tslint:disable-next-line: variable-name

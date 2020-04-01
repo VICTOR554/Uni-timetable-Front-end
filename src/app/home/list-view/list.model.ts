@@ -28,7 +28,7 @@ export class Week {
 export class Module {
     constructor(
         // tslint:disable-next-line: variable-name
-        public name: number,
+        public name: string,
         public code: string,
         // tslint:disable-next-line: variable-name
         public course_id: number,

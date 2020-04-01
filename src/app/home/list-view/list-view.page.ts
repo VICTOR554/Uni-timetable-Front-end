@@ -4,7 +4,6 @@ import { Week, Activity, Module } from './list.model';
 import { Subscription } from 'rxjs';
 import { LoadingController, PopoverController } from '@ionic/angular';
 import { Router, RouterEvent, NavigationEnd } from '@angular/router';
-import { WeekComponent } from './week/week.component';
 import { LecturerComponent } from './lecturer/lecturer.component';
 
 
@@ -19,9 +18,11 @@ export class ListViewPage implements OnInit, OnDestroy {
   loadedmodules: Module[];
   private listSub: Subscription;
   selectedPath = '/home/tabs/list-view';
+  locationPath = '/home/tabs/list-view/location';
   counter = 0;
   day = 0;
   noclass;
+  is_Week;
 
   constructor(
     private listService: ListService,
@@ -30,10 +31,15 @@ export class ListViewPage implements OnInit, OnDestroy {
     private popoverController: PopoverController
   ) {
     this.router.events.subscribe((event: RouterEvent) => {
-      // console.log(event)
+      // console.log('Event', event);
       if (event.url !== undefined && event instanceof NavigationEnd) {
         if ((event.url === this.selectedPath) && this.counter !== 0) {
           this.update();
+          console.log('refreshed page');
+          console.log('counter = ', this.counter);
+        }
+        if (event.url === this.locationPath) {
+          this.getWeekByNumber(this.is_Week);
           console.log('refreshed page');
           console.log('counter = ', this.counter);
         }
@@ -54,11 +60,9 @@ export class ListViewPage implements OnInit, OnDestroy {
 
   update() {
     this.getCurrentWeek();
-
   }
 
   getCurrentWeek() {
-
     this.listSub = this.listService.GetCurrentWeek().subscribe((week: any) => {
       this.loadedweek = week;
       console.log('Week', this.loadedweek);
@@ -67,9 +71,9 @@ export class ListViewPage implements OnInit, OnDestroy {
       this.day = week.dates[0];
       console.log('YOU FKFJKFK', this.day);
     });
-
-
   }
+
+
 
   getWeekByNumber(weekNumber) {
     this.listSub = this.listService.GetWeekByNumber(weekNumber).subscribe((week: any) => {
@@ -137,19 +141,10 @@ export class ListViewPage implements OnInit, OnDestroy {
     this.day = currentday;
   }
 
-  async weekPopover(eve) {
-    const popover = await this.popoverController.create({
-      component: WeekComponent,
-      componentProps: {},
-      event: eve,
-      mode: 'ios',
-      translucent: true,
-      cssClass: 'popOver'
-    });
-    return await popover.present();
-  }
 
-  async lecturerPopover(eve , lecturer) {
+
+
+  async lecturerPopover(eve, lecturer) {
     const popover = await this.popoverController.create({
       component: LecturerComponent,
       componentProps: { key1: lecturer },
@@ -159,6 +154,10 @@ export class ListViewPage implements OnInit, OnDestroy {
       cssClass: 'popOver'
     });
     return await popover.present();
+  }
+
+  SelectedDay(day) {
+    this.is_Week = day;
   }
 
   // used to clear subscription to avoid memory leaks

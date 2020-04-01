@@ -1,5 +1,3 @@
-
-
 export class Note {
     constructor(
 
@@ -14,3 +12,12 @@ export class Note {
     ) { }
 }
 
+export class Module {
+    constructor(
+        // tslint:disable-next-line: variable-name
+        public name: string,
+        public code: string,
+        // tslint:disable-next-line: variable-name
+        public course_id: number,
+    ) { }
+}

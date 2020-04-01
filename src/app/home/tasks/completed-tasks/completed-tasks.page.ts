@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { IonItemSliding, LoadingController } from '@ionic/angular';
-import { Task } from '../tasks.model';
+import { Task, Module } from '../tasks.model';
 import { TasksService } from '../tasks.service';
 import { Subscription } from 'rxjs';
 import { Router, RouterEvent, NavigationEnd } from '@angular/router';
@@ -13,6 +13,7 @@ import { Router, RouterEvent, NavigationEnd } from '@angular/router';
 })
 export class CompletedTasksPage implements OnInit, OnDestroy {
   loadedcompletedtask: Task[];
+  loadedmodules: Module[];
   private taskSub: Subscription;
   selectedPath = '/home/tabs/tasks/completed-tasks';
   counter = 0;
@@ -50,6 +51,18 @@ export class CompletedTasksPage implements OnInit, OnDestroy {
         this.taskSub = this.tasksService.getCompleteTasks().subscribe((completedtasks: any) => {
           this.loadedcompletedtask = completedtasks;
           console.log(completedtasks);
+
+          this.loadedmodules = [];
+          // checks the module code and calls getmodule to get module name
+          completedtasks.forEach(element => {
+            if (element.module_code) {
+              this.getModule(element.module_code);
+            } else {
+
+              this.getModule('no module');
+            }
+          });
+
           if (completedtasks.length === 0) {
             this.nocompletedtasks = true;
           } else {
@@ -61,6 +74,24 @@ export class CompletedTasksPage implements OnInit, OnDestroy {
         }, 1000);
       });
   }
+
+  // gets module name
+  getModule(ModuleCode) {
+    if (ModuleCode === 'no module') {
+      this.loadedmodules.push({
+        name: 'no module',
+        code: 'no module',
+        course_id: 0
+      });
+
+    } else {
+      this.taskSub = this.tasksService.GetModule(ModuleCode).subscribe((module: any) => {
+        this.loadedmodules.push(module);
+        console.log('Module Code', ModuleCode);
+        console.log('Module', module);
+        console.log('modules for the week', this.loadedmodules);
+      });
+    }}
 
   Flag(task: any, slidingItem: IonItemSliding) {
     console.log(task);

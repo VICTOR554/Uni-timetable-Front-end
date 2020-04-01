@@ -4,11 +4,11 @@
     <ion-grid>
       <ion-row>
 
-        <ion-buttons>
+        <!-- <ion-buttons>
           <ion-button slot="icon-only">
             <ion-icon name="calendar"></ion-icon>
           </ion-button>
-        </ion-buttons>
+        </ion-buttons> -->
 
         <ion-col>
 
@@ -17,18 +17,20 @@
 
         </ion-col>
 
-        <ion-buttons>
-          <ion-button slot="icon-only" (click)="weekPopover($event)">
+        <ion-buttons class="nopadding textcenter">
+          <ion-button slot="icon-only" [routerLink]="['/', 'home', 'tabs', 'list-view', 'week']">
             <ion-icon name="calendar"></ion-icon>
           </ion-button>
         </ion-buttons>
 
       </ion-row>
-      <ion-row >
+      <ion-row>
 
         <ion-col class="nopadding">
           <p *ngIf="loadedweek" class="nopadding textcenter">(Week - {{ loadedweek.number }})</p>
+
         </ion-col>
+
 
       </ion-row>
 
@@ -135,7 +137,8 @@
                     <ion-col class="nopadding ">
                       <!-- solved icon button routing problem using stop event -->
                       <ion-button size="small" shape="round" class="iround"
-                        [routerLink]="['/', 'home', 'tabs', 'list-view', 'location',activity.location]">
+                        [routerLink]="['/', 'home', 'tabs', 'list-view', 'location',activity.location]"
+                        click="SelectedDay(loadedweek.number)">
                         <ion-icon name="pin"></ion-icon>
                       </ion-button>
                       <label>-{{activity.location}}</label>
@@ -144,7 +147,8 @@
 
                     <ion-col class="nopadding ">
 
-                      <ion-button size="small" shape="round" class="iround" (click)="lecturerPopover($event, activity.lecturer_name)">
+                      <ion-button size="small" shape="round" class="iround"
+                        (click)="lecturerPopover($event, activity.lecturer_name)">
                         <ion-icon name="person"></ion-icon>
                       </ion-button>
                       <label>-{{activity.lecturer_name}}</label>
