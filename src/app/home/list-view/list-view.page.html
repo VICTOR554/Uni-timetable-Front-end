@@ -17,17 +17,17 @@
 
         </ion-col>
 
-        <ion-buttons class="nopadding textcenter">
+        <!-- <ion-buttons class="nopadding textcenter">
           <ion-button slot="icon-only" [routerLink]="['/', 'home', 'tabs', 'list-view', 'week']">
             <ion-icon name="calendar"></ion-icon>
           </ion-button>
-        </ion-buttons>
+        </ion-buttons> -->
 
       </ion-row>
       <ion-row>
 
-        <ion-col class="nopadding">
-          <p *ngIf="loadedweek" class="nopadding textcenter">(Week - {{ loadedweek.number }})</p>
+        <ion-col class="nopadding" >
+          <p *ngIf="loadedweek !== undefined" class="nopadding textcenter">(Week - {{ loadedweek.number }})</p>
 
         </ion-col>
 
@@ -38,9 +38,9 @@
 
   </ion-toolbar>
   <!--To view the days of the week-->
-  <ion-toolbar class="ion-toolbar2">
+  <ion-toolbar class="ion-toolbar2" *ngIf="loadedweek !== undefined" >
 
-    <ion-grid>
+    <ion-grid >
       <ion-row class="nopadding" class="marginrow">
 
         <ion-col class="nopadding">
@@ -61,7 +61,7 @@
 
       </ion-row>
 
-      <ion-row class="ion-padding-bottom" *ngIf="loadedweek">
+      <ion-row class="ion-padding-bottom" *ngIf="loadedweek !== undefined">
         <ion-icon *ngIf="loadedweek.number > 1" name="arrow-back" class="ion-padding-top"
           (click)="previousWeek(loadedweek.number)">
         </ion-icon>
@@ -88,7 +88,7 @@
         </ion-col>
 
         <ion-col class="nopadding textcenter" (click)="CurrentDay(loadedweek.dates[4])">
-          <ion-button shape="round" class="bround">
+          <ion-button shape="round" class="bround" >
             {{ loadedweek.dates[4] | momentPipe:'DD' }}</ion-button>
         </ion-col>
 
@@ -109,7 +109,7 @@
       <ion-col class="nopadding">
         <ion-list class="nopadding">
           <!-- for loop to draw the list from the array-->
-          <ion-card *ngFor="let activity of loadedactivity">
+          <ion-card *ngFor="let activity of loadedactivity; let i = index">
             <ion-grid class="nopadding">
 
               <ion-row class="nopadding">
@@ -129,7 +129,7 @@
                 </ion-col>
 
                 <ion-col>
-                  <p *ngFor="let module of loadedmodules">{{module.name}}</p>
+                  <p>{{ loadedmodules[i].name }}</p>
 
                   <p>{{activity.type}}</p>
 
@@ -138,7 +138,7 @@
                       <!-- solved icon button routing problem using stop event -->
                       <ion-button size="small" shape="round" class="iround"
                         [routerLink]="['/', 'home', 'tabs', 'list-view', 'location',activity.location]"
-                        click="SelectedDay(loadedweek.number)">
+                        >
                         <ion-icon name="pin"></ion-icon>
                       </ion-button>
                       <label>-{{activity.location}}</label>

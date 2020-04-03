@@ -19,7 +19,7 @@ export class Week {
     constructor(
         // tslint:disable-next-line: variable-name
         public number: number,
-        public dates: [],
+        public dates: number[],
 
     ) { }
 }

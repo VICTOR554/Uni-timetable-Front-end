@@ -14,7 +14,7 @@ import { LecturerComponent } from './lecturer/lecturer.component';
 })
 export class ListViewPage implements OnInit, OnDestroy {
   loadedactivity: Activity[];
-  loadedweek: Week[];
+  loadedweek: Week;
   loadedmodules: Module[];
   private listSub: Subscription;
   selectedPath = '/home/tabs/list-view';
@@ -22,7 +22,6 @@ export class ListViewPage implements OnInit, OnDestroy {
   counter = 0;
   day = 0;
   noclass;
-  is_Week;
 
   constructor(
     private listService: ListService,
@@ -38,11 +37,7 @@ export class ListViewPage implements OnInit, OnDestroy {
           console.log('refreshed page');
           console.log('counter = ', this.counter);
         }
-        if (event.url === this.locationPath) {
-          this.getWeekByNumber(this.is_Week);
-          console.log('refreshed page');
-          console.log('counter = ', this.counter);
-        }
+
         this.counter = this.counter + 1;
       }
     });
@@ -52,7 +47,7 @@ export class ListViewPage implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    console.log('hi');
+    console.log('hiiiiii', this.loadedweek);
     this.getCurrentWeek();
 
 
@@ -156,9 +151,6 @@ export class ListViewPage implements OnInit, OnDestroy {
     return await popover.present();
   }
 
-  SelectedDay(day) {
-    this.is_Week = day;
-  }
 
   // used to clear subscription to avoid memory leaks
   ngOnDestroy() {
