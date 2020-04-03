@@ -14,11 +14,19 @@ import { LecturerComponent } from './home/list-view/lecturer/lecturer.component'
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
-
 @NgModule({
   declarations: [AppComponent, LecturerComponent],
   entryComponents: [LecturerComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, SharedModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
+  // tslint:disable-next-line: max-line-length
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    SharedModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+
+  ],
   providers: [
     StatusBar,
     SplashScreen,
@@ -26,4 +34,4 @@ import { environment } from '../environments/environment';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
