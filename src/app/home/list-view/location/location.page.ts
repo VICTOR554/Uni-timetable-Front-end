@@ -14,7 +14,7 @@ import { Locations } from '../list.model';
 export class LocationPage implements OnInit, OnDestroy {
 
   selectedLocationImage: string;
-  loadedlocation: Locations[];
+  loadedlocation: Locations;
   private listSub: Subscription;
   currentlocation;
 
