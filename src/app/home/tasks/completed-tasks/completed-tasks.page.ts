@@ -59,7 +59,7 @@ export class CompletedTasksPage implements OnInit, OnDestroy {
               this.getModule(element.module_code);
             } else {
 
-              this.getModule('no module');
+              this.getModule('No module');
             }
           });
 
@@ -75,23 +75,24 @@ export class CompletedTasksPage implements OnInit, OnDestroy {
       });
   }
 
-  // gets module name
-  getModule(ModuleCode) {
-    if (ModuleCode === 'no module') {
-      this.loadedmodules.push({
-        name: 'no module',
-        code: 'no module',
-        course_id: 0
-      });
+ // gets module name
+ getModule(ModuleCode) {
+  if (ModuleCode === 'No module') {
+    this.loadedmodules.push({
+      name: 'No module',
+      code: 'No module',
+      course_id: 0
+    });
 
-    } else {
-      this.taskSub = this.tasksService.GetModule(ModuleCode).subscribe((module: any) => {
-        this.loadedmodules.push(module);
-        console.log('Module Code', ModuleCode);
-        console.log('Module', module);
-        console.log('modules for the week', this.loadedmodules);
-      });
-    }}
+  } else {
+    this.taskSub = this.tasksService.GetModule(ModuleCode).subscribe((module: any) => {
+      this.loadedmodules.push(module);
+      console.log('Module Code', ModuleCode);
+      console.log('Module', module);
+      console.log('modules for the week', this.loadedmodules);
+    });
+  }
+}
 
   Flag(task: any, slidingItem: IonItemSliding) {
     console.log(task);

@@ -60,7 +60,7 @@ export class AllTasksPage implements OnInit, OnDestroy {
               this.getModule(element.module_code);
             } else {
 
-              this.getModule('no module');
+              this.getModule('No module');
             }
           });
 
@@ -80,8 +80,8 @@ export class AllTasksPage implements OnInit, OnDestroy {
   getModule(ModuleCode) {
     if (ModuleCode === 'No module') {
       this.loadedmodules.push({
-        name: 'no module',
-        code: 'no module',
+        name: 'No module',
+        code: 'No module',
         course_id: 0
       });
 

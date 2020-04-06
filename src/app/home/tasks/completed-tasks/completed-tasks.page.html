@@ -8,23 +8,23 @@
         <ion-list>
           <!-- for loop to draw the list from the array -->
 
-          <ion-item-sliding *ngFor="let completetask of loadedcompletedtask" #slidingItem>
+          <ion-item-sliding *ngFor="let completetask of loadedcompletedtask; let i = index" #slidingItem>
 
-            <ion-item [routerLink]="['/', 'home', 'tabs', 'tasks', 'edit', completetask._id]">
+            <ion-item [routerLink]="['/', 'home', 'tabs', 'tasks', 'edit', completetask._id]" detail>
 
 
 
               <ion-label>
                 <p class="pb title">{{ completetask.title }}</p>
-                  
-                  <div class="task-details" class="pb">
-                    <ion-icon name="link" color="primary" class="pt"></ion-icon>
-                    <p  *ngFor="let module of loadedmodules" class="space-left">{{ module.name }}</p>
-                  </div>
-                  <div class="task-details" class="pbs">
-                    <ion-icon color="primary" name="calendar" class="pt"></ion-icon>
-                    <p class="space-left"> {{ completetask.due_date_time | momentPipe: "ddd DD MMM YYYY hh:mm a" }}</p>
-                  </div>
+
+                <div class="task-details" class="pb">
+                  <ion-icon name="link" color="primary" class="pt"></ion-icon>
+                  <p class="space-left">{{ loadedmodules[i].name }}</p>
+                </div>
+                <div class="task-details" class="pbs">
+                  <ion-icon color="primary" name="calendar" class="pt"></ion-icon>
+                  <p class="space-left"> {{ completetask.due_date_time | momentPipe: "ddd DD MMM YYYY hh:mm a" }}</p>
+                </div>
               </ion-label>
             </ion-item>
 

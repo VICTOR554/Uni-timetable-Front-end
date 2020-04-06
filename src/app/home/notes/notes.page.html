@@ -27,7 +27,7 @@
               <ion-label>
                 <p class="pb title">{{ notes.title }}</p>
                   
-                <div class="note-details" class="pb" >
+                <div class="note-details" class="pb" *ngIf="loadedmodules.length > 0" >
                   <ion-icon name="link" color="primary" class="pt"></ion-icon>
                   <p  class="space-left" >{{ loadedmodules[i].name }}</p>
                 </div>

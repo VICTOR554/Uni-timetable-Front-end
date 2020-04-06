@@ -8,24 +8,25 @@
           <ion-list>
             <!-- for loop to draw the list from the array -->
   
-            <ion-item-sliding *ngFor="let alltask of loadedalltask" #slidingItem>
+            <ion-item-sliding *ngFor="let alltask of loadedalltask; let i = index" #slidingItem>
   
-              <ion-item [routerLink]="['/', 'home', 'tabs', 'tasks', 'edit', alltask._id]">
+              <ion-item [routerLink]="['/', 'home', 'tabs', 'tasks', 'edit', alltask._id]" detail>
   
                 <ion-label>
                   <p class="pb title">{{ alltask.title }}</p>
                   
                   <div class="task-details" class="pb">
                     <ion-icon name="link" color="primary" class="pt"></ion-icon>
-                    <p  *ngFor="let module of loadedmodules" class="space-left">{{ module.name }}</p>
+                    <p  class="space-left" >{{ loadedmodules[i].name }}</p>
                   </div>
                   <div class="task-details" class="pbs">
                     <ion-icon color="primary" name="calendar" class="pt"></ion-icon>
                     <p class="space-left"> {{ alltask.due_date_time | momentPipe: "ddd DD MMM YYYY hh:mm a" }}</p>
                   </div>
                 </ion-label>
-              </ion-item>
-  
+                
+              </ion-item >
+              
               <ion-item-options>
                 
                

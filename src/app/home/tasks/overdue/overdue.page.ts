@@ -59,7 +59,7 @@ export class OverduePage implements OnInit, OnDestroy {
               this.getModule(element.module_code);
             } else {
 
-              this.getModule('no module');
+              this.getModule('No module');
             }
           });
           if (overdues.length === 0) {
@@ -76,10 +76,10 @@ export class OverduePage implements OnInit, OnDestroy {
 
   // gets module name
   getModule(ModuleCode) {
-    if (ModuleCode === 'no module') {
+    if (ModuleCode === 'No module') {
       this.loadedmodules.push({
-        name: 'no module',
-        code: 'no module',
+        name: 'No module',
+        code: 'No module',
         course_id: 0
       });
 
