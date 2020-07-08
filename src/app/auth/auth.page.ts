@@ -46,22 +46,19 @@ export class AuthPage implements OnInit {
             if (res.token) {
               this.isLoading = false;
               this.authService.token(studentid, password);
+              console.log('Token' + studentid + password);
               this.authService.loggedin();
-
               loadingEl.dismiss();
               this.router.navigateByUrl('/home/tabs/list-view');
               form.reset();
 
             } else {
               this.isLoading = false;
-
               loadingEl.dismiss();
               this.showAlert('wrong username or password');
               console.log('wrong username or password');
-
             }
           },
-
         );
       });
   }
@@ -75,10 +72,4 @@ export class AuthPage implements OnInit {
       })
       .then(alertEl => alertEl.present());
   }
-
-
-
-
-
-
 }

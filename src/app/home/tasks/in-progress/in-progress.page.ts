@@ -6,16 +6,17 @@ import { TasksService } from '../tasks.service';
 import { Router, RouterEvent, NavigationEnd } from '@angular/router';
 
 @Component({
-  selector: 'app-all-tasks',
-  templateUrl: './all-tasks.page.html',
-  styleUrls: ['./all-tasks.page.scss'],
+  selector: 'app-in-progress',
+  templateUrl: './in-progress.page.html',
+  styleUrls: ['./in-progress.page.scss'],
 })
-export class AllTasksPage implements OnInit, OnDestroy {
+export class InProgressPage implements OnInit, OnDestroy {
+
   loadedalltask: Task[];
   loadedmodules: Module[];
   private taskSub: Subscription;
   selectedPath1 = '/home/tabs/tasks';
-  selectedPath2 = '/home/tabs/tasks/all-tasks';
+  selectedPath2 = '/home/tabs/tasks/in-progress';
   counter = 0;
   notasks;
 

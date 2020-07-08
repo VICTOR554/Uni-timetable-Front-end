@@ -10,8 +10,8 @@ const routes: Routes = [
     children:
       [
         {
-          path: 'all-tasks',
-          loadChildren: () => import('./all-tasks/all-tasks.module').then(m => m.AllTasksPageModule)
+          path: 'in-progress',
+          loadChildren: () => import('./in-progress/in-progress.module').then( m => m.InProgressPageModule)
         },
         {
           path: 'flags',
@@ -27,20 +27,17 @@ const routes: Routes = [
         },
         {
           path: '',
-          redirectTo: '/home/tabs/tasks/all-tasks',
+          redirectTo: '/home/tabs/tasks/in-progress',
           pathMatch: 'full'
         }
       ]
   },
   {
     path: '',
-    redirectTo: '/home/tabs/tasks/all-tasks',
+    redirectTo: '/home/tabs/tasks/in-progress',
     pathMatch: 'full'
   },
-  {
-    path: 'all-tasks',
-    loadChildren: () => import('./all-tasks/all-tasks.module').then( m => m.AllTasksPageModule)
-  },
+
 ];
 
 @NgModule({

@@ -4,19 +4,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AllTasksPageRoutingModule } from './all-tasks-routing.module';
+import { InProgressPageRoutingModule } from './in-progress-routing.module';
 
-import { AllTasksPage } from './all-tasks.page';
+import { InProgressPage } from './in-progress.page';
 import { SharedModule } from '../../../shared/shared.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     IonicModule,
-    AllTasksPageRoutingModule,
+    InProgressPageRoutingModule,
     SharedModule
   ],
-  declarations: [AllTasksPage],
+  declarations: [InProgressPage]
 })
-export class AllTasksPageModule {}
+export class InProgressPageModule {}
