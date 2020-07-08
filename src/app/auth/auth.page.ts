@@ -22,7 +22,7 @@ export class AuthPage implements OnInit {
   ngOnInit() {
   }
 
-  Login(form: NgForm) {
+  onLogin(form: NgForm) {
     console.log(form);
     if (!form.valid) {
       return;
