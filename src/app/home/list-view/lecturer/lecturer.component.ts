@@ -9,17 +9,17 @@ import { NavParams } from '@ionic/angular';
 export class LecturerComponent implements OnInit {
 
   lecturer;
-  firstname;
-  lastname;
+  firstName;
+  lastName;
 
 
 
   constructor(public navParams: NavParams) {
     console.log(this.navParams.data);
     this.lecturer = this.navParams.get('key1');
-    this.firstname = this.lecturer.split(' ')[0];
-    this.lastname = this.lecturer.split(' ')[1];
-    // console.log(this.firstname , this.lastname);
+    this.firstName = this.lecturer.split(' ')[0];
+    this.lastName = this.lecturer.split(' ')[1];
+    // console.log(this.firstName , this.lastName);
   }
 
 

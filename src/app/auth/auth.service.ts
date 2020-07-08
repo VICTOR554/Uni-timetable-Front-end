@@ -46,9 +46,9 @@ export class AuthService {
 
 
 
-  token(studentid: number, password: string) {
+  token(studentId: number, password: string) {
     return this.http.post('https://timetable-plus.herokuapp.com/login', {
-      number: studentid,
+      number: studentId,
       password
     }).subscribe((res: any) => {
       console.log(res.token);
@@ -64,9 +64,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(studentid: number, password: string) {
+  login(studentId: number, password: string) {
     return this.http.post('https://timetable-plus.herokuapp.com/login', {
-      number: studentid,
+      number: studentId,
       password
     });
   }

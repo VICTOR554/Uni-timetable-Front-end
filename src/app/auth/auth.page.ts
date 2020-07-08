@@ -27,7 +27,7 @@ export class AuthPage implements OnInit {
     if (!form.valid) {
       return;
     }
-    const studentid = form.value.studentid;
+    const studentId = form.value.studentId;
     const password = form.value.password;
 
     this.isLoading = true;
@@ -37,7 +37,7 @@ export class AuthPage implements OnInit {
         loadingEl.present();
 
         let authObs: Observable<AuthResponseData>;
-        authObs = this.authService.login(studentid, password);
+        authObs = this.authService.login(studentId, password);
 
         authObs.subscribe(
           res => {
@@ -45,8 +45,8 @@ export class AuthPage implements OnInit {
 
             if (res.token) {
               this.isLoading = false;
-              this.authService.token(studentid, password);
-              console.log('Token' + studentid + password);
+              this.authService.token(studentId, password);
+              console.log('Token' + studentId + password);
               this.authService.loggedin();
               loadingEl.dismiss();
               this.router.navigateByUrl('/home/tabs/list-view');

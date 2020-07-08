@@ -14,9 +14,9 @@ import { Locations } from '../list.model';
 export class LocationPage implements OnInit, OnDestroy {
 
   selectedLocationImage: string;
-  loadedlocation: Locations;
+  loadedLocation: Locations;
   private listSub: Subscription;
-  currentlocation;
+  currentLocation;
 
 
   constructor(
@@ -39,12 +39,12 @@ export class LocationPage implements OnInit, OnDestroy {
           console.log('param', paramMap);
           console.log('id', paramMap.get('activitylocation'));
 
-          this.currentlocation = paramMap.get('activitylocation').split(' ')[0];
+          this.currentLocation = paramMap.get('activitylocation').split(' ')[0];
 
-          this.listSub = this.listService.getLocation(this.currentlocation).subscribe((location: any) => {
-            this.loadedlocation = location;
-            console.log('day', this.loadedlocation);
-            console.log('day', this.currentlocation);
+          this.listSub = this.listService.getLocation(this.currentLocation).subscribe((location: any) => {
+            this.loadedLocation = location;
+            console.log('day', this.loadedLocation);
+            console.log('day', this.currentLocation);
             this.selectedLocationImage = this.getMapImage(location.lat, location.lng, 18);
 
           });
