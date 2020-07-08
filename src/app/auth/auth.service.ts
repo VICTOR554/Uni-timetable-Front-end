@@ -16,12 +16,8 @@ export interface AuthResponseData {
 
 
 export class AuthService {
-
   // tslint:disable-next-line: variable-name
   private _userIsAuthenticated = false;
-
-  // tslint:disable-next-line: variable-name
-  private _userId = 'abc';
 
   // token watch
   // tslint:disable-next-line: variable-name
@@ -36,7 +32,6 @@ export class AuthService {
     return this._token;
   }
 
-
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -44,22 +39,10 @@ export class AuthService {
     })
   };
 
-
-
-  token(studentId: number, password: string) {
-    return this.http.post('https://timetable-plus.herokuapp.com/login', {
-      number: studentId,
-      password
-    }).subscribe((res: any) => {
-      console.log(res.token);
-      this._token = res.token;
-      this.httpOptions.headers = this.httpOptions.headers.set('Authorization', res.token);
-      // console.log(this._token)
-    });
-  }
-
-  get userId() {
-    return this._userId;
+  token(token) {
+    console.log(token);
+    this._token = token;
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', this._token);
   }
 
   constructor(private http: HttpClient) { }
@@ -70,8 +53,6 @@ export class AuthService {
       password
     });
   }
-
-
 
   logout() {
     console.log('before logged out', this._userIsAuthenticated);

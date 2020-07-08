@@ -29,6 +29,7 @@ export class AuthPage implements OnInit {
     }
     const studentId = form.value.studentId;
     const password = form.value.password;
+    console.log('User Input: ' + studentId + ', ' + password);
 
     this.isLoading = true;
     this.loadingCtrl
@@ -41,12 +42,11 @@ export class AuthPage implements OnInit {
 
         authObs.subscribe(
           res => {
-            console.log(res);
+            console.log('Token: ' + res.token);
 
             if (res.token) {
               this.isLoading = false;
-              this.authService.token(studentId, password);
-              console.log('Token' + studentId + password);
+              this.authService.token(res.token);
               this.authService.loggedin();
               loadingEl.dismiss();
               this.router.navigateByUrl('/home/tabs/list-view');
@@ -55,8 +55,8 @@ export class AuthPage implements OnInit {
             } else {
               this.isLoading = false;
               loadingEl.dismiss();
-              this.showAlert('wrong username or password');
-              console.log('wrong username or password');
+              this.showAlert(res.text);
+              console.log('Reason for no entry:' + res.text);
             }
           },
         );
