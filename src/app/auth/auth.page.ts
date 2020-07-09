@@ -38,7 +38,7 @@ export class AuthPage implements OnInit {
         loadingEl.present();
 
         let authObs: Observable<AuthResponseData>;
-        authObs = this.authService.login(studentId, password);
+        authObs = this.authService.token(studentId, password);
 
         authObs.subscribe(
           res => {
@@ -46,8 +46,8 @@ export class AuthPage implements OnInit {
 
             if (res.token) {
               this.isLoading = false;
-              this.authService.token(res.token);
-              this.authService.loggedin();
+              this.authService.httpHeaderAuthorization(res.token);
+              this.authService.login();
               loadingEl.dismiss();
               this.router.navigateByUrl('/home/tabs/list-view');
               form.reset();

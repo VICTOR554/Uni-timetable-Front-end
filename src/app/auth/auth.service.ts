@@ -32,6 +32,8 @@ export class AuthService {
     return this._token;
   }
 
+  constructor(private http: HttpClient) { }
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -39,28 +41,26 @@ export class AuthService {
     })
   };
 
-  token(token) {
-    console.log(token);
-    this._token = token;
-    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', this._token);
-  }
-
-  constructor(private http: HttpClient) { }
-
-  login(studentId: number, password: string) {
+  token(studentId: number, password: string) {
     return this.http.post('https://timetable-plus.herokuapp.com/login', {
       number: studentId,
       password
     });
   }
 
+  httpHeaderAuthorization(token) {
+    console.log(token);
+    this._token = token;
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', this._token);
+  }
+
   logout() {
-    console.log('before logged out', this._userIsAuthenticated);
+    console.log('before log out', this._userIsAuthenticated);
     this._userIsAuthenticated = false;
   }
 
-  loggedin() {
-    console.log('before logged in', this._userIsAuthenticated);
+  login() {
+    console.log('before log in', this._userIsAuthenticated);
     this._userIsAuthenticated = true;
   }
 }
