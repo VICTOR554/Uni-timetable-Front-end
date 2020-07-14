@@ -19,6 +19,7 @@ export class NotesPage implements OnInit, OnDestroy {
   counter = 0;
   nonotes;
 
+
   constructor(
     private notesService: NotesService,
     private router: Router,
@@ -38,32 +39,30 @@ export class NotesPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log('hi');
-    this.getNotes();
+    this.receiveNotes();
   }
 
   update() {
-    this.getNotes();
+    this.receiveNotes();
   }
 
-  getNotes() {
+  receiveNotes() {
     this.loadingCtrl.create({ message: 'Loading Note...' })
       .then(loadingEl => {
         loadingEl.present();
         this.noteSub = this.notesService.getAllNotes().subscribe((notes: any) => {
           this.loadednotes = notes;
           console.log(notes);
-
           this.loadedmodules = [];
           // checks the module code and calls getmodule to get module name
           notes.forEach(element => {
             if (element.module_code) {
-              this.getModule(element.module_code);
+              this.receiveModule(element.module_code);
             } else {
 
-              this.getModule('no module');
+              this.receiveModule('no module');
             }
           });
-
           if (notes.length === 0) {
             this.nonotes = true;
           } else {
@@ -74,27 +73,6 @@ export class NotesPage implements OnInit, OnDestroy {
           loadingEl.dismiss();
         }, 1000);
       });
-  }
-
-  // gets module name
-  getModule(ModuleCode) {
-    if (ModuleCode === 'no module') {
-      this.loadedmodules.push({
-        name: 'no module',
-        code: 'no module',
-        course_id: 0
-      });
-
-    } else {
-      this.noteSub = this.notesService.GetModule(ModuleCode).subscribe((module: any) => {
-        this.loadedmodules.push(module);
-        console.log('Module Code', ModuleCode);
-        console.log('Module', module);
-        console.log('modules for the week', this.loadedmodules);
-      });
-    }
-
-
   }
 
   onDelete(noteId: string, slidingItem: IonItemSliding) {
@@ -110,6 +88,25 @@ export class NotesPage implements OnInit, OnDestroy {
           console.log('delete item', noteId);
         }, 1000);
       });
+  }
+
+  receiveModule(moduleCode) {
+    if (moduleCode === 'no module') {
+      this.loadedmodules.push({
+        name: 'no module',
+        code: 'no module',
+        course_id: 0
+      });
+    } else {
+      this.noteSub = this.notesService.GetModule(moduleCode).subscribe((module: any) => {
+        this.loadedmodules.push(module);
+        console.log('Module Code', moduleCode);
+        console.log('Module', module);
+        console.log('modules for the week', this.loadedmodules);
+      });
+    }
+
+
   }
 
   // used to clear subscription to avoid memory leaks

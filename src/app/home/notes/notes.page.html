@@ -2,7 +2,7 @@
   <ion-toolbar>
 
 
-    <ion-title class="ion-text-center">notes</ion-title>
+    <ion-title class="ion-text-center">Notes</ion-title>
 
     <ion-buttons slot="primary">
       <ion-button routerLink="/home/tabs/notes/new-notes">
@@ -17,10 +17,7 @@
     <ion-row>
       <ion-col>
         <ion-searchbar showCancelButton="focus"></ion-searchbar>
-
-        <!--This is an item containing the lecture details-->
         <ion-list>
-          <!-- for loop to draw the list from the array-->
           <ion-item-sliding *ngFor="let notes of loadednotes; let i = index" #slidingItem detail>
 
             <ion-item [routerLink]="['/', 'home', 'tabs', 'notes', 'edit', notes._id]" detail>
@@ -38,9 +35,7 @@
                 </div>
               </ion-label>
             </ion-item>
-
             <ion-item-options side="end">
-            
               <ion-item-option color="danger" (click)="onDelete(notes._id, slidingItem)">
                 <ion-icon name="trash" slot="top" class="icon"></ion-icon>
                 Delete
@@ -56,8 +51,6 @@
         <h1 class="textcenter">There are no Notes</h1>
         <p class="textcenter">Would you like to create a Note?</p>
         <ion-row>
-
-  
           <ion-col class="nopadding textcenter " [routerLink]="['/', 'home', 'tabs', 'notes', 'new-notes']">
             <ion-label>Create Notes</ion-label>
             <br>
@@ -65,7 +58,6 @@
               <ion-icon name="add" slot="icon-only"></ion-icon>
             </ion-button>
           </ion-col>
-
         </ion-row>
       </ion-col>
     </ion-row>

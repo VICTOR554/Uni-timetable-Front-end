@@ -9,12 +9,7 @@ import * as moment from 'moment';
   providedIn: 'root'
 })
 export class NotesService {
-
-
-
-
-
-
+  constructor(private authService: AuthService, private http: HttpClient) { }
   getAllNotes() {
     return this.http.get('https://timetable-plus.herokuapp.com/student/note/', this.authService.httpOptions);
   }
@@ -24,12 +19,9 @@ export class NotesService {
     return this.http.get('https://timetable-plus.herokuapp.com/student/note/one/' + noteId, this.authService.httpOptions);
 
   }
-  GetModule(ModuleCode: string) {
-    return this.http.get('https://timetable-plus.herokuapp.com/student/module/' + ModuleCode, this.authService.httpOptions);
+  GetModule(moduleCode: string) {
+    return this.http.get('https://timetable-plus.herokuapp.com/student/module/' + moduleCode, this.authService.httpOptions);
   }
-
-  constructor(private authService: AuthService, private http: HttpClient) { }
-
 
   // tslint:disable-next-line: variable-name
   addNote(title: string, module_code: string, body: string) {
@@ -44,7 +36,6 @@ export class NotesService {
     );
     return this.http.post('https://timetable-plus.herokuapp.com/student/note/new', newNote, this.authService.httpOptions);
   }
-
 
   // tslint:disable-next-line: variable-name
   updateNote(title: string, module_code: string, body: string, noteId: string) {

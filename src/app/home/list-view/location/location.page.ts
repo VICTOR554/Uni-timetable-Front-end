@@ -31,9 +31,8 @@ export class LocationPage implements OnInit, OnDestroy {
         loadingEl.present();
         // Subscribe to changes in route params
         this.route.paramMap.subscribe(paramMap => {
-          // check if it has the note id if not go back to notes
           if (!paramMap.has('activitylocation')) {
-            this.navCtrl.navigateBack('/home/tabs/list-view');
+            this.navCtrl.navigateBack('/home/tabs/list-view'); 
             return;
           }
           console.log('param', paramMap);

@@ -1,48 +1,39 @@
 <ion-header>
   <ion-toolbar>
-
     <ion-grid>
       <ion-row>
-
+        <!-- Grid timetable link -->
         <!-- <ion-buttons>
           <ion-button slot="icon-only">
             <ion-icon name="calendar"></ion-icon>
           </ion-button>
         </ion-buttons> -->
 
+        <!-- Current Date -->
         <ion-col>
-
           <ion-title class="nopadding textcenter"> {{ day | momentPipe:'ddd DD MMM YYYY'}}
           </ion-title>
-
         </ion-col>
 
+        <!-- Week search -->
         <!-- <ion-buttons class="nopadding textcenter">
           <ion-button slot="icon-only" [routerLink]="['/', 'home', 'tabs', 'list-view', 'week']">
             <ion-icon name="calendar"></ion-icon>
           </ion-button>
         </ion-buttons> -->
-
       </ion-row>
       <ion-row>
-
-        <ion-col class="nopadding" >
-          <p *ngIf="loadedweek !== undefined" class="nopadding textcenter">(Week - {{ loadedweek.number }})</p>
-
+        <ion-col class="nopadding">
+          <p *ngIf="loadedWeek !== undefined" class="nopadding textcenter">(Week - {{ loadedWeek.number }})</p>
         </ion-col>
-
-
       </ion-row>
-
     </ion-grid>
-
   </ion-toolbar>
+
   <!--To view the days of the week-->
-  <ion-toolbar class="ion-toolbar2" *ngIf="loadedweek !== undefined" >
-
-    <ion-grid >
+  <ion-toolbar class="ion-toolbar2" *ngIf="loadedWeek !== undefined">
+    <ion-grid>
       <ion-row class="nopadding" class="marginrow">
-
         <ion-col class="nopadding">
           <p class="marginbottom textcenter">Mon</p>
         </ion-col>
@@ -58,62 +49,56 @@
         <ion-col class="nopadding">
           <p class="marginbottom textcenter">Fri</p>
         </ion-col>
-
       </ion-row>
 
-      <ion-row class="ion-padding-bottom" *ngIf="loadedweek !== undefined">
-        <ion-icon *ngIf="loadedweek.number > 1" name="arrow-back" class="ion-padding-top"
-          (click)="previousWeek(loadedweek.number)">
+      <ion-row class="ion-padding-bottom" *ngIf="loadedWeek !== undefined">
+        <ion-icon *ngIf="loadedWeek.number > 1" name="arrow-back" class="ion-padding-top"
+          (click)="previousWeek(loadedWeek.number)">
         </ion-icon>
 
         <ion-col class="nopadding textcenter">
-          <ion-button shape="round" class="a" class="bround" (click)="CurrentDay(loadedweek.dates[0])">
-            {{ loadedweek.dates[0] | momentPipe:'DD'  }}
+          <ion-button shape="round" class="a" class="bround" (click)="chosenDay(loadedWeek.dates[0])">
+            {{ loadedWeek.dates[0] | momentPipe:'DD'  }}
           </ion-button>
         </ion-col>
 
         <ion-col class="nopadding textcenter">
-          <ion-button shape="round" class="bround" (click)="CurrentDay(loadedweek.dates[1])">
-            {{ loadedweek.dates[1] | momentPipe:'DD' }}</ion-button>
+          <ion-button shape="round" class="bround" (click)="chosenDay(loadedWeek.dates[1])">
+            {{ loadedWeek.dates[1] | momentPipe:'DD' }}</ion-button>
         </ion-col>
 
         <ion-col class="nopadding textcenter">
-          <ion-button shape="round" class="bround" (click)="CurrentDay(loadedweek.dates[2])">
-            {{ loadedweek.dates[2] | momentPipe:' DD'  }}</ion-button>
+          <ion-button shape="round" class="bround" (click)="chosenDay(loadedWeek.dates[2])">
+            {{ loadedWeek.dates[2] | momentPipe:' DD'  }}</ion-button>
         </ion-col>
 
-        <ion-col class="nopadding textcenter" (click)="CurrentDay(loadedweek.dates[3])">
+        <ion-col class="nopadding textcenter" (click)="chosenDay(loadedWeek.dates[3])">
           <ion-button shape="round" class="bround">
-            {{ loadedweek.dates[3] | momentPipe:'DD' }}</ion-button>
+            {{ loadedWeek.dates[3] | momentPipe:'DD' }}</ion-button>
         </ion-col>
 
-        <ion-col class="nopadding textcenter" (click)="CurrentDay(loadedweek.dates[4])">
-          <ion-button shape="round" class="bround" >
-            {{ loadedweek.dates[4] | momentPipe:'DD' }}</ion-button>
+        <ion-col class="nopadding textcenter" (click)="chosenDay(loadedWeek.dates[4])">
+          <ion-button shape="round" class="bround">
+            {{ loadedWeek.dates[4] | momentPipe:'DD' }}</ion-button>
         </ion-col>
 
-        <ion-icon *ngIf="52 > loadedweek.number" class="ion-padding-top" name="arrow-forward"
-          (click)="nextWeek(loadedweek.number)">
+        <ion-icon *ngIf="52 > loadedWeek.number" class="ion-padding-top" name="arrow-forward"
+          (click)="nextWeek(loadedWeek.number)">
         </ion-icon>
       </ion-row>
-
     </ion-grid>
-
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!--This is a card containing the lecture details-->
   <ion-grid class="nopadding">
+    <!--This is the row containing the activity details-->
     <ion-row class="nopadding">
       <ion-col class="nopadding">
         <ion-list class="nopadding">
-          <!-- for loop to draw the list from the array-->
-          <ion-card *ngFor="let activity of loadedactivity; let i = index">
+          <ion-card *ngFor="let activity of loadedActivity; let i = index">
             <ion-grid class="nopadding">
-
               <ion-row class="nopadding">
-
                 <ion-col class="nopadding textcenter" size="3">
                   <ion-row>
 
@@ -129,52 +114,45 @@
                 </ion-col>
 
                 <ion-col>
-                  <p>{{ loadedmodules[i].name }}</p>
-
+                  <p *ngIf="loadedModules !== undefined">{{ loadedModules[i].name }}</p>
                   <p>{{activity.type}}</p>
 
                   <ion-row>
-                    <ion-col class="nopadding ">
-                      <!-- solved icon button routing problem using stop event -->
+                    <ion-col class="nopadding">
                       <ion-button size="small" shape="round" class="iround"
-                        [routerLink]="['/', 'home', 'tabs', 'list-view', 'location',activity.location]"
-                        >
+                        [routerLink]="['/', 'home', 'tabs', 'list-view', 'location',activity.location]">
                         <ion-icon name="pin"></ion-icon>
                       </ion-button>
                       <label>-{{activity.location}}</label>
-
                     </ion-col>
 
                     <ion-col class="nopadding ">
-
                       <ion-button size="small" shape="round" class="iround"
                         (click)="lecturerPopover($event, activity.lecturer_name)">
                         <ion-icon name="person"></ion-icon>
                       </ion-button>
                       <label>-{{activity.lecturer_name}}</label>
-
                     </ion-col>
-
                   </ion-row>
-
                 </ion-col>
-
               </ion-row>
             </ion-grid>
           </ion-card>
         </ion-list>
       </ion-col>
     </ion-row>
-    <ion-row *ngIf="noclass === true">
+
+    <!--This is the row viewed when there is no activity-->
+    <ion-row *ngIf="noActivity === true">
       <ion-col size-sm="12" offset-sm="3" class="nomargin">
         <h1 class="textcenter"> No Lectures Today</h1>
         <p class="textcenter">Would you like to do some Tasks?</p>
-        <ion-row>
 
+        <ion-row>
           <ion-col class="nopadding textcenter">
             <ion-label>In Progress</ion-label>
             <br>
-            <ion-button [routerLink]="['/', 'home', 'tabs', 'tasks', 'in-progress']"> 
+            <ion-button [routerLink]="['/', 'home', 'tabs', 'tasks', 'in-progress']">
               <ion-icon name="albums"></ion-icon>
             </ion-button>
           </ion-col>
@@ -186,9 +164,9 @@
               <ion-icon name="flag"></ion-icon>
             </ion-button>
           </ion-col>
-
         </ion-row>
       </ion-col>
     </ion-row>
+
   </ion-grid>
 </ion-content>

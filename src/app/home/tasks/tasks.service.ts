@@ -27,9 +27,9 @@ export class TasksService {
   constructor(private authService: AuthService, private http: HttpClient) { }
 
 
-  // ALL TASK
+ 
 
-  getOnScheduleTasks() {
+  getInProgressTasks() {
     return this.http.get('https://timetable-plus.herokuapp.com/student/task/onschedule', this.authService.httpOptions);
   }
   getCompleteTasks() {

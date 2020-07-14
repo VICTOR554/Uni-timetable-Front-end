@@ -11,26 +11,22 @@ export class ListService {
 
   constructor(private authService: AuthService, private http: HttpClient) { }
 
-
-
-
-
-  GetAllActivity(Currentday: number) {
-    return this.http.get('https://timetable-plus.herokuapp.com/student/activity/day/' + Currentday, this.authService.httpOptions);
+  GetAllActivity(currentDay: number) {
+    return this.http.get('https://timetable-plus.herokuapp.com/student/activity/day/' + currentDay, this.authService.httpOptions);
   }
 
-  GetModule(ModuleCode: string) {
-    return this.http.get('https://timetable-plus.herokuapp.com/student/module/' + ModuleCode, this.authService.httpOptions);
+  GetModule(moduleCode: string) {
+    return this.http.get('https://timetable-plus.herokuapp.com/student/module/' + moduleCode, this.authService.httpOptions);
   }
 
   GetCurrentWeek() {
     // tslint:disable-next-line: variable-name
     const created_date_time = +moment().format('X');
-    // console.log('Created_date_time', created_date_time);
+    console.log('Created_date_time', created_date_time);
     return this.http.get('https://timetable-plus.herokuapp.com/student/week/date/' + created_date_time, this.authService.httpOptions);
   }
 
-  getallWeeks() {
+  getAllWeeks() {
     return this.http.get('https://timetable-plus.herokuapp.com/student/week/', this.authService.httpOptions);
   }
 

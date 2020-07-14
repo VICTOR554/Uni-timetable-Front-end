@@ -6,25 +6,25 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanLoad {
   constructor(private authService: AuthService, private router: Router) { }
 
-  // runs before lazy loaded code
-  // canLoad(
-  //   route: Route,
-  //   segments: UrlSegment[]
-  // ): Observable<boolean> | Promise<boolean> | boolean {
-  //   console.log(this.authService.userIsAuthenticated);
-  //   if (this.authService.userIsAuthenticated !== true) {
-  //     this.router.navigateByUrl('/auth');
-  //   }
-  //   return this.authService.userIsAuthenticated;
-  // }
+  canLoad(
+    route: Route,
+    segments: UrlSegment[]
+  ): Observable<boolean> | Promise<boolean> | boolean {
+    console.log('Authentication -' + this.authService.userIsAuthenticated);
+    if (this.authService.userIsAuthenticated !== true) {
+      this.router.navigateByUrl('/auth');
+    }
+    return this.authService.userIsAuthenticated;
+  }
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot):
     Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    console.log(this.authService.userIsAuthenticated);
+    console.log('Authentication -' + this.authService.userIsAuthenticated);
     if (this.authService.userIsAuthenticated !== true) {
       this.router.navigateByUrl('/auth');
     }

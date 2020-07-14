@@ -37,21 +37,20 @@ export class OverduePage implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log('hi');
-    this.getTasks();
+    this.receiveOverdueTasks();
   }
 
   update() {
-    this.getTasks();
+    this.receiveOverdueTasks();
   }
 
-  getTasks() {
+  receiveOverdueTasks() {
     this.loadingCtrl.create({ message: 'Loading Overdue Tasks...' })
       .then(loadingEl => {
         loadingEl.present();
         this.taskSub = this.tasksService.getOverdueTasks().subscribe((overdues: any) => {
           this.loadedoverdue = overdues;
           console.log(overdues);
-
           this.loadedmodules = [];
           // checks the module code and calls getmodule to get module name
           overdues.forEach(element => {
@@ -72,25 +71,6 @@ export class OverduePage implements OnInit, OnDestroy {
           loadingEl.dismiss();
         }, 1000);
       });
-  }
-
-  // gets module name
-  getModule(ModuleCode) {
-    if (ModuleCode === 'No module') {
-      this.loadedmodules.push({
-        name: 'No module',
-        code: 'No module',
-        course_id: 0
-      });
-
-    } else {
-      this.taskSub = this.tasksService.GetModule(ModuleCode).subscribe((module: any) => {
-        this.loadedmodules.push(module);
-        console.log('Module Code', ModuleCode);
-        console.log('Module', module);
-        console.log('modules for the week', this.loadedmodules);
-      });
-    }
   }
 
   Complete(task: any, slidingItem: IonItemSliding) {
@@ -122,9 +102,7 @@ export class OverduePage implements OnInit, OnDestroy {
     this.loadingCtrl.create({ message: 'Task is Flagged...' })
       .then(loadingEl => {
         loadingEl.present();
-
         task.is_flagged = true;
-
         this.tasksService.UpdateTask(
           task.title,
           task.module_code,
@@ -157,6 +135,24 @@ export class OverduePage implements OnInit, OnDestroy {
       });
   }
 
+  // gets module name
+  getModule(ModuleCode) {
+    if (ModuleCode === 'No module') {
+      this.loadedmodules.push({
+        name: 'No module',
+        code: 'No module',
+        course_id: 0
+      });
+
+    } else {
+      this.taskSub = this.tasksService.GetModule(ModuleCode).subscribe((module: any) => {
+        this.loadedmodules.push(module);
+        console.log('Module Code', ModuleCode);
+        console.log('Module', module);
+        console.log('modules for the week', this.loadedmodules);
+      });
+    }
+  }
 
   // used to clear subscription to avoid memory leaks
   ngOnDestroy() {

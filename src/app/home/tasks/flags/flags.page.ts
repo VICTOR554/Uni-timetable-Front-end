@@ -37,14 +37,14 @@ export class FlagsPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log('hi');
-    this.getTasks();
+    this.receiveFlagTasks();
   }
 
   update() {
-    this.getTasks();
+    this.receiveFlagTasks();
   }
 
-  getTasks() {
+  receiveFlagTasks() {
     this.loadingCtrl.create({ message: 'Loading Flagged Tasks...' })
       .then(loadingEl => {
         loadingEl.present();

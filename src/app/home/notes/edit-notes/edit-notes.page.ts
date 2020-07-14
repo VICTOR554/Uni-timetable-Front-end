@@ -28,7 +28,7 @@ export class EditNotesPage implements OnInit, OnDestroy {
   ngOnInit() {
     // Subscribe to changes in route params
     this.route.paramMap.subscribe(paramMap => {
-      // check if it has the note id if not go back to notes
+      // check if it has the note id if not go back to notes 
       if (!paramMap.has('noteId')) {
         this.navCtrl.navigateBack('/home/tabs/notes');
         return;

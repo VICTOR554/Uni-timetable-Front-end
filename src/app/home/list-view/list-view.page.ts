@@ -13,15 +13,14 @@ import { LecturerComponent } from './lecturer/lecturer.component';
   styleUrls: ['./list-view.page.scss'],
 })
 export class ListViewPage implements OnInit, OnDestroy {
-  loadedactivity: Activity[];
-  loadedweek: Week;
-  loadedmodules: Module[];
+  loadedActivity: Activity[];
+  loadedWeek: Week;
+  loadedModules: Module[];
   private listSub: Subscription;
   selectedPath = '/home/tabs/list-view';
-  locationPath = '/home/tabs/list-view/location';
   counter = 0;
   day = 0;
-  noclass;
+  noActivity;
 
   constructor(
     private listService: ListService,
@@ -37,103 +36,89 @@ export class ListViewPage implements OnInit, OnDestroy {
           console.log('refreshed page');
           console.log('counter = ', this.counter);
         }
-
         this.counter = this.counter + 1;
       }
     });
   }
 
-
-
-
   ngOnInit() {
-    console.log('hiiiiii', this.loadedweek);
-    this.getCurrentWeek();
-
-
+    console.log('hiiiiii', this.loadedWeek);
+    this.receiveCurrentWeek();
   }
 
   update() {
-    this.getCurrentWeek();
+    this.receiveCurrentWeek();
   }
 
-  getCurrentWeek() {
+  receiveCurrentWeek() {
     this.listSub = this.listService.GetCurrentWeek().subscribe((week: any) => {
-      this.loadedweek = week;
-      console.log('Week', this.loadedweek);
+      this.loadedWeek = week;
+      console.log('Week', this.loadedWeek);
 
-      this.getActivity(week.dates[0]);
+      this.receiveActivity(week.dates[0]);
       this.day = week.dates[0];
-      console.log('YOU FKFJKFK', this.day);
+      console.log('First day of the week', this.day);
     });
   }
 
-
-
-  getWeekByNumber(weekNumber) {
+  receiveWeekByNumber(weekNumber) {
     this.listSub = this.listService.GetWeekByNumber(weekNumber).subscribe((week: any) => {
-      this.loadedweek = week;
-      console.log('specific Week', this.loadedweek);
+      this.loadedWeek = week;
+      console.log('specific Week', this.loadedWeek);
 
-      this.getActivity(week.dates[0]);
+      this.receiveActivity(week.dates[0]);
       this.day = week.dates[0];
 
 
     });
   }
 
-
-  getActivity(currentday) {
+  receiveActivity(currentDay) {
     this.loadingCtrl.create({ message: 'Loading Lecture...' })
       .then(loadingEl => {
         loadingEl.present();
-        this.listSub = this.listService.GetAllActivity(currentday).subscribe((activities: any) => {
-          this.loadedactivity = activities;
-          console.log('day', currentday);
+        this.listSub = this.listService.GetAllActivity(currentDay).subscribe((activities: any) => {
+          this.loadedActivity = activities;
+          console.log('day', currentDay);
           console.log('Activity', activities);
-
           if (activities.length === 0) {
-            this.noclass = true;
+            this.noActivity = true;
           } else {
-            this.noclass = false;
+            this.noActivity = false;
           }
-
-          this.loadedmodules = [];
+          this.loadedModules = [];
           // checks the module code and calls getmodule to get module name
           activities.forEach(element => {
-            this.getModule(element.module_code);
+            this.receiveModule(element.module_code);
           });
         });
         setTimeout(() => {
           loadingEl.dismiss();
         }, 500);
       });
-
   }
 
   // gets module name
-  getModule(ModuleCode) {
-    this.listSub = this.listService.GetModule(ModuleCode).subscribe((module: any) => {
-      this.loadedmodules.push(module);
-      console.log('Module Code', ModuleCode);
+  receiveModule(moduleCode) {
+    this.listSub = this.listService.GetModule(moduleCode).subscribe((module: any) => {
+      this.loadedModules.push(module);
+      console.log('Module Code', moduleCode);
       console.log('Module', module);
-      console.log('modules for the week', this.loadedmodules);
+      console.log('modules for the actvities in a day', this.loadedModules);
     });
   }
 
-
-
-  previousWeek(weeknumber) {
-    this.getWeekByNumber(weeknumber - 1);
+  previousWeek(weekNumber) {
+    this.receiveWeekByNumber(weekNumber - 1);
   }
 
-  nextWeek(weeknumber) {
-    this.getWeekByNumber(weeknumber + 1);
+  nextWeek(weekNumber) {
+    this.receiveWeekByNumber(weekNumber + 1);
   }
 
-  CurrentDay(currentday) {
-    this.getActivity(currentday);
-    this.day = currentday;
+  chosenDay(chosenDay) {
+    this.receiveActivity(chosenDay);
+    this.day = chosenDay;
   }
 
 

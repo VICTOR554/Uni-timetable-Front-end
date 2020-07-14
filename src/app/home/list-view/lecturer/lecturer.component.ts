@@ -19,7 +19,7 @@ export class LecturerComponent implements OnInit {
     this.lecturer = this.navParams.get('key1');
     this.firstName = this.lecturer.split(' ')[0];
     this.lastName = this.lecturer.split(' ')[1];
-    // console.log(this.firstName , this.lastName);
+    console.log(this.firstName , this.lastName);
   }
 
 

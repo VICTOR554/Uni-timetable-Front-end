@@ -47,7 +47,7 @@ export class AuthPage implements OnInit {
             if (res.token) {
               this.isLoading = false;
               this.authService.httpHeaderAuthorization(res.token);
-              this.authService.login();
+              this.authService.logIn();
               loadingEl.dismiss();
               this.router.navigateByUrl('/home/tabs/list-view');
               form.reset();
@@ -57,6 +57,7 @@ export class AuthPage implements OnInit {
               loadingEl.dismiss();
               this.showAlert(res.text);
               console.log('Reason for no entry:' + res.text);
+              form.reset();
             }
           },
         );

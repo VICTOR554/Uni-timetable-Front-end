@@ -73,7 +73,6 @@ export class EditTasksPage implements OnInit, OnDestroy {
         console.log(this.form);
         console.log(this.is_completed);
         console.log(this.is_flagged);
-
         if (!this.form.valid) {
             return;
         }

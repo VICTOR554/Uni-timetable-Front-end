@@ -24,10 +24,6 @@
   margin-right: 14px;
 }
 
-.a:focus {
-  background-color: orange;
-}
-
 .nopadding {
   padding: 0px !important;
 }
@@ -52,4 +48,8 @@
   padding: 0px !important;
   text-align: center !important;
   margin: 0px !important;
+}
+
+.a:focus {
+  background-color: orange;
 }

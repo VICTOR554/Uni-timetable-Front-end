@@ -12,8 +12,8 @@ import { Router, RouterEvent, NavigationEnd } from '@angular/router';
 })
 export class InProgressPage implements OnInit, OnDestroy {
 
-  loadedalltask: Task[];
-  loadedmodules: Module[];
+  loadedInProgress: Task[];
+  loadedModules: Module[];
   private taskSub: Subscription;
   selectedPath1 = '/home/tabs/tasks';
   selectedPath2 = '/home/tabs/tasks/in-progress';
@@ -39,24 +39,24 @@ export class InProgressPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log('hi');
-    this.getTasks();
+    this.receiveInProgressTasks();
   }
 
   update() {
-    this.getTasks();
+    this.receiveInProgressTasks();
   }
 
-  getTasks() {
+  receiveInProgressTasks() {
     this.loadingCtrl.create({ message: 'Loading In Progress Tasks...' })
       .then(loadingEl => {
         loadingEl.present();
-        this.taskSub = this.tasksService.getOnScheduleTasks().subscribe((alltasks: any) => {
-          this.loadedalltask = alltasks;
-          console.log(alltasks);
+        this.taskSub = this.tasksService.getInProgressTasks().subscribe((inProgressTask: any) => {
+          this.loadedInProgress = inProgressTask;
+          console.log(inProgressTask);
 
-          this.loadedmodules = [];
+          this.loadedModules = [];
           // checks the module code and calls getmodule to get module name
-          alltasks.forEach(element => {
+          inProgressTask.forEach(element => {
             if (element.module_code) {
               this.getModule(element.module_code);
             } else {
@@ -65,7 +65,7 @@ export class InProgressPage implements OnInit, OnDestroy {
             }
           });
 
-          if (alltasks.length === 0) {
+          if (inProgressTask.length === 0) {
             this.notasks = true;
           } else {
             this.notasks = false;
@@ -80,7 +80,7 @@ export class InProgressPage implements OnInit, OnDestroy {
   // gets module name
   getModule(ModuleCode) {
     if (ModuleCode === 'No module') {
-      this.loadedmodules.push({
+      this.loadedModules.push({
         name: 'No module',
         code: 'No module',
         course_id: 0
@@ -88,30 +88,30 @@ export class InProgressPage implements OnInit, OnDestroy {
 
     } else {
       this.taskSub = this.tasksService.GetModule(ModuleCode).subscribe((module: any) => {
-        this.loadedmodules.push(module);
+        this.loadedModules.push(module);
         console.log('Module Code', ModuleCode);
         console.log('Module', module);
-        console.log('modules for the week', this.loadedmodules);
+        console.log('modules for the week', this.loadedModules);
       });
     }
   }
 
-  onDelete(alltaskId: string, slidingItem: IonItemSliding) {
+  onDelete(inProgressTaskId: string, slidingItem: IonItemSliding) {
     slidingItem.close();
     this.loadingCtrl.create({ message: 'Deleting Task...' })
       .then(loadingEl => {
         loadingEl.present();
-        this.tasksService.deleteTask(alltaskId).subscribe(() => {
+        this.tasksService.deleteTask(inProgressTaskId).subscribe(() => {
           this.update();
         });
         setTimeout(() => {
           loadingEl.dismiss();
-          console.log('delete task', alltaskId);
+          console.log('delete task', inProgressTaskId);
         }, 1000);
       });
   }
 
-  Flag(task: any, slidingItem: IonItemSliding) {
+  flagTask(task: any, slidingItem: IonItemSliding) {
     console.log(task);
     slidingItem.close();
     this.loadingCtrl.create({ message: 'Task is Flagged...' })
@@ -138,7 +138,7 @@ export class InProgressPage implements OnInit, OnDestroy {
       });
   }
 
-  Complete(task: any, slidingItem: IonItemSliding) {
+  completeTask(task: any, slidingItem: IonItemSliding) {
     slidingItem.close();
     this.loadingCtrl.create({ message: 'Task is Completed...' })
       .then(loadingEl => {

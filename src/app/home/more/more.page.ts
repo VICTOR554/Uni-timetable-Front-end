@@ -19,7 +19,7 @@ export class MorePage implements OnInit {
     this.loadingCtrl.create({ message: 'Logging Out...' })
       .then(loadingEl => {
         loadingEl.present();
-        this.authService.logout();
+        this.authService.logOut();
         this.router.navigateByUrl('/auth');
         setTimeout(() => {
           loadingEl.dismiss();

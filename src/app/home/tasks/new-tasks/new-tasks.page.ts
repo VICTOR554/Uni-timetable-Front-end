@@ -41,9 +41,8 @@ export class NewTasksPage implements OnInit {
     });
   }
 
-  onCreateAlltask() {
+  onCreateTask() {
     console.log(this.form);
-
     if (!this.form.valid) {
 
       return;

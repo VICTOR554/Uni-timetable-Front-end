@@ -54,12 +54,12 @@ export class AuthService {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', this._token);
   }
 
-  logout() {
+  logOut() {
     console.log('before log out', this._userIsAuthenticated);
     this._userIsAuthenticated = false;
   }
 
-  login() {
+  logIn() {
     console.log('before log in', this._userIsAuthenticated);
     this._userIsAuthenticated = true;
   }
